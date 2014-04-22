@@ -1,7 +1,10 @@
 FBClone::Application.routes.draw do
  
   resources :users, only: [:new, :create, :show] do
+  	
   	resources :friend_requests, only: [:create]
+
+  	resources :posts, only: [:create, :index]
 
   	member do
   		get 'friends'

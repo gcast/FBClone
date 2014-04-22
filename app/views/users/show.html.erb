@@ -1,12 +1,73 @@
-<h1>Welcome to <%= @user.firstName %> <%= @user.lastName %>'s profile</h1>
+<section class="nav_bar"
+
+  <h4><a href="<%= friends_user_url(current_user) %>">My Friends</a></h4>
+
+</section>
 
 
-<% if (current_user.email != @user.email) && 
-	(current_user.can_request_friendship?(@user)) %>
+<section class="user_profile">
 
-	<%= button_to "Add Friend", user_friend_requests_url(@user), method: :post %>
-<% end %>
+  <h1>Welcome to <%= @user.firstName %> <%= @user.lastName %>'s profile</h1>
+  <% if (current_user.email != @user.email) && (current_user.can_request_friendship?(@user)) %>
+    <%= button_to "Add Friend", user_friend_requests_url(@user), method: :post %>
+  <% end %>
 
+</section>
+
+
+
+<secion class="create_post">
+
+  <form action="<%= user_posts_url(@user) %>" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+      <h3>Post on <%= @user.firstName %> <%= @user.lastName %>'s wall</h3>
+    
+        <label for="textBody">Post</label>
+        <br>
+        <textarea name="post[body]" ROWS=3 COLS=30></textarea>
+  
+      <h5>Tag your friends in this post</h5>
+  
+       <!--  <input type="hidden" name="post_tags[user_ids][]" value=""> figure out later -->
+    
+        <% current_user.friends.each do |friend| %>
+          <%= friend.firstName %> <%= friend.lastName %>
+          <input type="checkbox" name="post[tagged_user_ids][]" value="<%= friend.id %>">
+          <br>
+        <% end %>
+  
+      <input type="submit" value="Post">
+  </form>
+
+</section>
+
+
+
+<section class="user_timeline">
+
+  <h2><%= @user.firstName %> <%= @user.lastName %>'s Wall</h1>
+
+  <% @user.received_posts.each do |post| %>
+    <!-- Fix N+1 Query -->
+    <%= post.author.firstName %> <%= post.author.lastName %> said: 
+    <br>
+    <%= post.body %>
+    <br>
+      
+    <!-- Fix N+1 Query -->
+    <% unless post.tagged_users.empty? %>
+      Tagged: 
+      <br>
+      <% post.tagged_users.each do |user| %>
+        <li> <%= user.firstName %> <%= user.lastName %> </li>
+      <% end %>
+    <% end %>
+
+    <br>
+  <% end %>
+
+</section>
 
 
 

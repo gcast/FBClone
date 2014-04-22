@@ -7,14 +7,14 @@ class User < ActiveRecord::Base
 	before_validation :ensure_session_token!
 
 	has_many(
-		:friendRequestAsRequestor, 
+		:friendRequestAsRequestor, #change to snake case
 		class_name: "FriendRequest",
 		foreign_key: :requestorID, 
 		primary_key: :id
 	)
 
 	has_many(
-		:friendRequestAsRequestee, 
+		:friendRequestAsRequestee, #change to snake case
 		class_name: "FriendRequest",
 		foreign_key: :requesteeID, 
 		primary_key: :id
@@ -24,6 +24,27 @@ class User < ActiveRecord::Base
 		:owned_friendships, 
 		class_name: "Friendship",
 		foreign_key: :userID,
+		primary_key: :id
+	)
+
+	has_many(
+		:authored_posts,
+		class_name: "Post",
+		foreign_key: :author_id,
+		primary_key: :id
+	)
+
+	has_many(
+		:received_posts,
+		class_name: "Post",
+		foreign_key: :recipient_id,
+		primary_key: :id
+	)
+
+	has_many(
+		:taggings, 
+		class_name: "PostTag",
+		foreign_key: :tagged_user_id,
 		primary_key: :id
 	)
 

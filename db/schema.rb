@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422035135) do
+ActiveRecord::Schema.define(version: 20140422182844) do
 
   create_table "friend_requests", force: true do |t|
     t.integer  "requestorID"
@@ -30,6 +30,27 @@ ActiveRecord::Schema.define(version: 20140422035135) do
   add_index "friendships", ["friendID"], name: "index_friendships_on_friendID"
   add_index "friendships", ["userID", "friendID"], name: "index_friendships_on_userid_and_friendid", unique: true
   add_index "friendships", ["userID"], name: "index_friendships_on_userID"
+
+  create_table "post_tags", force: true do |t|
+    t.integer  "post_id",        null: false
+    t.integer  "tagged_user_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "post_tags", ["post_id", "tagged_user_id"], name: "index_post_tags_on_post_id_and_tagged_user_id", unique: true
+  add_index "post_tags", ["post_id"], name: "index_post_tags_on_post_id"
+  add_index "post_tags", ["tagged_user_id"], name: "index_post_tags_on_tagged_user_id"
+
+  create_table "posts", force: true do |t|
+    t.text     "body"
+    t.integer  "author_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "recipient_id"
+  end
+
+  add_index "posts", ["author_id"], name: "index_posts_on_author_id"
 
   create_table "users", force: true do |t|
     t.string   "firstName",       null: false

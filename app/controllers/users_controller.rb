@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
 	def new
-		render :new
 	end
 
 	def create
@@ -19,14 +18,12 @@ class UsersController < ApplicationController
 	def friends
 		user = User.find(params[:id])
 		@friends = user.friends
-		@sent_requests = user.friendRequestAsRequestor
+		@sent_requests = user.friendRequestAsRequestor #change to snakecase // add include to minimize query
 		@received_requests = user.friendRequestAsRequestee
-		render :friends
 	end
 
 	def show
 		@user = User.find(params[:id])
-		render :show
 	end
 
 	private
