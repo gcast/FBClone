@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FBClone</title> 
+  <h1>FBClone</h1>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+
+  <% unless flash[:notices].nil? %>
+  <h3>Notices</h3>
+    <% flash[:notices].each do |notice| %>
+      <li><%= notice %></li>
+    <% end %>
+    <hr>
+  <% end %>
+
+  
+
+  <% unless flash[:errors].nil? %>
+  <h3>Errors</h3>
+    <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+    <hr>
+  <% end %>
+
+  <% unless current_user.nil? %>
+    Welcome: <%= current_user.email %>
+    <%= button_to "Log Out", session_url, method: :delete %>
+    <%= button_to "My Profile", user_url(current_user), method: :get %>
+  <% end %>
+
+
+<h4><a href="<%= friends_user_url(current_user) %>">My Friends</a></h4>
+
+</head>
+
+<hr>
+
+<body>
+
+
+<%= yield %>
+
+</body>
+</html>

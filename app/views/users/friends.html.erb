@@ -1,0 +1,50 @@
+<!-- Refactor -->
+
+<!-- Friends -->
+<% unless current_user.friends.empty? %>
+  Friends: 
+   <% @friends.each do |friend| %>
+      <li>
+
+        <!-- N+1 QUERY -->
+      <% friendship = current_user.owned_friendships.where("friendID = ?", friend.id).first %>
+       <a href="<%= user_url(friend) %>">
+         <%= friend.firstName %> <%= friend.lastName %>
+        </a>
+        <%= button_to "Unfriend", friendship_url(friendship), method: :delete %>
+      </li>
+    <% end %> 
+<% end %>
+
+<!-- Requests Sent -->
+<% unless @sent_requests.empty? %>
+  Friend Requests Sent To: 
+  <% @sent_requests.each do |request| %>
+
+    <!-- N+1 QUERY -->
+    <% requestee = request.requestee %>
+    <li>
+      <a href="<%= user_url(requestee)%>"> 
+        <%= requestee.firstName %> <%= requestee.lastName %>
+      </a>
+    </li>
+  <% end %>
+<% end %>
+
+<!-- Requests From  -->
+<% unless @received_requests.empty? %>
+  Friend Requests From: 
+  <% @received_requests.each do |request| %>
+
+    <!-- N+1 QUERY -->
+    <% requestor = request.requestor %>
+    <li>
+      <a href="<%= user_url(requestor)%>"> 
+        <%= requestor.firstName %> <%= requestor.lastName %>
+      </a>
+    </li>
+    <%= button_to "Accept", accept_request_url(request), method: :put %>
+    <%= button_to "Decline", decline_request_url(request), method: :put %>
+    <br>
+  <% end %>
+<% end %>
