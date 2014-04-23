@@ -55,6 +55,13 @@ class User < ActiveRecord::Base
 		primary_key: :id
 	)
 
+	has_many(
+		:albums, 
+		class_name: "Album",
+		foreign_key: :owner_id,
+		primary_key: :id
+	)
+
 	has_many :friends, through: :owned_friendships, source: :friend
 
 	attr_reader :password
@@ -82,7 +89,7 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	# So many queries -- fix
+	# REFACTOR
 	def can_request_friendship?(user)
 		!already_friends?(user) && 
 		!sent_request_to?(user) && 

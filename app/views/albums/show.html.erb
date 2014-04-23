@@ -1,0 +1,6 @@
+Album: <%= @album.name %>
+<br>
+	<% @album.photos.each do |photo| %>
+		<img src="<%= photo.file.url(:med) %>">
+		<br>
+	<% end %>	

@@ -1,0 +1,25 @@
+<section class="create_album">
+	
+	<h4>Create your album</h4>
+
+<form action="<%= user_albums_url(current_user) %>" method="post" enctype="multipart/form-data">
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		<br>
+		<label for="album_name">Name</label>
+		<input type="text" name="album[name]">
+		<br>
+		<label>Photo 1</label>
+		<input type="file" multiple name="photos[]">
+		<br>
+		<label>Photo 2</label>
+		<input type="file" multiple name="photos[]">
+		<br>
+		<label>Photo 3</label>
+		<input type="file" multiple name="photos[]">
+		<br>
+
+		<input type="submit" value="Create Album">
+
+</form>
+
+</section>
