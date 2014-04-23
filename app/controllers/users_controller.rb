@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		@friends = user.friends
 		@sent_requests = user.friendRequestAsRequestor #change to snakecase // add include to minimize query
-		@received_requests = user.friendRequestAsRequestee
+		@received_requests = user.friendRequestAsRequestee #change to snakecase // add include to minimize query
 	end
 
 	def show

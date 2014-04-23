@@ -2,6 +2,8 @@ class Post < ActiveRecord::Base
 
 	validates :body, :author_id, presence: true
 
+	has_many :comments, as: :commentable
+
 	belongs_to(
 		:author, 
 		class_name: "User",

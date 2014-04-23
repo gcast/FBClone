@@ -48,6 +48,13 @@ class User < ActiveRecord::Base
 		primary_key: :id
 	)
 
+	has_many(
+		:authored_comments, 
+		class_name: "Comment",
+		foreign_key: :author_id,
+		primary_key: :id
+	)
+
 	has_many :friends, through: :owned_friendships, source: :friend
 
 	attr_reader :password

@@ -18,16 +18,12 @@ class FriendRequestsController < ApplicationController
 		requestorID = request.requestor.id
 		requesteeID = request.requestee.id
 
-		friendshipA = Friendship.new({ userID: requestorID, friendID: requesteeID })
-		friendshipB = Friendship.new({ userID: requesteeID, friendID: requestorID })
-
 		Friendship.transaction do 
-			friendshipA.save!
-			friendshipB.save!
+			Friendship.new({ userID: requestorID, friendID: requesteeID }).save!
+			Friendship.new({ userID: requesteeID, friendID: requestorID }).save!
 			request.destroy
 		end
 		
-		#Add Errors
 		redirect_to user_url(current_user)
 	end
 
