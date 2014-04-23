@@ -17,6 +17,10 @@ class PostsController < ApplicationController
 		end
 	end
 
+	def show
+		@post = Post.includes(:photos, :comments, :post_tags).find(params[:id])
+	end
+
 	private
 	def valid_params
 		params.require(:post).permit(:body, :tagged_user_ids => [])

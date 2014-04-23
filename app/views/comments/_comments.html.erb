@@ -1,0 +1,7 @@
+Comments: 
+<% post.comments.each do |comment| %>
+	<li>
+		<%= comment.author.firstName %>:
+		<%= comment.comment %>
+	</li>
+<% end %>

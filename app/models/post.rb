@@ -1,8 +1,10 @@
 class Post < ActiveRecord::Base
 	validates :body, :author_id, presence: true
+	after_commit :send_notification
 
 	has_many :comments, as: :commentable
 	has_many :photos, as: :imageable
+	has_many :notifications, as: :notifiable, dependent: :destroy
 
 	belongs_to(
 		:author, 
@@ -20,5 +22,9 @@ class Post < ActiveRecord::Base
 	)
 
 	has_many :tagged_users, through: :post_tags, source: :person_tagged
+
+	def send_notification
+		self.notifications.create(user_id: self.recipient_id, event_id: 6)
+	end
 
 end

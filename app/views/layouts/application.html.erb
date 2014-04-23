@@ -32,6 +32,7 @@
     <%= button_to "My Profile", user_url(current_user), method: :get %>
     <a href="<%= friends_user_url(current_user) %>">My Friends</a>
     <a href="<%= user_albums_url(current_user) %>">My Albums</a>
+    <a href="<%=  notifications_url %>">Notifications</a>
   <% end %>
 
 

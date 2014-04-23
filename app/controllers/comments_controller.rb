@@ -16,8 +16,7 @@ class CommentsController < ApplicationController
 		end
 
 		if @comment.save
-			#Change to redirect to a more logical location
-			redirect_to user_url(current_user)
+			redirect_to user_url(@comment.commentable.recipient_id)
 		else
 			flash[:errors] = @comment.errors.full_messages
 			redirect_to user_url(current_user)

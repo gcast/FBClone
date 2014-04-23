@@ -7,6 +7,13 @@ class User < ActiveRecord::Base
 	before_validation :ensure_session_token!
 
 	has_many(
+		:notifications,
+		class_name: "Notification",
+		foreign_key: :user_id,
+		primary_key: :id
+	)
+
+	has_many(
 		:sent_requests, 
 		class_name: "FriendRequest",
 		foreign_key: :requestor_id, 

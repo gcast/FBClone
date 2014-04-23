@@ -1,0 +1,30 @@
+<a href="<%= post_url(post) %>">
+	<%= post.author.firstName %> <%= post.author.lastName %> said:
+</a> 
+
+<!-- Post Body -->
+<%= post.body %>
+
+<!-- Photos -->
+<% if post.photos %>
+  <% post.photos.each do |photo| %>
+    <img src="<%= photo.file.url(:thumb) %>">
+  <% end %>
+<% end %>
+
+<!-- Post Tags -->
+<% unless post.tagged_users.empty? %>
+  Tagged: 
+  <% post.tagged_users.each do |user| %>
+    <li><%= user.firstName %> <%= user.lastName %></li>
+  <% end %>
+<% end %>
+
+<br>
+
+<!-- Comments -->
+<%= render partial: "comments/comments", locals: { post: post } %>
+
+<!-- Comments Form -->
+<%= render partial: "comments/form", locals: { post: post } %>
+
