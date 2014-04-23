@@ -3,20 +3,20 @@ class FriendRequest < ActiveRecord::Base
 	belongs_to(
 		:requestor, 
 		class_name: "User",
-		foreign_key: :requestorID,
+		foreign_key: :requestor_id,
 		primary_key: :id
 	)
 
 	belongs_to(
 		:requestee, 
 		class_name: "User",
-		foreign_key: :requesteeID,
+		foreign_key: :requestee_id,
 		primary_key: :id
 	)
 
-	validates_uniqueness_of :requestorID, :scope => [:requestorID, :requesteeID]
-	validates_uniqueness_of :requesteeID, :scope => [:requestorID, :requesteeID]
-	validates :requestorID, :requesteeID, presence: true
+	validates_uniqueness_of :requestor_id, :scope => [:requestor_id, :requestee_id]
+	validates_uniqueness_of :requestee_id, :scope => [:requestor_id, :requestee_id]
+	validates :requestor_id, :requestee_id, presence: true
 
 
 end

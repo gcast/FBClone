@@ -1,8 +1,8 @@
 class Post < ActiveRecord::Base
-
 	validates :body, :author_id, presence: true
 
 	has_many :comments, as: :commentable
+	has_many :photos, as: :imageable
 
 	belongs_to(
 		:author, 

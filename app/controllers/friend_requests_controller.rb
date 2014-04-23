@@ -1,26 +1,26 @@
 class FriendRequestsController < ApplicationController
 
 	def create
-		requesteeID = params[:user_id]
-		@friendship_request = current_user.friendRequestAsRequestor.new({requesteeID: requesteeID})
+		requestee_id = params[:user_id]
+		@friendship_request = current_user.sent_requests.new({requestee_id: requestee_id})
 
 		if @friendship_request.save
 			flash[:notices] = ["Friend Request Sent"]
-			redirect_to user_url(requesteeID)
+			redirect_to user_url(requestee_id)
 		else
 			flash[:errors] = @friendship_request.errors.full_messages
-			redirect_to user_url(requesteeID)
+			redirect_to user_url(requestee_id)
 		end
 	end
 
 	def accept
 		request = FriendRequest.find(params[:id])
-		requestorID = request.requestor.id
-		requesteeID = request.requestee.id
+		requestor_id = request.requestor.id
+		requestee_id = request.requestee.id
 
 		Friendship.transaction do 
-			Friendship.new({ userID: requestorID, friendID: requesteeID }).save!
-			Friendship.new({ userID: requesteeID, friendID: requestorID }).save!
+			Friendship.new({ user_id: requestor_id, friend_id: requestee_id }).save!
+			Friendship.new({ user_id: requestee_id, friend_id: requestor_id }).save!
 			request.destroy
 		end
 		

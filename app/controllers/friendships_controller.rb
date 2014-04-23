@@ -3,7 +3,7 @@ class FriendshipsController < ApplicationController
 	def destroy
 		friendshipA = Friendship.find(params[:id])
 		friendshipB = Friendship.where(
-			"userID = ? AND friendID = ?", friendshipA.friendID, friendshipA.userID ).first
+			"user_id = ? AND friend_id = ?", friendshipA.friend_id, friendshipA.user_id ).first
 
 		Friendship.transaction do 
 			friendshipA.destroy

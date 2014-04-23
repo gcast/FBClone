@@ -1,0 +1,42 @@
+<section class="user_timeline">
+  <h2><%= @user.firstName %> <%= @user.lastName %>'s Wall</h1>
+
+<% unless @received_posts.empty? %> 
+  <% @received_posts.each do |post| %>
+
+    
+    <%= post.author.firstName %> <%= post.author.lastName %> said: 
+    <br>
+    <%= post.body %>
+    <br>
+
+    <!-- Photos -->
+    <% if post.photos %>
+      <% post.photos.each do |photo| %>
+        <img src="<%= photo.file.url(:thumb) %>">
+      <% end %>
+    <% end %>
+
+    <!-- Creating a comment -->
+    <form action="<%= post_comment_url(post) %>" method="post">
+        <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+        <label for="comment">Comment:</label>
+        <input type="text" name="comment[comment]" id="comment">
+
+        <input type="submit" value="Comment">
+    </form>
+      
+    
+    <% unless post.tagged_users.empty? %>
+      Tagged: 
+      <br>
+      <% post.tagged_users.each do |user| %>
+        <li><%= user.firstName %> <%= user.lastName %></li>
+      <% end %>
+    <% end %>
+
+    <br>
+  <% end %>
+<% end %>
+</section>

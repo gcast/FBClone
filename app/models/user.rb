@@ -7,23 +7,23 @@ class User < ActiveRecord::Base
 	before_validation :ensure_session_token!
 
 	has_many(
-		:friendRequestAsRequestor, #change to snake case
+		:sent_requests, 
 		class_name: "FriendRequest",
-		foreign_key: :requestorID, 
+		foreign_key: :requestor_id, 
 		primary_key: :id
 	)
 
 	has_many(
-		:friendRequestAsRequestee, #change to snake case
+		:received_requests, 
 		class_name: "FriendRequest",
-		foreign_key: :requesteeID, 
+		foreign_key: :requestee_id, 
 		primary_key: :id
 	)
 
 	has_many(
 		:owned_friendships, 
 		class_name: "Friendship",
-		foreign_key: :userID,
+		foreign_key: :user_id,
 		primary_key: :id
 	)
 
@@ -82,21 +82,29 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	# So many queries -- fix
 	def can_request_friendship?(user)
-		!request_exists?(user) && !already_friends?(user)
-	end
-
-	def request_exists?(user)
-		if (self.friendRequestAsRequestor.where("requesteeID = ?", user.id).empty? &&
-			self.friendRequestAsRequestee.where("requestorID = ?", user.id).empty?)
-			return false
-		else
-			return true
-		end
+		!already_friends?(user) && 
+		!sent_request_to?(user) && 
+		!received_request_from?(user)
 	end
 
 	def already_friends?(user)
-		self.friends.where("friendID = ?", user.id).length != 0
+		return false if self.owned_friendships.empty?
+		return false if self.owned_friendships.where("friend_id = ?", user.id).empty?
+		return true
+	end
+
+	def sent_request_to?(user)
+		return false if self.sent_requests.empty?
+		return false if self.sent_requests.where("requestee_id = ?", user.id).empty?
+		return true
+	end
+
+	def received_request_from?(user)
+		return false if self.received_requests.empty?
+		return false if self.received_requests.where("requestor_id = ?", user.id).empty?
+		return true
 	end
 
 	private

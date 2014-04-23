@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422205342) do
+ActiveRecord::Schema.define(version: 20140423035012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,22 +28,33 @@ ActiveRecord::Schema.define(version: 20140422205342) do
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
 
   create_table "friend_requests", force: true do |t|
-    t.integer  "requestorID"
-    t.integer  "requesteeID"
+    t.integer  "requestor_id"
+    t.integer  "requestee_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "friendships", force: true do |t|
-    t.integer  "userID"
-    t.integer  "friendID"
+    t.integer  "user_id"
+    t.integer  "friend_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "friendships", ["friendID"], name: "index_friendships_on_friendID", using: :btree
-  add_index "friendships", ["userID", "friendID"], name: "index_friendships_on_userID_and_friendID", unique: true, using: :btree
-  add_index "friendships", ["userID"], name: "index_friendships_on_userID", using: :btree
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+  add_index "friendships", ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true, using: :btree
+  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
+
+  create_table "photos", force: true do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "post_tags", force: true do |t|
     t.integer  "post_id",        null: false

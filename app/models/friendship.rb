@@ -6,14 +6,14 @@ class Friendship < ActiveRecord::Base
 	belongs_to(
 		:owner, 
 		class_name: "User",
-		foreign_key: :userID,
+		foreign_key: :user_id,
 		primary_key: :id
 	)
 
 	belongs_to(
 		:friend,
 		class_name: "User",
-		foreign_key: :friendID,
+		foreign_key: :friend_id,
 		primary_key: :id
 	)
 

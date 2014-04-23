@@ -15,15 +15,17 @@ class UsersController < ApplicationController
 		end
 	end
 
+	#Can minimize queries further?
 	def friends
-		user = User.find(params[:id])
-		@friends = user.friends
-		@sent_requests = user.friendRequestAsRequestor #change to snakecase // add include to minimize query
-		@received_requests = user.friendRequestAsRequestee #change to snakecase // add include to minimize query
+		@user = User.find(params[:id])
+		@friendships = @user.owned_friendships.includes(:friend)
+		@sent_requests = @user.sent_requests.includes(:requestee)
+		@received_requests = @user.received_requests.includes(:requestor)
 	end
 
 	def show
 		@user = User.find(params[:id])
+		@received_posts = @user.received_posts.includes(:author, :photos, :tagged_users)
 	end
 
 	private
