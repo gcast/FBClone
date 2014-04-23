@@ -1,7 +1,7 @@
 class Friendship < ActiveRecord::Base
 
-	validates :userID, :friendID, presence: true
-	validates :userID, :uniqueness => { :scope => :friendID }
+	validates :user_id, :friend_id, presence: true
+	validates :user_id, :uniqueness => { :scope => :friend_id }
 
 	belongs_to(
 		:owner, 

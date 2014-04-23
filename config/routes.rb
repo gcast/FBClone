@@ -3,7 +3,7 @@ FBClone::Application.routes.draw do
   resources :users, only: [:new, :create, :show] do
   	resources :friend_requests, only: [:create]
   	resources :posts, only: [:create, :index]
-    resources :albums, only: [:create, :index]
+    resources :albums, only: [:create, :index, :destroy]
 
   	member do
   		get 'friends'
@@ -13,7 +13,10 @@ FBClone::Application.routes.draw do
   end
   resource :session, only: [:new, :create, :destroy]
   resources :friendships, only: [:destroy]
-  resources :albums, only: [:new, :show]
+  resources :albums, only: [:new, :show] do
+    resources :photos, only: [:destroy]
+  end
+  
 
   # MAKE RESTFUL ??
   put "/friend_requests/:id/accept", { as: :accept_request, controller: :friend_requests, action: :accept }

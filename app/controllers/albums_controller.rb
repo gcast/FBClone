@@ -21,6 +21,18 @@ class AlbumsController < ApplicationController
 	def new
 	end
 
+	def destroy
+		@album = Album.find(params[:id])
+
+		if @album.destroy
+			flash[:notices] = ["Album successfully deleted"]
+			redirect_to user_albums_url(params[:user_id])
+		else
+			flash[:errors] = @album.errors.full_messages
+			redirect_to user_albums_url(params[:user_id])
+		end
+	end
+
 	def index
 		@user = User.find(params[:user_id])
 		@albums = @user.albums.includes(:photos)

@@ -2,5 +2,6 @@ Album: <%= @album.name %>
 <br>
 	<% @album.photos.each do |photo| %>
 		<img src="<%= photo.file.url(:med) %>">
+		<%= button_to "Delete Photo", album_photo_url(@album, photo), method: :delete %>
 		<br>
 	<% end %>	
