@@ -1,0 +1,11 @@
+Friend Groups:
+
+<% @friend_groups.each do |group| %>
+	
+	<%= group.group_name %>
+
+	<% group.friends_in_group.each do |friend| %>
+		<li><%= friend.firstName %> <%= friend.lastName %></li>
+	<% end %>
+
+<% end %>	

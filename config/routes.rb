@@ -11,7 +11,6 @@ FBClone::Application.routes.draw do
   		get 'friends'
   		get 'about'
   	end
-
   end
 
   resource :session, only: [:new, :create, :destroy]
@@ -23,6 +22,7 @@ FBClone::Application.routes.draw do
 
   resources :notifications, only: [:index]
   resources :posts, only: [:show]
+  resources :friend_groups, only: [:new, :create, :index]
 
   # MAKE RESTFUL ??
   put "/friend_requests/:id/accept", { as: :accept_request, controller: :friend_requests, action: :accept }

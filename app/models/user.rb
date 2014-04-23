@@ -7,6 +7,20 @@ class User < ActiveRecord::Base
 	before_validation :ensure_session_token!
 
 	has_many(
+		:belongs_to_group,
+		class_name: "FriendGroupJoin",
+		foreign_key: :friend_id,
+		primary_key: :id
+	)
+
+	has_many(
+		:created_groups,
+		class_name: "FriendGroup",
+		foreign_key: :owner_id,
+		primary_key: :id
+	)
+
+	has_many(
 		:notifications,
 		class_name: "Notification",
 		foreign_key: :user_id,
