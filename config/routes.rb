@@ -10,7 +10,7 @@ FBClone::Application.routes.draw do
   	member do
   		get 'friends'
   		get 'about'
-      get 'timeline'
+      get 'wall'
   	end
   end
 

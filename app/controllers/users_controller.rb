@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-	before_action :ensure_friends_with_user!, only: [:timeline]
+	before_action :ensure_friends_with_user!, only: [:wall]
+	before_action :reroute_to_wall_if_friends!, only: [:show]
 
 	def new
 	end
@@ -27,13 +28,20 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])	
 	end
 
-	def timeline
+	def wall
 		@user = User.includes(:received_posts => [:author, :photos, :tagged_users]).find(params[:id])
 	end
 
 	private
 	def valid_params
 		params.require(:user).permit(:firstName, :lastName, :email, :password, :birthDate)
+	end
+
+	def reroute_to_wall_if_friends!
+		user = User.find(params[:id])
+		if current_user == user || current_user.friends_with?(user)
+			redirect_to wall_user_url(user)
+		end
 	end
 
 end

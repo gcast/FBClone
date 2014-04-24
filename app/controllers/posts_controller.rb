@@ -25,6 +25,6 @@ class PostsController < ApplicationController
 	end
 
 	def photo_params
-    	params.require(:photos)
+    	params.require(:photos) if !params[:photos].nil?
 	end
 end

@@ -65,7 +65,7 @@
 
   .search-field > input {
     width: 300px;
-    padding: 2px;
+    padding: 5px;
     border-radius: 2px;
   }
 
@@ -81,7 +81,7 @@
 
   .header-logo{
     display: block;
-    width: 475px;
+    width: 485px;
     float: left;
   }
 
@@ -104,27 +104,36 @@
   padding: 5px 0 2px 5px;
 }
 
-.post-header > p {
-  font-weight: 575;
-  padding: 0;
+.post-header-create {
+  padding: 2px;
+  background-color: #f4f6f9;
+}
+
+.post-header-create > p {
+  font-weight: bold;
+  padding: 4px;
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .post-header-thumbnail {
   float: left;
-  padding: 15px 0 0 15px;
+  padding: 15px 10px 0 15px;
   width: 75px;
+
 }
 
 .post-header-thumbnail > a {
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .post-header-thumbnail img {
   width: 100%;
+  height: 100%;
 }
 
 .post-header-info {
@@ -134,9 +143,14 @@
 
 .post-header-info > h3 {
   color: black;
-  font-size: 16px;
+  font-size: 14px;
   padding: 0;
   margin: 0;
+}
+
+.post-header-info > h3 > a{
+  color: black;
+  font-size: 14px;
 }
 
 .post-header-info > p {
@@ -176,7 +190,7 @@
 .logout {
   display: block;
   float: right;
-  bottom: 11px;
+  bottom: 13px;
 }
 
 textarea {
@@ -184,7 +198,8 @@ textarea {
    border: none;
    display: block;
    margin: auto;
-   width: 465px;
+   width: 455px;
+   padding: 10px;
 }
 
 textarea:focus {
@@ -193,7 +208,7 @@ textarea:focus {
 
 .post-footer {
   display: block;
-  background-color: #edf0f5;
+  background-color: #f4f6f9;
   padding: 0 0px 10px 10px;
 }
 
@@ -219,6 +234,11 @@ textarea:focus {
 
 .comment-form {
   float: left;
+  border-radius: 2px;
+}
+
+.comment-form > input {
+  padding: 3px;
 }
 
 </style>
@@ -259,7 +279,7 @@ textarea:focus {
       
       <div class="header-logo group">
         <logo>FACEBOOK</logo>
-        <div class="search-field"><input type="text" name="SEARCHBAR" value="Search friends, posts etc..."></div>
+        <div class="search-field"><input type="text" name="SEARCHBAR" placeholder="Search friends, posts etc..."></div>
       </div>
         
         

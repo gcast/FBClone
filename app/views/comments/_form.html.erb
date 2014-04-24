@@ -1,7 +1,7 @@
 <form class="comment-form" action="<%= post_comment_url(post) %>" method="post">
         <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-        <input class="comment-box" type="text" name="comment[comment]">
+        <input class="comment-box" type="text" name="comment[comment]" placeholder="Write a comment...">
 
         <input class="submit" type="submit" value="Comment">
 </form>
