@@ -1,43 +1,43 @@
 class AlbumsController < ApplicationController
 
-	def create
-		@album = current_user.albums.new(valid_params)
-
-		unless params[:photos].nil?
-			params[:photos].each do |file_params|
-      			@album.photos.new(file: file_params)
-    		end
-    	end
-
-    	if @album.save
-    		flash[:notices] = ["Album: #{@album.name} was successfully created"]
-    		redirect_to user_albums_url(current_user)
-    	else
-    		flash[:errors] = @album.errors.full_messages
-    		redirect_to user_albums_url(current_user)
-    	end
-	end
+	before_action :ensure_friends_with_user!, only: [:index]
 
 	def new
+	end
+
+	def create
+		album = current_user.albums.new(valid_params)
+
+		unless photo_params.nil?
+			photo_params.each { |params| album.photos.new(file: params) }
+    	end
+
+    	if album.save
+    		flash[:notices] = ["Album: #{album.name} was successfully created"]
+    	else
+    		flash[:errors] = album.errors.full_messages
+    	end
+
+    	redirect_to user_albums_url(current_user)
 	end
 
 	def destroy
 		@album = Album.find(params[:id])
 
 		if @album.destroy
-			flash[:notices] = ["Album successfully deleted"]
-			redirect_to user_albums_url(params[:user_id])
+			flash[:notices] = ["Album successfully deleted"]	
 		else
 			flash[:errors] = @album.errors.full_messages
-			redirect_to user_albums_url(params[:user_id])
 		end
+
+		redirect_to user_albums_url(params[:user_id])
 	end
 
 	def index
-		@user = User.find(params[:user_id])
-		@albums = @user.albums.includes(:photos)
+		@user = User.includes(:albums => :photos).find(params[:user_id])
 	end
 
+	#Should nest under users to ensure friend validation before action?
 	def show
 		@album = Album.find(params[:id])
 	end
@@ -47,4 +47,7 @@ class AlbumsController < ApplicationController
 		params.require(:album).permit(:name)
 	end
 
+	def photo_params
+		params.require(:photos)
+	end
 end

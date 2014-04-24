@@ -2,11 +2,7 @@
 <%= render partial: "userprofile" %>
 
 
-<%= render partial: "createpost" %>
-
-
-<%= render partial: "timeline" %>
-
+<a href="<%= timeline_user_url(@user) %>"><%= @user.full_name %>'s Timeline</a>
 
 
 

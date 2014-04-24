@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
 
+	before_validation :ensure_session_token!
+
 	validates :firstName, :lastName, :email, :password_digest, :birthDate, :session_token, presence: true
 	validates :email, uniqueness: true
 	validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 	validates :password, :length => { minimum: 6, allow_nil: true }
-	before_validation :ensure_session_token!
 
 	has_many(
 		:belongs_to_group,
@@ -112,27 +113,40 @@ class User < ActiveRecord::Base
 
 	# REFACTOR
 	def can_request_friendship?(user)
-		!already_friends?(user) && 
+		!friends_with?(user) && 
 		!sent_request_to?(user) && 
 		!received_request_from?(user)
 	end
 
-	def already_friends?(user)
-		return false if self.owned_friendships.empty?
-		return false if self.owned_friendships.where("friend_id = ?", user.id).empty?
-		return true
+	def has_friends?
+		self.friends.length > 0
+	end
+
+	def friends_with?(user)
+		has_friends? &&
+		!self.friends.where("friend_id = ?", user.id).empty?
+	end
+
+	def has_sent_requests?
+		!self.sent_requests.empty?
 	end
 
 	def sent_request_to?(user)
-		return false if self.sent_requests.empty?
-		return false if self.sent_requests.where("requestee_id = ?", user.id).empty?
-		return true
+		self.has_sent_requests? &&
+		!self.sent_requests.where("requestee_id = ?", user.id).empty?
+	end
+
+	def has_received_requests?
+		!self.received_requests.empty?
 	end
 
 	def received_request_from?(user)
-		return false if self.received_requests.empty?
-		return false if self.received_requests.where("requestor_id = ?", user.id).empty?
-		return true
+		self.has_received_requests? && 
+		!self.received_requests.where("requestor_id = ?", user.id).empty?
+	end
+
+	def full_name
+		"#{self.firstName} #{self.lastName}"
 	end
 
 	private

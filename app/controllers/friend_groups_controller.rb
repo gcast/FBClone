@@ -1,5 +1,4 @@
 class FriendGroupsController < ApplicationController
-
 	def new
 	end
 
@@ -19,10 +18,8 @@ class FriendGroupsController < ApplicationController
 		@friend_groups = current_user.created_groups.includes(:friends_in_group)
 	end
 
-
 	private
 	def valid_params
 		params.require(:group).permit(:group_name, :friends_in_group_ids => [])
 	end
-
 end

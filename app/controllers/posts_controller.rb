@@ -4,17 +4,15 @@ class PostsController < ApplicationController
 		@post = current_user.authored_posts.new(valid_params)
 		@post.recipient_id = params[:user_id]
 
-		unless params[:photos].nil?
-			params[:photos].each do |file_params|
-      			@post.photos.new(file: file_params)
-    		end
+		unless photo_params.nil?
+			photo_params.each { |params| @post.photos.new(file: params) }
     	end
 	
-		if @post.save
-			redirect_to user_url(@post.recipient_id)
-		else
-			redirect_to user_url(@post.recipient_id)
+		if !@post.save
+			flash[:errors] = @post.errors.full_messages
 		end
+
+		redirect_to user_url(@post.recipient_id)
 	end
 
 	def show
@@ -26,8 +24,7 @@ class PostsController < ApplicationController
 		params.require(:post).permit(:body, :tagged_user_ids => [])
 	end
 
-	#Can I just write in line 8?
-	# def photo_params
- #    	params.require(:photos)
-	# end
+	def photo_params
+    	params.require(:photos)
+	end
 end

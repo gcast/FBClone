@@ -1,14 +1,18 @@
+<h1> <%= @user.full_name %>'s Timeline </h1>
+
 <section class="user_timeline">
 
-  <h2><%= @user.firstName %> <%= @user.lastName %>'s Wall</h2>
+	<%= render partial: "createpost" %>
 
-  <% unless @received_posts.empty? %> 
+  	<h2><%= @user.full_name %>'s Wall</h2>
 
-    <% @received_posts.each do |post| %>
-      <%= render partial: "/posts/post", locals: { post: post } %>
-      <br>
-    <% end %>
+  		<% unless @user.received_posts.empty? %> 
 
-  <% end %>
+    		<% @user.received_posts.each do |post| %>
+      			<%= render partial: "/posts/post", locals: { post: post } %>
+      		<br>
+    		<% end %>
+
+  		<% end %>
 
 </section>

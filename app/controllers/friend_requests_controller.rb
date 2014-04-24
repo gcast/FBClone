@@ -6,11 +6,11 @@ class FriendRequestsController < ApplicationController
 
 		if @friendship_request.save
 			flash[:notices] = ["Friend Request Sent"]
-			redirect_to user_url(requestee_id)
 		else
-			flash[:errors] = @friendship_request.errors.full_messages
-			redirect_to user_url(requestee_id)
+			flash[:errors] = @friendship_request.errors.full_messages		
 		end
+
+		redirect_to user_url(requestee_id)
 	end
 
 	def accept
@@ -30,12 +30,11 @@ class FriendRequestsController < ApplicationController
 	def decline
 		request = FriendRequest.find(params[:id])
 
-		if request.destroy
-			redirect_to user_url(current_user)
-		else
+		if !request.destroy
 			flash[:errors] = ["There was a problem deleting your friend request"]
-			redirect_to user_url(current_user)
 		end
+
+		redirect_to user_url(current_user)
 	end
 
 end

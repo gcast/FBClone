@@ -1,11 +1,11 @@
-<h3> <%= @user.firstName %> <% @user.lastName %>'s Albums </h3>
+<h3> <%= @user.full_name %>'s Albums </h3>
 
 	<% if @user == current_user %>
 		<a href="<%= new_album_url %>">Create An Album</a>
 	<% end %>
 
-<% unless @albums.empty? %>
-	<% @albums.each do |album| %>
+<% unless @user.albums.empty? %>
+	<% @user.albums.each do |album| %>
 		
 		<li><a href="<%= album_url(album) %>"><%= album.name %></a></li>
 

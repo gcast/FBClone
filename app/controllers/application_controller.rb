@@ -19,4 +19,14 @@ class ApplicationController < ActionController::Base
   	@current_user ||= User.find_by_session_token(session[:session_token])
   end
 
+  def ensure_friends_with_user!
+    id = params[:id].nil? ? params[:user_id] : params[:id]
+    user = User.find(id)
+
+    if (user.id != current_user.id) && !current_user.friends_with?(user)
+      flash[:notices] = ["You have to be friends with this user."]
+      redirect_to user_url(user)
+    end
+  end
+
 end
