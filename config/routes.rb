@@ -22,7 +22,7 @@ FBClone::Application.routes.draw do
   end
 
   resources :notifications, only: [:index]
-  resources :posts, only: [:show]
+  resources :posts, only: [:show, :destroy]
   resources :friend_groups, only: [:new, :create, :index]
 
   # MAKE RESTFUL ??

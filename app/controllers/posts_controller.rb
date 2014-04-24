@@ -19,6 +19,12 @@ class PostsController < ApplicationController
 		@post = Post.includes(:photos, :comments, :post_tags).find(params[:id])
 	end
 
+	def destroy
+		@post = Post.find(params[:id])
+		@post.destroy
+		redirect_to :back
+	end
+
 	private
 	def valid_params
 		params.require(:post).permit(:body, :tagged_user_ids => [])

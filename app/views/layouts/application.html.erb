@@ -118,15 +118,15 @@
 
 .post-header-thumbnail {
   float: left;
-  padding: 15px 10px 0 15px;
+  padding: 15px 0 0 15px;
   width: 75px;
 
 }
 
 .post-header-thumbnail > a {
   display: block;
-  width: 70px;
-  height: 70px;
+  width: 42px;
+  height: 42px;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
@@ -148,7 +148,7 @@
   margin: 0;
 }
 
-.post-header-info > h3 > a{
+.post-header-info > h3 > a {
   color: black;
   font-size: 14px;
 }
@@ -161,7 +161,7 @@
 }
 
 .post-content {
-  padding: 15px;
+  padding: 0 15px;
   font-size: 14px;
 }
 
@@ -223,7 +223,8 @@ textarea:focus {
   border-color: #29447e #29447e #1a356e;
   color: #fff;
   border-radius: 3px;
-  padding: 3px 6px;
+  padding: 3px 4px;
+  margin: 1px;
   outline: none;
   white-space: nowrap;
   -webkit-user-select: none;
@@ -239,6 +240,17 @@ textarea:focus {
 
 .comment-form > input {
   padding: 3px;
+}
+
+.delete-post {
+  float: right;
+  width: auto;
+  border: 0 none;
+  margin: 5px 10px 0 0;
+  padding:0;
+  background: transparent;
+  font-size: 14px;
+  color: #A8A8A8;
 }
 
 </style>
@@ -278,7 +290,7 @@ textarea:focus {
     <% unless current_user.nil? %>
       
       <div class="header-logo group">
-        <logo>FACEBOOK</logo>
+        <logo>Facebook</logo>
         <div class="search-field"><input type="text" name="SEARCHBAR" placeholder="Search friends, posts etc..."></div>
       </div>
         
