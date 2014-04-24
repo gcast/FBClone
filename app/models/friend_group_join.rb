@@ -4,7 +4,7 @@ class FriendGroupJoin < ActiveRecord::Base
 	#validate uniqueness on all two columns
 
 	belongs_to(
-		:group,
+		:friend_group,
 		class_name: "FriendGroup",
 		foreign_key: :group_id,
 		primary_key: :id
@@ -16,5 +16,7 @@ class FriendGroupJoin < ActiveRecord::Base
 		foreign_key: :friend_id,
 		primary_key: :id
 	)
+
+	has_one :owner, through: :friend_group, source: :owner
 
 end

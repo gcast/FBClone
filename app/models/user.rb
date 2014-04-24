@@ -111,7 +111,6 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	# REFACTOR
 	def can_request_friendship?(user)
 		!friends_with?(user) && 
 		!sent_request_to?(user) && 

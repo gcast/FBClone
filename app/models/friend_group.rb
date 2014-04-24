@@ -6,7 +6,7 @@ class FriendGroup < ActiveRecord::Base
 	belongs_to(
 		:owner,
 		class_name: "User",
-		foreign_key: :user_id,
+		foreign_key: :owner_id,
 		primary_key: :id
 	)
 
@@ -15,7 +15,8 @@ class FriendGroup < ActiveRecord::Base
 		class_name: "FriendGroupJoin",
 		foreign_key: :group_id,
 		primary_key: :id,
-		inverse_of: :group
+		inverse_of: :friend_group,
+		dependent: :destroy
 	)
 
 	has_many :friends_in_group, through: :friend_group_joins, source: :friend
