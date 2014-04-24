@@ -1,6 +1,6 @@
 <section class="user_profile">
 
-  <h1>Welcome to <%= @user.firstName %> <%= @user.lastName %>'s profile</h1>
+  <h1>Welcome to <%= @user.full_name %>'s profile</h1>
 
   <% if (current_user.email != @user.email) && (current_user.can_request_friendship?(@user)) %>
     <%= button_to "Add Friend", user_friend_requests_url(@user), method: :post %>

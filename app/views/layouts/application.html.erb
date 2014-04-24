@@ -1,44 +1,286 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>FBClone</title> 
-  <h1>FBClone</h1>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-
-
-  <% unless flash[:notices].nil? %>
-  <h3>Notices</h3>
-    <% flash[:notices].each do |notice| %>
-      <li><%= notice %></li>
-    <% end %>
-    <hr>
-  <% end %>
-
   
+  <style>
 
-  <% unless flash[:errors].nil? %>
-  <h3>Errors</h3>
-    <% flash[:errors].each do |error| %>
-      <li><%= error %></li>
+  html, body, header, nav, h1, a, ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+  }
+
+  body {
+    font-family: sans-serif;
+    background-color: #edf0f5;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .group:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .navbar {
+    background: #3b5998;
+    width: 100%;
+  }
+
+  .navbar > nav {
+    margin: auto;
+    width: 1242px;
+    padding: 15px;
+  }
+
+  .navbar a {
+    color: white;
+    font-weight: 550;
+    font-size: 13px;
+  }
+
+  .navbar ul {
+    list-style: none;
+    float: left;
+  }
+
+  .navbar ul li {
+    float: left;
+    padding: 7px;
+  }
+
+  .user-links {
+    display: block;
+    float: right;
+    width: 372px;
+  }
+
+  .search-field {
+    float: right;
+    padding: 5px;
+  }
+
+  .search-field > input {
+    width: 300px;
+    padding: 2px;
+    border-radius: 2px;
+  }
+
+  logo{
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    display: block;
+    float: left;
+    padding: 5px;
+    
+  }
+
+  .header-logo{
+    display: block;
+    width: 475px;
+    float: left;
+  }
+
+/*POST STYLES*/
+
+
+.posts {
+  margin: 50px auto;
+  width: 480px;
+}
+
+.post {
+  border-top: 1px solid #ddd;
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.post-header {
+  padding: 5px 0 2px 5px;
+}
+
+.post-header > p {
+  font-weight: 575;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.post-header-thumbnail {
+  float: left;
+  padding: 15px 0 0 15px;
+  width: 75px;
+}
+
+.post-header-thumbnail > a {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+
+.post-header-thumbnail img {
+  width: 100%;
+}
+
+.post-header-info {
+  float: left;
+  padding: 20px 0 20px 0;
+}
+
+.post-header-info > h3 {
+  color: black;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.post-header-info > p {
+  color: black;
+  font-size: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.post-content {
+  padding: 15px;
+  font-size: 14px;
+}
+
+.create-comment {
+  padding: 10px;
+  background-color: white;
+}
+
+.comment-box {
+  width: 175px;
+}
+
+.submit {
+    position: relative;
+    display: inline-block;
+    background: #5b74a8;
+    border-color: #29447e #29447e #1a356e;
+    color: #fff;
+    padding: 3px 6px;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 0 #29447e;
+    font-weight: bold;
+    margin-top: 18px
+}
+
+.logout {
+  display: block;
+  float: right;
+  bottom: 11px;
+}
+
+textarea {
+   resize: none;
+   border: none;
+   display: block;
+   margin: auto;
+   width: 465px;
+}
+
+textarea:focus {
+    outline: none ;
+}
+
+.post-footer {
+  display: block;
+  background-color: #edf0f5;
+  padding: 0 0px 10px 10px;
+}
+
+.file-submit::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.file-submit:before {
+  content: 'Upload Photo';
+  display: inline-block;
+  background: #5b74a8;
+  border-color: #29447e #29447e #1a356e;
+  color: #fff;
+  border-radius: 3px;
+  padding: 3px 6px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 5px 0 0 #29447e;
+}
+
+.comment-form {
+  float: left;
+}
+
+</style>
+
+
+<head>
+
+    <header class="navbar">
+      <nav class="group">
+
+      <title>FBClone</title> 
+      
+      <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+      <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+      <%= csrf_meta_tags %>
+
+
+      <% unless flash[:notices].nil? %>
+      <h3>Notices</h3>
+        <% flash[:notices].each do |notice| %>
+          <li><%= notice %></li>
+        <% end %>
+        <hr>
+      <% end %>
+
+    
+      <% unless flash[:errors].nil? %>
+      <h3>Errors</h3>
+        <% flash[:errors].each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+        <hr>
+      <% end %>
+
+
+
+    <% unless current_user.nil? %>
+      
+      <div class="header-logo group">
+        <logo>FACEBOOK</logo>
+        <div class="search-field"><input type="text" name="SEARCHBAR" value="Search friends, posts etc..."></div>
+      </div>
+        
+        
+      <div class="user-links group">
+        <ul>
+          <li><a href="<%= user_url(current_user) %>">Home</a></li>
+          <li><a href="<%= notifications_url %>">Notifications</a></li>
+          <li><a href="<%= friends_user_url(current_user) %>">My Friends</a></li>
+          <li><a href="<%= user_albums_url(current_user) %>">My Albums</a></li>
+        </ul>
+        <%= button_to "Log Out", session_url, method: :delete, :class => "submit logout" %>
+      </div>
+  
     <% end %>
-    <hr>
-  <% end %>
 
-  <% unless current_user.nil? %>
-    Welcome: <%= current_user.email %>
-    <%= button_to "Log Out", session_url, method: :delete %>
-    <%= button_to "My Profile", user_url(current_user), method: :get %>
-    <a href="<%= friends_user_url(current_user) %>">My Friends</a>
-    <a href="<%= user_albums_url(current_user) %>">My Albums</a>
-    <a href="<%=  notifications_url %>">Notifications</a>
-  <% end %>
-
+    </nav>
+  </header>
 
 </head>
 
-<hr>
+
 
 <body>
 

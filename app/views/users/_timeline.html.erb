@@ -1,10 +1,10 @@
-<h1> <%= @user.full_name %>'s Timeline </h1>
-
 <section class="user_timeline">
 
-	<%= render partial: "createpost" %>
+  	<section class="posts"> 
 
-  	<h2><%= @user.full_name %>'s Wall</h2>
+  		<%= render partial: "createpost" %>
+
+  		<br>
 
   		<% unless @user.received_posts.empty? %> 
 
@@ -14,5 +14,7 @@
     		<% end %>
 
   		<% end %>
+
+  	</section>
 
 </section>

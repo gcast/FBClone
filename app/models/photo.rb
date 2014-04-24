@@ -7,7 +7,8 @@ class Photo < ActiveRecord::Base
   	has_attached_file :file, :styles => {
     	:big => "600x600",
     	:med => "300x300",
-    	:thumb => "100x100"
+    	:thumb => "15x15"
+    	#Why doesn't it get smaller?
   	}
 
   	validates_attachment_content_type :file, :content_type => /\Aimage\/.*\Z/
