@@ -1,4 +1,4 @@
-<a href="<%=new_friend_group_url%>">Create Friend Group</a>
+<a href="<%= new_friend_group_url %>">Create Friend Group</a>
 <a href="<%=friend_groups_url%>">Friend Groups</a>
 
 <% unless @user.owned_friendships.empty? %>
@@ -9,7 +9,7 @@
 
       <li>
         <a href="<%= user_url(friendship.friend) %>">
-          <%= friendship.friend.firstName %> <%= friendship.friend.lastName %>
+          <%= friendship.friend.full_name %>
         </a>
 
         <%= button_to "Unfriend", friendship_url(friendship), method: :delete %>

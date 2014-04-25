@@ -10,7 +10,9 @@
 		<li><a href="<%= album_url(album) %>"><%= album.name %></a></li>
 
 		<% if @user == current_user %>
-			<%= button_to "Delete Album", user_album_url(current_user, album), method: :delete%>
+			<% unless (album.name == "Profile Photos") || (album.name == "Cover Photos") %>
+				<%= button_to "Delete Album", user_album_url(current_user, album), method: :delete %>
+			<% end %>
 		<% end %>
 
 	<% end %>	

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 	validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 	validates :password, :length => { minimum: 6, allow_nil: true }
 
+	after_commit :do_this, :on => [:create]
+
 	has_many(
 		:belongs_to_group,
 		class_name: "FriendGroupJoin",
@@ -156,5 +158,11 @@ class User < ActiveRecord::Base
 	def ensure_session_token!
 		self.session_token ||= SecureRandom.urlsafe_base64(16)
 	end
+
+	def do_this 
+		self.albums.create([{name: "Profile Photos"}, {name: "Cover Photos"}])
+	end
+
+	
 
 end
