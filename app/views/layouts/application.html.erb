@@ -56,7 +56,8 @@
   .user-links {
     display: block;
     float: right;
-    width: 372px;
+    width: 210px;
+    margin-right: 60px;
   }
 
   .search-field {
@@ -107,7 +108,7 @@
 }
 
 .box-header {
-  padding: 2px;
+  padding: 5px;
   background-color: #f4f6f9;
 }
 
@@ -120,9 +121,7 @@
 
 .post-header-thumbnail {
   float: left;
-  padding: 15px 0 0 15px;
-  width: 75px;
-
+  padding: 10px;
 }
 
 .post-header-thumbnail > a {
@@ -206,6 +205,7 @@ textarea {
 
 textarea:focus {
     outline: none ;
+    height: 100px;
 }
 
 .post-footer {
@@ -335,7 +335,7 @@ textarea:focus {
 .user-header-links ul {
   list-style: none;
   float: right;
-  margin-right: 200px; 
+  margin-right: 85px; 
   border-left: 1px solid #ddd;
 }
 
@@ -360,7 +360,7 @@ textarea:focus {
 .user-details {
   margin-top: 50px;
   display: block;
-  width: 335px;
+  width: 317px;
   height: 200px;
   float: left;
 }
@@ -376,7 +376,6 @@ textarea:focus {
 .user-detail-photos > ul {
   margin: auto;
   list-style: none;
-  margin: 1px;
 }
 
 .user-detail-photos > ul > li {
@@ -384,9 +383,9 @@ textarea:focus {
   width: 100px;
   display: block;
   float: left;
-  padding: 2px;
   border: 1px solid #ddd;
   border-radius: 2px;
+  margin: 1px;
 }
 
 .user-detail-photos li img {
@@ -394,8 +393,6 @@ textarea:focus {
   width: 100%;
   height: 100%;
 }
-
-
 
 
 </style>
@@ -431,7 +428,7 @@ textarea:focus {
       <% end %>
 
 
-
+    <!-- MOVE LOGIC TO CONTROLLER ACTION -->
     <% unless current_user.nil? %>
       
       <div class="header-logo group">
@@ -442,10 +439,8 @@ textarea:focus {
         
       <div class="user-links group">
         <ul>
-          <li><a href="<%= user_url(current_user) %>">Home</a></li>
+          <li><a href="<%= wall_user_url(@user) %>">Home</a></li>
           <li><a href="<%= notifications_url %>">Notifications</a></li>
-          <li><a href="<%= friends_user_url(current_user) %>">My Friends</a></li>
-          <li><a href="<%= user_albums_url(current_user) %>">My Albums</a></li>
         </ul>
         <%= button_to "Log Out", session_url, method: :delete, :class => "submit logout" %>
       </div>
@@ -457,10 +452,7 @@ textarea:focus {
 
 </head>
 
-
-
 <body>
-
 
 <%= yield %>
 
