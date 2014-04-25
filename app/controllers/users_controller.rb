@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-	before_action :ensure_friends_with_user!, only: [:wall]
-	before_action :reroute_to_wall_if_friends!, only: [:show]
+	# before_action :ensure_friends_with_user!, only: [:wall]
+	# before_action :reroute_to_wall_if_friends!, only: [:show]
 
 	def new
 	end

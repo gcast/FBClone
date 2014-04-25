@@ -1,28 +1,104 @@
 <section class="user_wall">
 
-	<section class="about">
+	<section class="user-header group">
+		
+		<div class="profile-picture">
+			<!-- Placeholder Image -->
+			<img src="http://s3.amazonaws.com/FBCloneProd/photos/files/000/000/001/med/Screen_Shot_2014-02-12_at_9.08.52_AM.png?1398219802">
+		</div>
 
+		<div class="toggle-friend-button">
+			<% if (current_user != @user) && (current_user.can_request_friendship?(@user)) %>
+    			<%= button_to "Add Friend", user_friend_requests_url(@user), method: :post, :class => "add-friend" %>
+  			<% end %>
+  		</div>
+		
+
+		<div class="profile-name">
+			<p><%= @user.full_name %></p>
+		</div>
+
+		<div class="cover-photo">
+			<!-- Placeholder Image -->
+			<img src="http://www.deautoreviews.com/wp-content/uploads/2014/01/bugatti-veyron-super-sport-car.jpg">
+		</div>
+
+		<div class="user-header-links">
+
+			<ul>
+          		<li><a href="<%= wall_user_url(@user) %>">Timeline</a></li>
+          		<li><a href="#">About</a></li>
+          		<li><a href="#">Photos</a></li>
+          		<li><a href="#">More</a></li>
+        	</ul>
+
+		</div>
 
 	</section>
 
-  	<section class="posts"> 
+	<section class="user-profile-body group"> 
 
-  		<%= render partial: "/posts/form" %>
+		<section class="user-details group">
 
-  		<br>
+			<article class="user-mini-photos">
 
-  		<% unless @user.received_posts.empty? %> 
+				<header class="box-header"><p>Photos</p></header>
 
-    		<% @user.received_posts.each do |post| %>
-      			<%= render partial: "/posts/post", locals: { post: post } %>
-      		<br>
-    		<% end %>
+				<div class="user-detail-photos group">
+					
+					<ul class="group">
+						<% 9.times do %>
+						
+						<li>
+						<!-- Placeholder -->
+						<img src="http://s3.amazonaws.	com/FBCloneProd/photos/files/000/000/001/med/Screen_Shot_2014-02-12_at_9.08.52_AM.	png?1398219802">
+						</li>
+	
+						<% end %>
+					</ul>
+				</div>
 
-  		<% end %>
+			</article>
+
+			<article class="user-mini-photos">
+
+				<header class="box-header"><p>Friends</p></header>
+
+				<div class="user-detail-photos group">
+					
+					<ul class="group">
+						<% 9.times do %>
+						
+						<li>
+						<!-- Placeholder -->
+						<img src="http://s3.amazonaws.	com/FBCloneProd/photos/files/000/000/001/med/Screen_Shot_2014-02-12_at_9.08.52_AM.	png?1398219802">
+						</li>
+	
+						<% end %>
+					</ul>
+				</div>
+
+			</article>			
+	
+		</section>
+	
+  		<section class="posts"> 
+	
+  			<%= render partial: "/posts/form" %>
+	
+  			<br>
+	
+  			<% unless @user.received_posts.empty? %> 
+	
+    			<% @user.received_posts.each do |post| %>
+    	  			<%= render partial: "/posts/post", locals: { post: post } %>
+    	  		<br>
+    			<% end %>
+	
+  			<% end %>
+	
+  		</section>
 
   	</section>
-
-
-
 
 </section>

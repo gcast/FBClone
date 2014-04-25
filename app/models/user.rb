@@ -111,6 +111,10 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def friendship(user)
+		self.friends.where("friend_id = ?", user.id).first #Use try?
+	end
+
 	def can_request_friendship?(user)
 		!friends_with?(user) && 
 		!sent_request_to?(user) && 
