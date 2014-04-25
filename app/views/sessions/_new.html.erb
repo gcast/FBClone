@@ -1,0 +1,25 @@
+<form action="<%= session_url %>" method='post'>
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+      <div class="sign-in group">
+		
+      	<div class="inputs email">
+      	  <label class="label">Email or Phone</label>
+      	  <input type="email" name="user[email]">
+      	</div>
+		
+      	<div class="inputs password">
+      	 	<label class="label">Password</label>
+      	  	<input type="password" name="user[password]">
+      	</div>
+		
+      	<div class="inputs login">
+      	  <input class="submit" type="submit" value="Log In">
+      	</div>
+		
+      </div>
+
+</form>
+
+
+

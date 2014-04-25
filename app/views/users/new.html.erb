@@ -1,39 +1,65 @@
-<form action="<%= users_url %>" method='post'>
-
-<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-
-<h1>Sign Up</h1>
-
-<label for="firstName">First Name</label>
-<input type="text" name="user[firstName]" id="firstName">
-
-<br>
-
-<label for="lastName">Last Name</label>
-<input type="text" name="user[lastName]" id="lastName">
-
-<br>
-
-<label for="birthDate">Date of Birth</label>
-<input type="date" name="user[birthDate]" id="birthDate">
-
-<br>
-
-<label for="email">Email</label>
-<input type="text" name="user[email]" id="email">
-
-<br>
-
-<label for="password">Password</label>
-<input type="password" name="user[password]" id="password">
-
-<br>
-<br>
-
-<input type='submit' value="Sign Up">
-
-</form>
-
-<a href="<%= new_session_url %>">Sign In</a>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
 
 
+<body>
+
+  <header class="navbar">
+    <nav class="group">
+
+      <div class="header-logo">
+        <logo>Facebook</logo>
+      </div>
+      
+      <%= render partial: "sessions/new" %>
+     
+    </nav>
+  </header>
+
+  <section class="body group">
+
+    <div class="signup group">
+
+     <div class="signup_intro">
+       <div id="signup_header">Sign Up</div>
+       <div class="signup_text">It's free and always will be.</div>
+     </div>
+
+     <form class="group" id="sign_up" action="<%= users_url %>" method="post">
+
+     	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+         <div class="signup_fields" id="name">
+           <input type="text" id="firstName" placeholder="First Name" name="user[firstName]">
+           <input type="text" id="lastName" placeholder="Last Name" name="user[lastName]">
+         </div>
+
+         <div class="signup_fields" id="email">
+           <input type="email" id="email" placeholder="Email" name="user[email]">
+         </div>
+
+         <div class="signup_fields" id="bdate">
+           <input type="date" id="bdate" placeholder="BirthDate" name="user[birthDate]">
+         </div>
+
+         <div class="signup_fields" id="password">
+           <input type="password" id="password" placeholder="Password" name="user[password]">
+         </div>
+
+         <div class="sign-up-button" id="signup_button">
+           <input type="submit" value="Sign Up">
+         </div>
+
+     </form>
+
+    </div>
+
+  </section>
+
+
+</body>
+</html>

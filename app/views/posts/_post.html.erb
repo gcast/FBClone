@@ -7,7 +7,9 @@
 
 		<div class="post-header-thumbnail">
           <a href="#">
-      		<img src="<%= Post.find(1).photos.first.file.url(:thumb) %>">  	
+          	<% profile_photos = post.author.get_profile_photos %>
+			<% src = profile_photos.empty? ? Photo.default_photo_url : profile_photos.first.file.url %>
+      		<img src="<%= src %>">  	
           </a>
         </div>
 

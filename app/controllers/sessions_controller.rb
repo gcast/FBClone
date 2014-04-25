@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
 	def new
+		redirect_to new_user_url
 	end
 
 	def create
@@ -8,7 +9,7 @@ class SessionsController < ApplicationController
 
 		if @user
 			log_in!(@user)
-			redirect_to user_url(@user)
+			redirect_to wall_user_url(@user)
 		else
 			flash[:errors] = ["Invalid login credentials"]
 			redirect_to new_session_url
