@@ -274,7 +274,8 @@ textarea:focus {
 }
 
 .cover-photo img {
-  max-width:100%; 
+  width:100%; 
+ 
   /*max-height:100%;*/
 }
 
@@ -432,7 +433,7 @@ textarea:focus {
     <% unless current_user.nil? %>
       
       <div class="header-logo group">
-        <logo>Facebook</logo>
+        <a href="<%= wall_user_url(current_user)%>"><logo>Facebook</logo></a>
         <div class="search-field"><input type="text" name="SEARCHBAR" placeholder="Search friends, posts etc..."></div>
       </div>
         

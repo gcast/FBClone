@@ -8,7 +8,7 @@ class PhotosController < ApplicationController
 			flash[:errors] = @photo.errors.full_messages
 		end
 
-		redirect_to album_url(params[:album_id])
+		redirect_to :back
 	end
 
 end

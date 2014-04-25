@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 			flash[:errors] = @post.errors.full_messages
 		end
 
-		redirect_to user_url(@post.recipient_id)
+		redirect_to wall_user_url(@post.recipient_id)
 	end
 
 	def show

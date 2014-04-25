@@ -17,7 +17,7 @@ FBClone::Application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :friendships, only: [:destroy]
 
-  resources :albums, only: [:new, :show] do
+  resources :albums, only: [:new, :show, :edit, :update] do
     resources :photos, only: [:destroy]
   end
 

@@ -13,6 +13,7 @@
 			<% unless (album.name == "Profile Photos") || (album.name == "Cover Photos") %>
 				<%= button_to "Delete Album", user_album_url(current_user, album), method: :delete %>
 			<% end %>
+				<%= button_to "Edit Album", edit_album_url(album), method: :get %>
 		<% end %>
 
 	<% end %>	

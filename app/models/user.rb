@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 	validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 	validates :password, :length => { minimum: 6, allow_nil: true }
 
-	after_commit :do_this, :on => [:create]
+	after_commit :create_default_albums!, :on => [:create]
 
 	has_many(
 		:belongs_to_group,
@@ -154,12 +154,20 @@ class User < ActiveRecord::Base
 		"#{self.firstName} #{self.lastName}"
 	end
 
+	def get_profile_photos
+		@profile_photos ||= self.albums.where("name = 'Profile Photos'").first.photos
+	end
+
+	def get_cover_photos
+		@cover_photos ||= self.albums.where("name = 'Cover Photos'").first.photos
+	end
+
 	private
 	def ensure_session_token!
 		self.session_token ||= SecureRandom.urlsafe_base64(16)
 	end
 
-	def do_this 
+	def create_default_albums! 
 		self.albums.create([{name: "Profile Photos"}, {name: "Cover Photos"}])
 	end
 

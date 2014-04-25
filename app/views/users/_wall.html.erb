@@ -2,10 +2,13 @@
 
 	<section class="user-header group">
 		
-		<div class="profile-picture">
-			<!-- Placeholder Image -->
-			<img src="http://s3.amazonaws.com/FBCloneProd/photos/files/000/000/001/med/Screen_Shot_2014-02-12_at_9.08.52_AM.png?1398219802">
-		</div>
+		<a href="<%= user_albums_url(@user)  %>">
+			<div class="profile-picture">
+				<% profile_photos = @user.get_profile_photos %>
+				<% src = profile_photos.empty? ? Photo.default_photo_url : profile_photos.first.file.url %>
+				<img src="<%= src %>">
+			</div>
+		</a>
 
 		<div class="toggle-friend-button">
 			<% if (current_user != @user) && (current_user.can_request_friendship?(@user)) %>
@@ -18,10 +21,13 @@
 			<p><%= @user.full_name %></p>
 		</div>
 
-		<div class="cover-photo">
-			<!-- Placeholder Image -->
-			<img src="http://www.deautoreviews.com/wp-content/uploads/2014/01/bugatti-veyron-super-sport-car.jpg">
-		</div>
+		<a href="<%= user_albums_url(@user)  %>">
+			<div class="cover-photo">
+				<% cover_photos = @user.get_cover_photos %>
+				<% src = cover_photos.empty? ? Photo.default_cover_photo_url : cover_photos.first.file.url %>
+				<img src="<%= src %>">
+			</div>
+		</a>
 
 		<div class="user-header-links">
 

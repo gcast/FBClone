@@ -1,7 +1,6 @@
 class FriendGroupJoin < ActiveRecord::Base
 
-	validates :group, :friend_id, presence: true
-	#validate uniqueness on all two columns
+	validates :friend_group, :friend_id, presence: true
 
 	belongs_to(
 		:friend_group,

@@ -3,6 +3,28 @@ class AlbumsController < ApplicationController
 	before_action :ensure_friends_with_user!, only: [:index]
 
 	def new
+		@method = "new"
+	end
+
+	def edit
+		@album = Album.includes(:photos).find(params[:id])
+		@method = "edit"
+	end
+
+	def update
+		album = Album.includes(:photos).find(params[:id])
+
+		unless photo_params.nil?
+			photo_params.each { |params| album.photos.create(file: params) }
+    	end
+
+    	if album.update(valid_params)
+    		flash[:notices] = ["Album: #{album.name} was successfully updated"]
+    	else
+    		flash[:errors] = album.errors.full_messages
+    	end
+
+    	redirect_to edit_album_url(album)
 	end
 
 	def create
@@ -40,6 +62,7 @@ class AlbumsController < ApplicationController
 	#Should nest under users to ensure friend validation before action?
 	def show
 		@album = Album.find(params[:id])
+		@user = @album.owner
 	end
 
 	private
