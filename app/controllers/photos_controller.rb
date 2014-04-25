@@ -11,4 +11,6 @@ class PhotosController < ApplicationController
 		redirect_to :back
 	end
 
+	#ADD SHOW
+
 end

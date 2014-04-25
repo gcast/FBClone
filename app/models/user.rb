@@ -87,6 +87,7 @@ class User < ActiveRecord::Base
 	)
 
 	has_many :friends, through: :owned_friendships, source: :friend
+	has_many :photos, through: :albums, source: :photos
 
 	attr_reader :password
 
@@ -132,6 +133,10 @@ class User < ActiveRecord::Base
 		!self.friends.where("friend_id = ?", user.id).empty?
 	end
 
+	def get_friendship(user)
+		self.owned_friendships.where("friend_id = ?", user.id)
+	end
+
 	def has_sent_requests?
 		!self.sent_requests.empty?
 	end
@@ -162,6 +167,8 @@ class User < ActiveRecord::Base
 		@cover_photos ||= self.albums.where("name = 'Cover Photos'").first.photos
 	end
 
+
+
 	private
 	def ensure_session_token!
 		self.session_token ||= SecureRandom.urlsafe_base64(16)
@@ -170,7 +177,5 @@ class User < ActiveRecord::Base
 	def create_default_albums! 
 		self.albums.create([{name: "Profile Photos"}, {name: "Cover Photos"}])
 	end
-
-	
 
 end

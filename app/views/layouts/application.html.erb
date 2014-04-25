@@ -275,7 +275,7 @@ textarea:focus {
 
 .cover-photo img {
   width:100%; 
- 
+
   /*max-height:100%;*/
 }
 
@@ -305,6 +305,7 @@ textarea:focus {
   color: white;
   font-weight: bold;
   font-size: 25px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .add-friend {
@@ -312,19 +313,17 @@ textarea:focus {
   display: block;
   top: 270px;
   left: 730px;
-
   float: right;
   width: auto;
   border: 0 none;
   margin: 5px 10px 0 0;
   padding: 5px;
   background: white;
-  font-size: 14px;
+  font-size: 12px;
   color: black;
   font-weight: bold;
   border: 2px solid #bbb;
-  border-radius: 2px;
-
+  border-radius: 4px;
 }
 
 .user-header-links {
@@ -374,12 +373,28 @@ textarea:focus {
   margin-bottom: 25px;
 }
 
+.friend-mini-profile {
+  position: relative;
+  float: left;
+}
+
+
+.friend-name {
+  position: absolute;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  left: 20px;
+  top: 58px;
+}
+
 .user-detail-photos > ul {
   margin: auto;
   list-style: none;
 }
 
-.user-detail-photos > ul > li {
+.user-detail-photos > ul li {
   height: 100px;
   width: 100px;
   display: block;
