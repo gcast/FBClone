@@ -29,16 +29,11 @@ class Post < ActiveRecord::Base
 		self.notifications.create(user_id: self.recipient_id, event_id: 6)
 	end
 
-	#Assumes logic that will prevent non-friends from viewing post by default
-	def viewable_by_current_user?(user)
-		# user_received_shares = current_user.received_shares
-
-		user_received_shares = user.received_shares
-
-		# current_user == self.author 
-		user == self.author ||
+	#Already assumes current_user is not author && they are friends
+	def viewable_by_current_user?
+		user_received_shares = current_user.received_shares
 		#No overlap between user received shares and post shares
-		((user_received_shares - self.shares).length != user_received_shares.length)
+		(user_received_shares - self.shares).length != user_received_shares.length
 	end
 
 end

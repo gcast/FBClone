@@ -29,20 +29,22 @@
 
         </div> 
 
-        <!-- SHARE DROPDOWN -->
-        <div class="share-checkbox submit">
-          Share
-
-          <ul class="share-dropdown submit">
-          <% current_user.created_groups.each do |group| %>  
-              <li>
-                <input type="checkbox" name="share[group_ids][]" value="<%= group.id %>">
-                <label><%= group.group_name %></label>
-              </li>
-          <% end %> 
-          </ul>
-
-        </div>
+        <% unless current_user.created_groups.empty? %>
+          <!-- SHARE DROPDOWN -->
+          <div class="share-checkbox submit">
+            Share
+  
+            <ul class="share-dropdown submit">
+            <% current_user.created_groups.each do |group| %>  
+                <li>
+                  <input type="checkbox" name="share[group_ids][]" value="<%= group.id %>">
+                  <label><%= group.group_name %></label>
+                </li>
+            <% end %> 
+            </ul>
+  
+          </div>
+        <% end %>
 
       </div>
 
