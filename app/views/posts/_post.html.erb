@@ -15,7 +15,7 @@
 
          <div class="post-header-info">
           <h3><a href="#"><%= post.author.firstName %></a></h3>
-          <p>Sent 3 hours ago from New York</p>
+          <p>Sent <%= ((Time.now - post.created_at) / (60 * 60)).floor %> hours ago</p>
         </div>
 
 	</header>

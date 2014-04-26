@@ -177,15 +177,16 @@
 
 .submit {
     position: relative;
-    display: inline-block;
-    background: #5b74a8;
-    border-color: #29447e #29447e #1a356e;
-    color: #fff;
+    margin-top: 18px;
     padding: 3px 6px;
-    border-radius: 3px;
-    box-shadow: 0 1px 0 0 #29447e;
+
+    background: #5b74a8;
+    color: #fff;
     font-weight: bold;
-    margin-top: 18px
+
+    border-radius: 3px;
+    border-color: #29447e #29447e #1a356e;
+    box-shadow: 0 2px 0 0 #29447e; 
 }
 
 .logout {
@@ -211,7 +212,19 @@ textarea:focus {
 .post-footer {
   display: block;
   background-color: #f4f6f9;
-  padding: 0 0px 10px 10px;
+  padding: 10px;
+}
+
+.post-footer > input {
+  float: left;
+  margin: 2px 5px;
+}
+
+.post-footer > div {
+  float: right;
+  margin: 2px 5px;
+  font-size: 12px;
+
 }
 
 .file-submit::-webkit-file-upload-button {
@@ -520,6 +533,31 @@ textarea:focus {
     margin-top: 18px
   }
 
+  .share-checkbox {
+    position: relative;
+  }
+
+  .share-checkbox:hover > .share-dropdown {
+    display: block;
+  }
+
+  .share-dropdown {
+    position: absolute;
+    list-style: none;
+    color: white;
+    top: 17px;
+    left: 0px;
+    width: 170px;
+    padding: 0;
+    margin: 0;
+    display: none;
+  } 
+
+  .share-dropdown > li {
+    display: block;
+    padding: 5px;
+
+  } 
 
 </style>
 

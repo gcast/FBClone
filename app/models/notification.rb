@@ -3,7 +3,7 @@ class Notification < ActiveRecord::Base
 	# Rails.application.routes.url_helpers
 	# message_path(self.notifiable)
 
-	validates :notifiable_id, :notifiable_type, :user_id, :event_id, presence: true
+	validates :notifiable, :user_id, :event_id, presence: true
 
 	belongs_to :notifiable, polymorphic: true
 
@@ -24,24 +24,24 @@ class Notification < ActiveRecord::Base
   }
 
   def get_url
-  	if self.event_id == 1 
-  		request = self.notifiable
-  		return "users/#{request.requestor.id}"
-  	elsif self.event_id == 2
-  		friendship = self.notifiable
-  		return "users/#{friendship.friend.id}"
-  	# elsif self.event_id == 3
+  	# if self.event_id == 1 
+  	# 	request = self.notifiable
+  	# 	return "users/#{request.requestor.id}"
+  	# elsif self.event_id == 2
+  	# 	friendship = self.notifiable
+  	# 	return "users/#{friendship.friend.id}"
+  	# # elsif self.event_id == 3
 
-  	# elsif self.event_id == 4
+  	# # elsif self.event_id == 4
 
-  	elsif self.event_id == 5
-  		post_tag = self.notifiable
-  		return "You were tagged in a post by: #{post_tag.post.author.firstName} #{post_tag.post.author.lastName}"
-  		# return #post_url
-  	elsif self.event_id == 6
-  		post = self.notifiable
-  		return "#{post.author.firstName} #{post.author.lastName} posted on your wall."	
-  	end
+  	# elsif self.event_id == 5
+  	# 	post_tag = self.notifiable
+  	# 	return "You were tagged in a post by: #{post_tag.post.author.firstName} #{post_tag.post.author.lastName}"
+  	# 	# return #post_url
+  	# elsif self.event_id == 6
+  	# 	post = self.notifiable
+  	# 	return "#{post.author.firstName} #{post.author.lastName} posted on your wall."	
+  	# end
   end
 
   def get_text

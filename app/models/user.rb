@@ -88,6 +88,8 @@ class User < ActiveRecord::Base
 
 	has_many :friends, through: :owned_friendships, source: :friend
 	has_many :photos, through: :albums, source: :photos
+	has_many :group_memberships, through: :belongs_to_group, source: :friend_group
+	has_many :received_shares, through: :group_memberships, source: :shares
 
 	attr_reader :password
 
@@ -134,7 +136,7 @@ class User < ActiveRecord::Base
 	end
 
 	def get_friendship(user)
-		self.owned_friendships.where("friend_id = ?", user.id)
+		self.owned_friendships.where("friend_id = ?", user.id).first
 	end
 
 	def has_sent_requests?
@@ -167,7 +169,9 @@ class User < ActiveRecord::Base
 		@cover_photos ||= self.albums.where("name = 'Cover Photos'").first.photos
 	end
 
-
+	# def belongs_to_groups?(groups)
+	# 	!self.belongs_to_group.where("group_id = ?", group.id).empty?
+	# end
 
 	private
 	def ensure_session_token!

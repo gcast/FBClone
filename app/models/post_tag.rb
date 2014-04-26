@@ -2,9 +2,10 @@ class PostTag < ActiveRecord::Base
 
 	validates :post, :tagged_user_id, presence: true
 	validates :post_id, uniqueness: { scope: :tagged_user_id }
+
 	after_commit :send_notification
 
-	has_many :notifications, as: :notifiable, dependent: :destroy
+	has_many :notifications, as: :notifiable, inverse_of: :notifiable, dependent: :destroy
 
 	belongs_to(
 		:post,

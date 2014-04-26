@@ -3,33 +3,51 @@
   <form action="<%= user_posts_url(@user) %>" method="post" enctype="multipart/form-data">
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-        <header class="box-header">
-          <p>Post</p>
-        </header>
+      <header class="box-header">
+        <p>Post</p>
+      </header>
 
-        <textarea name="post[body]"  placeholder="Type Something..."></textarea>
+      <textarea name="post[body]"  placeholder="Type Something..."></textarea>
 
-        <!-- ROWS=5 COLS=50 -->
-  
-
-
-
-        <!-- MOVE TO PARTIALS IN CORRECT VIEWS -->
-       <!--  <h5>Tag your friends in this post</h5>
-        <% current_user.friends.each do |friend| %>
-          <%= friend.firstName %> <%= friend.lastName %>
-          <input type="checkbox" name="post[tagged_user_ids][]" value="<%= friend.id %>">
-          <br>
-        <% end %>
-
-        -->  
        
-
-      <div class="post-footer">
+      <div class="post-footer group">
         <input class="submit" type="submit" value="Post">
-        <input class="file-submit" type="file" multiple name="photos[]" value="Upload Photos"> 
+        <input class="file-submit" type="file" multiple name="photos[]" value="Upload Photos">
+
+        <!-- TAG DROPDOWN -->
+        <div class="share-checkbox submit">
+          Tag
+
+          <ul class="share-dropdown submit">
+            <% current_user.friends.each do |friend| %>
+                <li>
+                  <input type="checkbox" name="post[tagged_user_ids][]" value="<%= friend.id %>">
+                  <label><%= friend.full_name %></label>
+                </li>
+            <% end %> 
+          </ul>
+
+        </div> 
+
+        <!-- SHARE DROPDOWN -->
+        <div class="share-checkbox submit">
+          Share
+
+          <ul class="share-dropdown submit">
+          <% current_user.created_groups.each do |group| %>  
+              <li>
+                <input type="checkbox" name="share[group_ids][]" value="<%= group.id %>">
+                <label><%= group.group_name %></label>
+              </li>
+          <% end %> 
+          </ul>
+
+        </div>
+
       </div>
 
   </form>
 
 </section>
+
+
