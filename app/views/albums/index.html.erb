@@ -1,20 +1,38 @@
-<h3> <%= @user.full_name %>'s Albums </h3>
+<section class="user-albums">
 
-	<% if @user == current_user %>
-		<a href="<%= new_album_url %>">Create An Album</a>
-	<% end %>
+	<ul class="album-index group">
 
-<% unless @user.albums.empty? %>
-	<% @user.albums.each do |album| %>
-		
-		<li><a href="<%= album_url(album) %>"><%= album.name %></a></li>
+		<% unless @user.albums.empty? %>
+			<% @user.albums.each do |album| %>
+				<li>
+					<a href="<%= album_url(album) %>">
+						<% if !album.photos.empty? %>
+							<% src = album.photos.sample.file.url(:thumb) %>
+						<% else %>
+							<% src = Photo.default_photo_url %>
+						<% end %>
+						<img src="<%= src %>">
+						<tag><%= album.name %></tag>
+					</a>
 
-		<% if @user == current_user %>
-			<% unless (album.name == "Profile Photos") || (album.name == "Cover Photos") %>
-				<%= button_to "Delete Album", user_album_url(current_user, album), method: :delete %>
-			<% end %>
-				<%= button_to "Edit Album", edit_album_url(album), method: :get %>
+				 	<% if @user == current_user %>
+						<% unless (album.name == "Profile Photos") || (album.name == "Cover Photos") %>
+							<%= button_to "Delete Album", user_album_url(current_user, album), method: :delete %>
+						<% end %>
+						 <%= button_to "Edit Album", edit_album_url(album), method: :get %>
+					<% end %> 
+
+				</li>
+	
+			<% end %>	
 		<% end %>
 
-	<% end %>	
-<% end %>	
+	</ul>	
+
+	<% if @user == current_user %>
+		<a class="submit" href="<%= new_album_url %>">
+			Create a new album
+		</a>
+	<% end %>
+
+</section>

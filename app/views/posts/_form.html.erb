@@ -11,6 +11,7 @@
 
        
       <div class="post-footer group">
+        
         <input class="submit" type="submit" value="Post">
         <input class="file-submit" type="file" multiple name="photos[]" value="Upload Photos">
 
@@ -26,10 +27,10 @@
                 </li>
             <% end %> 
           </ul>
-
         </div> 
 
         <% unless current_user.created_groups.empty? %>
+
           <!-- SHARE DROPDOWN -->
           <div class="share-checkbox submit">
             Share
@@ -42,8 +43,8 @@
                 </li>
             <% end %> 
             </ul>
-  
           </div>
+
         <% end %>
 
       </div>

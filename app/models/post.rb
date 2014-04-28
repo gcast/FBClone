@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
 	has_many :photos, as: :imageable
 	has_many :notifications, as: :notifiable, dependent: :destroy
 	has_many :shares, as: :shareable, inverse_of: :shareable, dependent: :destroy
+	has_many :likes, as: :likeable, inverse_of: :likeable, dependent: :destroy
 
 	belongs_to(
 		:author, 

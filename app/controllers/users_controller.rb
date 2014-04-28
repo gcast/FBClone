@@ -29,7 +29,9 @@ class UsersController < ApplicationController
 	end
 
 	def wall
-		@user = User.includes(:received_posts => [:author, :photos, :tagged_users]).find(params[:id])
+		@user = User.includes(
+			:received_posts => [:likes, :photos, :tagged_users, :comments => [:author => [:photos]], :author => [:photos]])
+			.find(params[:id])
 	end
 
 	private

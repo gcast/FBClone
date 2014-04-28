@@ -224,8 +224,35 @@ textarea:focus {
   float: right;
   margin: 2px 5px;
   font-size: 12px;
-
 }
+
+.post-footer > ul {
+  list-style: none;
+}
+
+.post-footer li {
+  display: block;
+  padding: 10px;
+  width: 400px; /*CAN DELETE LATER*/
+  font-size: 11px;
+}
+
+.comment-header img {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  float: left;
+}
+
+.comment-details {
+  float: left;
+  margin-left: 10px;
+  margin-top: 5px;
+  vertical-align: middle;
+  display: block;
+}
+
 
 .file-submit::-webkit-file-upload-button {
   visibility: hidden;
@@ -556,8 +583,47 @@ textarea:focus {
   .share-dropdown > li {
     display: block;
     padding: 5px;
-
   } 
+
+  .album-index li {
+    position: relative;
+    display: block;
+    width: 150px;
+    height: 150px;
+    padding: 3px;
+    border: 2px solid #bbb;
+    border-radius: 3px;
+    float: left;
+    margin: 25px;
+    background-color: #aaa;
+  }
+
+  .album-index tag {
+    display: block;
+    position: absolute;
+    width: 150px;
+    bottom: 11px;
+    color: white;
+    font-weight: bold;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    text-align: center;
+  }
+
+  .album-index img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .album-submit {
+    display: block;
+    width: 200px;
+  }
+
+  .user-albums > a {
+    margin: 25px;
+    font-weight: normal;
+  }
 
 </style>
 

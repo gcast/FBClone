@@ -22,10 +22,16 @@ FBClone::Application.routes.draw do
   end
 
   resources :notifications, only: [:index]
-  resources :posts, only: [:show, :destroy]
-  resources :friend_groups, only: [:new, :create, :index]
+  resources :posts, only: [:show, :destroy] do
+    member do 
+      post 'like'
+    end
+  end
 
-  # MAKE RESTFUL ??
+  resources :friend_groups, only: [:new, :create, :index]
+  resources :comments, only: [:destroy]
+
+
   put "/friend_requests/:id/accept", { as: :accept_request, controller: :friend_requests, action: :accept }
   put "/friend_requests/:id/decline", { as: :decline_request, controller: :friend_requests, action: :decline }
   

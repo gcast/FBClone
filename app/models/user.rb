@@ -10,6 +10,13 @@ class User < ActiveRecord::Base
 	after_commit :create_default_albums!, :on => [:create]
 
 	has_many(
+		:liked_items, 
+		class_name: "Like",
+		foreign_key: :liker_id, 
+		primary_key: :id
+	)
+
+	has_many(
 		:belongs_to_group,
 		class_name: "FriendGroupJoin",
 		foreign_key: :friend_id,
@@ -167,6 +174,13 @@ class User < ActiveRecord::Base
 
 	def get_cover_photos
 		@cover_photos ||= self.albums.where("name = 'Cover Photos'").first.photos
+	end
+
+	#CHANGE OTHER PLACES WHERE YOU GET PROFILE PHOTOS & CHECK IF EMPTY. ALL LOGIC DONE HERE
+	def profile_photo_url
+		profile_photos = get_profile_photos
+		profile_photo_url = profile_photos.empty? ? Photo.default_photo_url : profile_photos.first.file.url
+		profile_photo_url
 	end
 
 	# def belongs_to_groups?(groups)

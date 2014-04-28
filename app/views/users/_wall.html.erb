@@ -101,7 +101,7 @@
 	
   			<% unless @user.received_posts.empty? %> 
 	
-    			<% @user.received_posts.each do |post| %>
+    			<% @user.received_posts.reverse.each do |post| %>
     	  			<%= render partial: "/posts/post", locals: { post: post } %>
     	  		<br>
     			<% end %>

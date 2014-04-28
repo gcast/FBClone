@@ -34,13 +34,34 @@
 		
 	<div class="post-footer">
 		<%= render partial: "comments/form", locals: { post: post } %>
-		<button class="submit">Like!</button>
+
+		<!-- ADD LOGIC TO CHANGE THIS BUTTON TO UNLIKE IF USER ALREADY LIKED -->
+		<%= button_to "Like", like_post_url(post), method: :post, :class => "submit" %>
+		<div class="num-likes"><%= post.likes.count %></div>
+		
+			<ul class="group">
+				<% post.comments.each do |comment| %>
+					<li>
+						<%= button_to "x", comment_url(comment), method: :delete, :class => "delete-post" %>
+						<div class="comment-header group">
+							<img src="<%= comment.author.profile_photo_url %>">
+							<div class="comment-details">
+								<strong><%= comment.author.firstName %></strong>: <%= comment.comment %>
+								<br>
+								<%= ((Time.now - comment.created_at) / (60 * 60)).floor %> hours ago
+							</div>
+						</div>
+					</li>
+				<% end %>
+			</ul>
+	</div>
+
 	</div>
 	
 </article>
 	
 	<!-- 
-	<%= render partial: "comments/comments", locals: { post: post } %>
+	
 	
 	 		 Post Tags -->
 	<!-- 	<% unless post.tagged_users.empty? %>

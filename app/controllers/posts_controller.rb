@@ -33,6 +33,12 @@ class PostsController < ApplicationController
 		redirect_to :back
 	end
 
+	def like
+		@post = Post.find(params[:id])
+		@post.likes.create({ liker_id: current_user.id })
+		redirect_to :back
+	end
+
 	private
 	def valid_params
 		params.require(:post).permit(:body, :tagged_user_ids => [])
