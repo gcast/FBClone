@@ -31,6 +31,8 @@ gem "aws-sdk"
 gem "figaro"
 gem "pg"
 
+#ADD GEOCODER FOR POST LOCATION http://www.rubygeocoder.com/
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 

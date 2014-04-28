@@ -15,7 +15,7 @@
         <!-- MOVE TO PARTIALS IN CORRECT VIEWS -->
        <!--  <h5>Tag your friends in this post</h5>
         <% current_user.friends.each do |friend| %>
-          <%= friend.firstName %> <%= friend.lastName %>
+          <%= friend.first_name %> <%= friend.last_name %>
           <input type="checkbox" name="post[tagged_user_ids][]" value="<%= friend.id %>">
           <br>
         <% end %>

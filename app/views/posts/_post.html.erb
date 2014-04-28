@@ -14,7 +14,7 @@
         </div>
 
          <div class="post-header-info">
-          <h3><a href="#"><%= post.author.firstName %></a></h3>
+          <h3><a href="#"><%= post.author.first_name %></a></h3>
           <p>Sent <%= ((Time.now - post.created_at) / (60 * 60)).floor %> hours ago</p>
         </div>
 
@@ -46,7 +46,7 @@
 						<div class="comment-header group">
 							<img src="<%= comment.author.profile_photo_url %>">
 							<div class="comment-details">
-								<strong><%= comment.author.firstName %></strong>: <%= comment.comment %>
+								<strong><%= comment.author.first_name %></strong>: <%= comment.comment %>
 								<br>
 								<%= ((Time.now - comment.created_at) / (60 * 60)).floor %> hours ago
 							</div>
@@ -54,6 +54,7 @@
 					</li>
 				<% end %>
 			</ul>
+			
 	</div>
 
 	</div>
@@ -67,7 +68,7 @@
 	<!-- 	<% unless post.tagged_users.empty? %>
 		  Tagged: 
 		  <% post.tagged_users.each do |user| %>
-		    <li><%= user.firstName %> <%= user.lastName %></li>
+		    <li><%= user.first_name %> <%= user.last_name %></li>
 		  <% end %>
 		<% end %> -->
 	

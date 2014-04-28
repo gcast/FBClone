@@ -678,6 +678,39 @@ textarea:focus {
     margin: 10px 0;
   }
 
+  .all-results {
+    padding: 50px;
+  }
+
+  .results-subsets {
+    padding: 50px;
+    background-color: green;
+    display: block;
+    width: 40%;
+    margin: auto;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    background: white;
+  }
+
+  .results-subsets ul {
+    list-style: none;
+  }
+
+  .results-subsets li {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+    margin: 10px;
+  }
+
+  .results-subsets li:hover {
+    background-color: #bbb;
+    color: white;
+  }
+
 </style>
 
 
@@ -716,7 +749,15 @@ textarea:focus {
       
       <div class="header-logo group">
         <a href="<%= wall_user_url(current_user)%>"><logo>Facebook</logo></a>
-        <div class="search-field"><input type="text" name="SEARCHBAR" placeholder="Search friends, posts etc..."></div>
+        <div class="search-field">
+
+          <!-- FIX APPERANCE -->
+          <form action="<%= search_url %>" method="GET">
+            <input type="text" name="query" placeholder="Search friends, users, posts etc...">
+            <input type="submit" value="Search">
+          </form>
+
+        </div>
       </div>
         
         

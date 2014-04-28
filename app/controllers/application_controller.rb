@@ -14,6 +14,9 @@ class ApplicationController < ActionController::Base
   	session[:session_token] = nil
   end
 
+  #JUST AS CURRENT_USER IS SAVED AS IVAR, STORE OTHER INFO AS IVARS THAT 
+  #ARE HARD TO INCLUDE IN ASSOCIATIONS (E.G. SEARCHABLE)
+
   def current_user
   	return nil unless session[:session_token]
   	@current_user ||= User.find_by_session_token(session[:session_token])

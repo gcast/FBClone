@@ -29,14 +29,17 @@ class UsersController < ApplicationController
 	end
 
 	def wall
-		@user = User.includes(
-			:received_posts => [:likes, :photos, :tagged_users, :comments => [:author => [:photos]], :author => [:photos]])
-			.find(params[:id])
+		@user = User.find(params[:id])
+		@albums = @user.albums
+		@photos = @user.photos
+		@friends = @user.friends.includes(:photos, :albums)
+		@received_posts = @user.received_posts.includes(:author, :likes, :photos, :tagged_users, :comments => [:author => :photos])
 	end
+
 
 	private
 	def valid_params
-		params.require(:user).permit(:firstName, :lastName, :email, :password, :birthDate)
+		params.require(:user).permit(:first_name, :last_name, :email, :password, :birthDate)
 	end
 
 	def reroute_to_wall_if_friends!

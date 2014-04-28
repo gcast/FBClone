@@ -9,7 +9,7 @@
 	<br>
 
 	<% current_user.friends.each do |friend| %>
-		<%= friend.firstName %> <%= friend.lastName %>
+		<%= friend.first_name %> <%= friend.last_name %>
 		<input type="checkbox" name="group[friends_in_group_ids][]" value="<%= friend.id %>">
 		<br>
 	<% end %>

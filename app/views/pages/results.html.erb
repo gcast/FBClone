@@ -1,0 +1,45 @@
+<% posts = @results.map(&:searchable).select { |result| result.class.name == "Post" } %>
+<% users = @results.map(&:searchable).select { |result| result.class.name == "User" } %>
+
+<section class="all-results group">
+
+	<% unless users.empty? %>
+
+	<section class="results-subsets group">
+
+		<header>Users</header>
+
+		<ul>
+			<% users.each do |user| %>
+				<a href="<%=wall_user_url(user)%>">
+					<li>
+						<img src="<%= user.profile_photo_url %>">
+						<%= user.full_name %>
+					</li>
+				</a>
+			<% end %>
+		</ul>
+
+	</section>
+
+	<% end %>
+
+	<% unless posts.empty? %>
+	
+		<section class="results-subsets group">
+	
+			<header>Posts</header>
+	
+			<ul>
+				<% posts.each do |post| %>
+					<a href="<%=wall_user_url(post.recipient_id)%>">
+						<li><%= post.body %></li>
+					</a>
+				<% end %>
+			</ul>
+	
+		</section>
+
+	<% end %>
+
+</section>

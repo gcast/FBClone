@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 		@post = current_user.authored_posts.new(valid_params)
 		@post.recipient_id = params[:user_id]
 
-		Share.create_default_share(@post)
+		# Share.create_default_share(@post)
 		
 		unless share_params.nil?
 			share_params[:group_ids].map(&:to_i).each { |id| @post.shares.new({ group_id: id }) }

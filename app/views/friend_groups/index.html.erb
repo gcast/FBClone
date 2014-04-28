@@ -5,7 +5,9 @@ Friend Groups:
 	<%= group.group_name %>
 
 	<% group.friends_in_group.each do |friend| %>
-		<li><%= friend.firstName %> <%= friend.lastName %></li>
+		<li>
+			<%= friend.full_name %>
+		</li>
 	<% end %>
-
+	<br>
 <% end %>	

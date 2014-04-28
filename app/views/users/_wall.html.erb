@@ -59,7 +59,7 @@
 
 				<div class="user-detail-photos group">	
 					<ul class="group">
-						<% @user.photos.each do |photo| %>
+						<% @photos.each do |photo| %>
 							<li><img src="<%= photo.file.url %>"></li>
 						<% end %>
 					</ul>
@@ -74,16 +74,16 @@
 			<div class="user-detail-photos group">
 				<ul class="group">
 
-					<% @user.friends.each do |friend| %>
-					<a href="<%= wall_user_url(friend) %>">
-					<div class="friend-mini-profile group">
-						<% profile_photos = friend.get_profile_photos %>
-						<% src = profile_photos.empty? ? Photo.default_photo_url : profile_photos.first.file.url %>
+					<% @friends.each do |friend| %>
+						<a href="<%= wall_user_url(friend) %>">
+						<div class="friend-mini-profile group">
+							<% profile_photos = friend.get_profile_photos %>
+							<% src = profile_photos.empty? ? Photo.default_photo_url               : profile_photos.first.file.url %>
 
-						<div class="friend-name"><p><%= friend.full_name %></p></div>
-						<li><img src="<%= src %>"></li>
-					</div>
-					</a>
+							<div class="friend-name"><p><%= friend.full_name %></p></div>
+							<li><img src="<%= src %>"></li>
+						</div>
+						</a>
 					<% end %>
 				</ul>
 
@@ -96,14 +96,15 @@
   		<section class="posts"> 
 	
   			<%= render partial: "/posts/form" %>
-	
   			<br>
 	
-  			<% unless @user.received_posts.empty? %> 
+  			<% unless @received_posts.empty? %> 
 	
-    			<% @user.received_posts.reverse.each do |post| %>
-    	  			<%= render partial: "/posts/post", locals: { post: post } %>
-    	  		<br>
+    			<% @received_posts.reverse.each do |post| %>
+    				<% if post.viewable_by_user?(current_user) %>
+    	  				<%= render partial: "/posts/post", locals: { post: post } %>
+    	  			<% end %>
+    	  			<br>
     			<% end %>
 	
   			<% end %>

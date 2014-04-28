@@ -21,7 +21,8 @@
             </div>
   
             <div class="friend-list-options">
-          <%= button_to "Unfriend", friendship_url(friendship), method: :delete, :class => "submit" %>
+              <%= button_to "Unfriend", friendship_url(friendship), 
+              method: :delete, :class => "submit" %>
             </div>
   
           </li>
@@ -33,41 +34,29 @@
 </section>
 
 
-
-
-
-
 <!-- Requests Sent -->
 <% unless @user.sent_requests.empty? %>
-
   <h3>Friend Requests Sent To:</h3>
 
   <% @user.sent_requests.each do |request| %>
-
     <li>
       <% requestee = request.requestee %>
-      <a href="<%= user_url(requestee)%>"><%= requestee.firstName %> <%= requestee.lastName %></a>
+      <a href="<%= user_url(requestee)%>"><%= requestee.first_name %> <%= requestee.last_name %></a>
     </li>
-
   <% end %>
-
 <% end %>
 
 
 <!-- Requests From  -->
 <% unless @user.received_requests.empty? %>
-
   <h3>Friend Requests From:</h3>
 
   <% @user.received_requests.each do |request| %>
-
     <li>
       <% requestor = request.requestor %>
-      <a href="<%= user_url(requestor)%>"><%= requestor.firstName %> <%= requestor.lastName %></a>
+      <a href="<%= user_url(requestor)%>"><%= requestor.first_name %> <%= requestor.last_name %></a>
     </li>
-
     <%= button_to "Accept", accept_request_url(request), method: :put %>
-    <%= button_to "Decline", decline_request_url(request), method: :put %>
-    
+    <%= button_to "Decline", decline_request_url(request), method: :put %>   
   <% end %>
 <% end %>

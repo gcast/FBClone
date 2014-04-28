@@ -1,11 +1,13 @@
 class User < ActiveRecord::Base
 
 	include PgSearch
-	multisearchable :against => [:firstName, :lastName]
+	multisearchable :against => [:first_name, :last_name, :user_albums]
+
+
 
 	before_validation :ensure_session_token!
 
-	validates :firstName, :lastName, :email, :password_digest, :birthDate, :session_token, presence: true
+	validates :first_name, :last_name, :email, :password_digest, :birthDate, :session_token, presence: true
 	validates :email, uniqueness: true
 	validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 	validates :password, :length => { minimum: 6, allow_nil: true }
@@ -168,7 +170,7 @@ class User < ActiveRecord::Base
 	end
 
 	def full_name
-		"#{self.firstName} #{self.lastName}"
+		"#{self.first_name} #{self.last_name}"
 	end
 
 	def get_profile_photos
@@ -177,6 +179,11 @@ class User < ActiveRecord::Base
 
 	def get_cover_photos
 		@cover_photos ||= self.albums.where("name = 'Cover Photos'").first.photos
+	end
+
+	#FOR PG MULTISEARCH TO PREVENT N+1 QUERIES (Does it work?)
+	def user_albums 
+		self.albums
 	end
 
 	#CHANGE OTHER PLACES WHERE YOU GET PROFILE PHOTOS & CHECK IF EMPTY. ALL LOGIC DONE HERE

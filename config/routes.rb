@@ -38,6 +38,8 @@ FBClone::Application.routes.draw do
   post "/posts/:post_id/comment", { as: :post_comment, controller: :comments, action: :create }
   post "/photos/:photo_id/comment", { as: :photo_comment, controller: :comments, action: :create }
 
+  get "/search" => "pages#search"
+
 end
 
 
