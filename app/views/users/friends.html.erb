@@ -1,23 +1,40 @@
-<a href="<%= new_friend_group_url %>">Create Friend Group</a>
-<a href="<%=friend_groups_url%>">Friend Groups</a>
+<section class="friend-page group">
 
-<% unless @user.owned_friendships.empty? %>
+  <section class="friend-nav-bar group">
+    <a href="<%= new_friend_group_url %>" class="submit">Create Friend Group</a>
+    <a href="<%=friend_groups_url%>" class="submit">Friend Groups</a>
+  </section>
+  
+  
+  <section class="friends-list">
+    <% unless @user.owned_friendships.empty? %>
+      <ul>
+       <% @user.owned_friendships.each do |friendship| %>
+          <li class="group">
+  
+            <img src="<%= friendship.friend.profile_photo_url %>">
+  
+            <div class="friend-list-details">
+              <a href="<%= user_url(friendship.friend) %>">
+                <%= friendship.friend.full_name %>
+              </a>
+            </div>
+  
+            <div class="friend-list-options">
+          <%= button_to "Unfriend", friendship_url(friendship), method: :delete, :class => "submit" %>
+            </div>
+  
+          </li>
+        <% end %> 
+      </ul>
+    <% end %>
+  </section>
 
-  <h3>Friends:</h3>
+</section>
 
-   <% @user.owned_friendships.each do |friendship| %>
 
-      <li>
-        <a href="<%= user_url(friendship.friend) %>">
-          <%= friendship.friend.full_name %>
-        </a>
 
-        <%= button_to "Unfriend", friendship_url(friendship), method: :delete %>
-      </li>
 
-    <% end %> 
-
-<% end %>
 
 
 <!-- Requests Sent -->

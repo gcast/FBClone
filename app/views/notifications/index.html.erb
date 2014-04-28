@@ -2,8 +2,11 @@
 
 <% @notifications.each do |notification| %>
 	
-	<a href="<%= notification.get_url %>">
+	<a href="<%= notification_url(notification) %>">
 		<%= notification.get_text %>
+		<% unless notification.is_read? %>
+			Unread
+		<% end %>
 	<a/>
 	<br>
 

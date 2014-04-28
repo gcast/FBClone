@@ -1,9 +1,18 @@
 class Notification < ActiveRecord::Base
 
-	# Rails.application.routes.url_helpers
-	# message_path(self.notifiable)
+  include Rails.application.routes.url_helpers
 
-	validates :notifiable, :user_id, :event_id, presence: true
+  EVENTS = {
+      1 => "received friend request",
+      2 => "new friendship",
+      3 => "commented on your post",
+      4 => "tagged you in a post",
+      5 => "posted on your wall"
+  }
+
+	validates :notifiable, :user, :event_id, presence: true
+  validates :event_id, inclusion: { in: EVENTS.keys }
+  validates :is_read?, inclusion: { in: [true, false] }
 
 	belongs_to :notifiable, polymorphic: true
 
@@ -11,57 +20,51 @@ class Notification < ActiveRecord::Base
 		:user, 
 		class_name: "User",
 		foreign_key: :user_id,
-		primary_key: :id
+		primary_key: :id,
+    # counter_cache: true #READ UP WHAT THIS DOES AGAIN
 	)
 
-	EVENTS = {
-    	1 => "received friend request",
-    	2 => "new friend",
-    	3 => "commented on post",
-    	4 => "commented on photo",
-    	5 => "tagged in a post",
-    	6 => "posted on your wall"
-  }
+  scope :read, -> { where(is_read?: true) }
+  scope :unread, -> { where(is_read?: false) }
+  # HUHHHH scope :event -> (event_name) { where(event_id: EVENT_IDS[event_name]) } 
 
   def get_url
-  	# if self.event_id == 1 
-  	# 	request = self.notifiable
-  	# 	return "users/#{request.requestor.id}"
-  	# elsif self.event_id == 2
-  	# 	friendship = self.notifiable
-  	# 	return "users/#{friendship.friend.id}"
-  	# # elsif self.event_id == 3
+    element = self.notifiable
 
-  	# # elsif self.event_id == 4
+  	if self.event_id == 1 
+  		return wall_user_url(element.requestor_id)
+  	elsif self.event_id == 2
+  		return wall_user_url(element.friend)
+    elsif self.event_id == 3
+      return wall_user_url(element.commentable.recipient_id)
+    elsif self.event_id == 4
+      return wall_user_url(element.post.recipient_id)
+    elsif self.event_id == 5
+      return wall_user_url(element.recipient_id)
+    end
 
-  	# elsif self.event_id == 5
-  	# 	post_tag = self.notifiable
-  	# 	return "You were tagged in a post by: #{post_tag.post.author.firstName} #{post_tag.post.author.lastName}"
-  	# 	# return #post_url
-  	# elsif self.event_id == 6
-  	# 	post = self.notifiable
-  	# 	return "#{post.author.firstName} #{post.author.lastName} posted on your wall."	
-  	# end
   end
 
   def get_text
+    element = self.notifiable
+
   	if self.event_id == 1 
-  		request = self.notifiable
-  		return "You received a friend request from #{request.requestor.firstName} #{request.requestor.lastName}"
+  		return "You received a friend request from #{element.requestor.full_name}"
   	elsif self.event_id == 2
-  		friendship = self.notifiable
-  		return "You are now friends with #{friendship.friend.firstName} #{friendship.friend.lastName}"
-  	# elsif self.event_id == 3
-
-  	# elsif self.event_id == 4
-
+  		return "You are now friends with #{element.friend.full_name}"
+  	elsif self.event_id == 3
+      return "#{element.author.full_name} commented your post: #{element.comment}"
+  	elsif self.event_id == 4
+  		return "You were tagged in a post by: #{element.post.author.full_name}"
   	elsif self.event_id == 5
-  		post_tag = self.notifiable
-  		return "You were tagged in a post by: #{post_tag.post.author.firstName} #{post_tag.post.author.lastName}"
-  	elsif self.event_id == 6
-  		post = self.notifiable
-  		return "#{post.author.firstName} #{post.author.lastName} posted on your wall."	
+  		return "#{element.author.full_name} posted on your wall."	
   	end
+  end
+
+  def default_url_options
+    options = {}
+    options[:host] = "localhost:3000"
+    options
   end
 
 end

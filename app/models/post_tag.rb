@@ -22,6 +22,6 @@ class PostTag < ActiveRecord::Base
 	)
 
 	def send_notification
-		self.notifications.create(user_id: self.tagged_user_id, event_id: 5)
+		self.notifications.create(user_id: self.tagged_user_id, event_id: 4)
 	end
 end

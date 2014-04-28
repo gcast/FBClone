@@ -21,7 +21,7 @@ FBClone::Application.routes.draw do
     resources :photos, only: [:destroy]
   end
 
-  resources :notifications, only: [:index]
+  resources :notifications, only: [:index, :show]
   resources :posts, only: [:show, :destroy] do
     member do 
       post 'like'

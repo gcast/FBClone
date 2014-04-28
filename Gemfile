@@ -26,6 +26,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 gem "paperclip"
+gem 'pg_search'
 gem "aws-sdk"
 gem "figaro"
 gem "pg"

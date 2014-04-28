@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+	include PgSearch
+	multisearchable :against => [:firstName, :lastName]
+
 	before_validation :ensure_session_token!
 
 	validates :firstName, :lastName, :email, :password_digest, :birthDate, :session_token, presence: true
@@ -179,7 +182,7 @@ class User < ActiveRecord::Base
 	#CHANGE OTHER PLACES WHERE YOU GET PROFILE PHOTOS & CHECK IF EMPTY. ALL LOGIC DONE HERE
 	def profile_photo_url
 		profile_photos = get_profile_photos
-		profile_photo_url = profile_photos.empty? ? Photo.default_photo_url : profile_photos.first.file.url
+		profile_photo_url = profile_photos.empty? ? Photo.default_photo_url : profile_photos.first.file.url(:thumb)
 		profile_photo_url
 	end
 
