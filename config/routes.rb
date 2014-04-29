@@ -2,7 +2,7 @@ FBClone::Application.routes.draw do
   
   root to: 'users#new'
 
-  resources :users, only: [:new, :create, :show] do
+  resources :users, only: [:new, :create] do
   	resources :friend_requests, only: [:create]
   	resources :posts, only: [:create, :index]
     resources :albums, only: [:create, :index, :destroy]
@@ -11,6 +11,7 @@ FBClone::Application.routes.draw do
   		get 'friends'
   		get 'about'
       get 'wall'
+      get 'newsfeed'
   	end
   end
 

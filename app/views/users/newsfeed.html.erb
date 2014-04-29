@@ -1,0 +1,7 @@
+<section class="newsfeed">
+	<% @friends_postings.reverse.each do |post| %>
+		<% if post.viewable_by_user?(current_user) %>
+    		<%= render partial: "/posts/post", locals: { post: post, type: "newsfeed" } %>
+    	<% end %>	
+	<% end %>
+</section>

@@ -20,6 +20,13 @@ class Post < ActiveRecord::Base
 		primary_key: :id
 	)
 
+	belongs_to(
+		:recipient, 
+		class_name: "User",
+		foreign_key: :recipient_id,
+		primary_key: :id
+	)
+
 	has_many(
 		:post_tags,
 		class_name: "PostTag",

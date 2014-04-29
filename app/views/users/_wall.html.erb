@@ -92,6 +92,8 @@
 		</article>			
 	
 		</section>
+
+		<% if @user == current_user || @user.friends_with?(current_user) %>
 	
   		<section class="posts"> 
 	
@@ -102,7 +104,7 @@
 	
     			<% @received_posts.reverse.each do |post| %>
     				<% if post.viewable_by_user?(current_user) %>
-    	  				<%= render partial: "/posts/post", locals: { post: post } %>
+    	  				<%= render partial: "/posts/post", locals: { post: post, type: "wall"} %>
     	  			<% end %>
     	  			<br>
     			<% end %>
@@ -110,6 +112,8 @@
   			<% end %>
 	
   		</section>
+
+  		<% end %>
 
   	</section>
 

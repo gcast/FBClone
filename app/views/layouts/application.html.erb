@@ -711,6 +711,24 @@ textarea:focus {
     color: white;
   }
 
+  .search-bar {
+    padding: 5px;
+    width: 250px;
+  }
+
+  .search-button {
+    margin: 0 10px;
+  }
+
+  .newsfeed {
+    width: 30%;
+    margin: auto;
+  }
+
+  .newsfeed article {
+    margin: 20px 0;
+  }
+
 </style>
 
 
@@ -748,13 +766,13 @@ textarea:focus {
     <% unless current_user.nil? %>
       
       <div class="header-logo group">
-        <a href="<%= wall_user_url(current_user)%>"><logo>Facebook</logo></a>
+        <a href="<%= newsfeed_user_url(current_user)%>"><logo>Facebook</logo></a>
         <div class="search-field">
 
           <!-- FIX APPERANCE -->
           <form action="<%= search_url %>" method="GET">
-            <input type="text" name="query" placeholder="Search friends, users, posts etc...">
-            <input type="submit" value="Search">
+            <input class="search-bar" type="text" name="query" placeholder="Search friends, users, posts etc...">
+            <input class="search-button submit" type="submit" value="Search">
           </form>
 
         </div>

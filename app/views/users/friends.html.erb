@@ -15,7 +15,7 @@
             <img src="<%= friendship.friend.profile_photo_url %>">
   
             <div class="friend-list-details">
-              <a href="<%= user_url(friendship.friend) %>">
+              <a href="<%= wall_user_url(friendship.friend) %>">
                 <%= friendship.friend.full_name %>
               </a>
             </div>
@@ -41,7 +41,7 @@
   <% @user.sent_requests.each do |request| %>
     <li>
       <% requestee = request.requestee %>
-      <a href="<%= user_url(requestee)%>"><%= requestee.first_name %> <%= requestee.last_name %></a>
+      <a href="<%= wall_user_url(requestee)%>"><%= requestee.first_name %> <%= requestee.last_name %></a>
     </li>
   <% end %>
 <% end %>
@@ -54,7 +54,7 @@
   <% @user.received_requests.each do |request| %>
     <li>
       <% requestor = request.requestor %>
-      <a href="<%= user_url(requestor)%>"><%= requestor.first_name %> <%= requestor.last_name %></a>
+      <a href="<%= wall_user_url(requestor)%>"><%= requestor.first_name %> <%= requestor.last_name %></a>
     </li>
     <%= button_to "Accept", accept_request_url(request), method: :put %>
     <%= button_to "Decline", decline_request_url(request), method: :put %>   
