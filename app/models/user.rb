@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
 	include PgSearch
 	multisearchable :against => [:first_name, :last_name, :user_albums]
 
-
-
 	before_validation :ensure_session_token!
 
 	validates :first_name, :last_name, :email, :password_digest, :birthDate, :session_token, presence: true
@@ -13,6 +11,34 @@ class User < ActiveRecord::Base
 	validates :password, :length => { minimum: 6, allow_nil: true }
 
 	after_commit :create_default_albums!, :on => [:create]
+
+	has_many(
+		:message_threads_as_one, 
+		class_name: "MessageThread",
+		foreign_key: :user_one,
+		primary_key: :id
+	)
+
+	has_many(
+		:message_threads_as_two,
+		class_name: "MessageThread",
+		foreign_key: :user_two,
+		primary_key: :id
+	)
+
+	has_many(
+		:sent_messages,
+		class_name: "Message",
+		foreign_key: :sender_id,
+		primary_key: :id
+	)
+
+	has_many(
+		:recieved_messages,
+		class_name: "Message",
+		foreign_key: :recipient_id,
+		primary_key: :id
+	)
 
 	has_many(
 		:liked_items, 

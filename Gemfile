@@ -30,6 +30,8 @@ gem 'pg_search'
 gem "aws-sdk"
 gem "figaro"
 gem "pg"
+gem "backbone-on-rails"
+gem "ejs"
 
 #ADD GEOCODER FOR POST LOCATION http://www.rubygeocoder.com/
 

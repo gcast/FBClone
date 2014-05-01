@@ -56,7 +56,7 @@
   .user-links {
     display: block;
     float: right;
-    width: 210px;
+    width: 300px;
     margin-right: 60px;
   }
 
@@ -729,6 +729,56 @@ textarea:focus {
     margin: 20px 0;
   }
 
+  .new-message-thread {
+    display: block;
+    float: left;
+    padding: 10px;
+    border: 1px solid black;
+    margin-top: 10px;
+  }
+
+  .message-threads {
+    display: block;
+    float: right;
+    width: 750px;
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  .message-threads ul {
+    list-style: none;
+  }
+
+  .message-threads li {
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+  }
+
+  .message-thread {
+    display: block; 
+    width: 500px;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid black;
+  }
+
+  .message-thread textarea {
+    margin: 15px;
+  }
+
+  .message-thread ul {
+    list-style: none;
+  }
+
+  .message-thread li {
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin: 5px;
+  }
+
 </style>
 
 
@@ -783,6 +833,7 @@ textarea:focus {
         <ul>
           <li><a href="<%= wall_user_url(current_user) %>">Home</a></li>
           <li><a href="<%= notifications_url %>">Notifications</a></li>
+          <li><a href="<%= messages_user_url(current_user) %>">Messages</a></li>
         </ul>
         <%= button_to "Log Out", session_url, method: :delete, :class => "submit logout" %>
       </div>

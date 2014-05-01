@@ -1,0 +1,79 @@
+<section class="user-messages group">
+
+	<section class="message-threads">
+
+		<h3>Messages</h3>
+	
+		<ul>
+			<% @messages.reverse.each do |thread| %>
+				<a href="<%= message_thread_url(thread) %>">
+					<li>
+						<%= thread.messages.last.sender.first_name %>:
+						<%= thread.messages.last.message %>
+						<br>
+						Sent At: <%= thread.messages.last.created_at %>
+					</li>
+				</a>
+				<br>
+			<% end %>
+		
+		</ul>
+
+
+		<section class="new-message-thread">
+	
+			<h3>New Message</h3>
+		
+			<form action="<%= user_message_threads_url(current_user) %>" method="post">
+				<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		
+		
+				<label for="recipient">Recipient</label>
+				<select name="thread[user_two]" id="recipient">
+					<% current_user.friends.each do |friend| %>
+	    				<option value="<%= friend.id %>"><%= friend.full_name %></option>
+	    			<% end %>
+	  			</select>
+		
+				<textarea name="thread[first_message]"  placeholder="Message..."></textarea>
+		
+				<input type="submit" value="Send Message">
+		
+			</form>	
+	
+		</section>
+
+	
+	</section>
+
+</section>
+
+
+<!-- BACKBONE BEGINS HERE -->
+
+<!-- Fix issue with different cids -->
+<script type="application/json" id="bootstrapped_threads_json">
+   <%= @messages.to_json(include: :messages).html_safe %>  
+</script>
+
+<script type="application/json" id="bootstrapped_current_user_json">
+   <%= current_user.to_json(include: :friends).html_safe %>  
+</script>
+
+
+<script>
+	var current_user_data = JSON.parse($("#bootstrapped_current_user_json").html())
+	var threads_data = JSON.parse($("#bootstrapped_threads_json").html())
+
+	FBClone.current_user = new FBClone.Models.User(current_user_data, {parse: true})
+	FBClone.messageThreads = new FBClone.Collections.MessageThreads(threads_data, {parse: true})
+
+	$(document).ready(function(){
+  		FBClone.initialize({
+  			user: FBClone.current_user,
+  			messageThreads: FBClone.messageThreads,
+  			$rootEl: $(".user-messages")
+  		});
+	});
+</script>
+

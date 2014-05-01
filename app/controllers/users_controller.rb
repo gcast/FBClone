@@ -44,7 +44,14 @@ class UsersController < ApplicationController
 			#Can add more later like friend photo updates, new friendships etc...
 		end
 
-		
+	end
+
+	def messages
+		@messages = []
+		current_user.message_threads_as_one.each { |thread| @messages << thread }
+		current_user.message_threads_as_two.each { |thread| @messages << thread }
+
+		render :messages
 	end
 
 
@@ -58,12 +65,5 @@ class UsersController < ApplicationController
 			redirect_to wall_user_url(current_user)
 		end
 	end
-
-	# def reroute_to_wall_if_friends!
-	# 	user = User.find(params[:id])
-	# 	if current_user == user || current_user.friends_with?(user)
-	# 		redirect_to wall_user_url(user)
-	# 	end
-	# end
 
 end

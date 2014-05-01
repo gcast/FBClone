@@ -21,6 +21,7 @@ module FBClone
     # config.i18n.default_locale = :de
 
     config.initialize_on_precompile = false
+    config.assets.paths << "app/assets/templates"
 
     config.paperclip_defaults = {
       :storage => :s3,

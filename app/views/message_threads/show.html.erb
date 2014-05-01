@@ -1,0 +1,28 @@
+<section class="message-thread">
+
+	<ul>
+		<% @messageThread.messages.reverse.each do |message| %>
+			<li>
+				To: <%= message.recipient.first_name %>
+				<br>
+				From: <%= message.sender.first_name %>
+				<br>
+				Sent at: <%= message.created_at %>
+				<br>
+				<br>
+				<%= message.message %>
+			</li>
+		<% end %>
+	</ul>
+	
+	<h5>Reply</h5>
+	<form action="<%= message_thread_messages_url(@messageThread) %>" method="post">
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	
+		<textarea name="message"  placeholder="Message..."></textarea>
+	
+		<input type="submit" value="Submit">
+	
+	</form>
+
+</section>

@@ -1,0 +1,20 @@
+	<h3>Yaaas Messages</h3>
+
+	<ul>
+		<% threads.each(function(thread) {  %>
+			<a href="#">
+				<li>
+					<% id = thread.messages.last().get("sender_id") %>
+					<% if (id === FBClone.current_user.id) { %>
+						<%= FBClone.current_user.get("first_name") %>: 
+					<% } else { %>
+						<%= FBClone.current_user.friends.get(id).get("first_name")  %>:
+					<% } %> 				
+					<br>
+					<%= thread.messages.last().get("message") %>
+				</li>
+			</a>
+			<br>
+		<% }) %>
+	
+	</ul>
