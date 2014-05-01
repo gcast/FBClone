@@ -6,8 +6,6 @@ window.FBClone = {
 
   initialize: function(options) {
 
-    alert('Hello from Backbone!');
-
     new FBClone.Routers.MessagesRouter(options)
 
     Backbone.history.start()
