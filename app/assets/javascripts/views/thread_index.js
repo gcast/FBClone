@@ -1,23 +1,19 @@
 window.FBClone.Views.ThreadIndex = Backbone.View.extend({
 
-	tagName: "section",
+	  tagName: "section",
 
   	className: "message-threads",
 
- 	initialize: function(options) {
- 		this.other = options.other
- 	},
+ 	  initialize: function() {
+      this.listenTo(this.collection, "sync add change", this.render);
+ 	  },
 
   	template: JST["threads/index"],
 
-  	render: function () {
 
+  	render: function() {
     	var renderedContent = this.template({ threads: this.collection });
     	this.$el.html(renderedContent);
-
-    	var threadNewView = new FBClone.Views.ThreadNew
-
-    	this.$el.append(threadNewView.render().$el)
 
     	return this;
   	}

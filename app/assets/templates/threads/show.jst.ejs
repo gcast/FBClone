@@ -1,0 +1,45 @@
+<h5>Reply</h5>
+
+<form>
+	
+	<input type="hidden" name="message_thread_id" value="<%= thread.id %>">
+	
+	<textarea name="message"  placeholder="Message..."></textarea>
+	
+	<input type="submit" value="Submit">
+	
+</form>
+
+<br>
+<br>
+
+<ul>
+	<% thread.messages.each(function(message) { %>
+		<li>
+			<% rec_id = message.get("recipient_id") %>
+			To: 
+			<% if (rec_id === FBClone.current_user.id) { %>
+				<%= FBClone.current_user.get("first_name") %> 
+			<% } else { %>
+				<%= FBClone.current_user.friends.get(rec_id).get("first_name")  %>
+			<% } %> 
+
+			<br>
+
+			<% sender_id = message.get("sender_id") %>
+			From:
+
+			<% if (sender_id === FBClone.current_user.id) { %>
+				<%= FBClone.current_user.get("first_name") %>
+			<% } else { %>
+				<%= FBClone.current_user.friends.get(sender_id).get("first_name")  %>
+			<% } %>
+
+			<br>
+			Sent at: <%= message.get("created_at") %>
+			<br>
+			<br>
+			<%= message.get("message") %>
+		</li>
+	<% }) %>
+</ul>

@@ -4,21 +4,31 @@ window.FBClone.Routers.MessagesRouter = Backbone.Router.extend({
 		this.user = options.user
 		this.messageThreads = options.messageThreads
 		this.$rootEl = options.$rootEl
-
-
 	},
 
 	routes: {
-		"" : "threadIndex"
+		"" : "threadIndex",
+		 "threads/:id": "threadShow"
 	},
 
 	threadIndex: function() {
-		var threadIndex = new FBClone.Views.ThreadIndex({ collection: this.messageThreads })
-		
-		// this._swapview(threadIndex)
-		
-		this.$rootEl.html(threadIndex.render().$el)
+		var threadNewView = new FBClone.Views.ThreadNew
+    	this.$rootEl.html(threadNewView.render().$el)
+
+
+		var threadIndex = new FBClone.Views.ThreadIndex({ collection: this.messageThreads })	
+		this.$rootEl.append(threadIndex.render().$el)
+
 	},
+
+	threadShow: function(id) {
+
+		var thread = FBClone.messageThreads.get(id);
+
+		var threadShowView = new FBClone.Views.ThreadShow({ model: thread })
+
+		this.$rootEl.html(threadShowView.render().$el)
+	}
 
 	// _swapView: function(view) {
 	// 	this.currentView && this.currentView.remove()

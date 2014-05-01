@@ -6,7 +6,6 @@ window.FBClone.Views.ThreadNew = Backbone.View.extend({
 
   template: JST["threads/new"],
 
-
   render: function() {
   	
     var renderedContent = this.template({ friends: FBClone.current_user.friends });
@@ -22,9 +21,21 @@ window.FBClone.Views.ThreadNew = Backbone.View.extend({
   submit: function(event) {
   	event.preventDefault();
 
-  	var params = $(event.currentTarget).serialize()
+  	var params = $(event.currentTarget).serializeJSON();
+  
+    var newThread = new FBClone.Models.MessageThread(params.thread)
 
-  	console.log(params)
+    newThread.save({}, {
+      success: function() {
+        newThread.fetch({
+          success: function(obj) {
+            FBClone.messageThreads.add(obj);
+            Backbone.history.navigate("", { trigger: true })
+          }
+        })
+
+      }
+    })
 
   }
 

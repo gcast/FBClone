@@ -2,7 +2,7 @@
 
 	<ul>
 		<% threads.each(function(thread) {  %>
-			<a href="#">
+			<a href="#/threads/<%= thread.id %>">
 				<li>
 					<% id = thread.messages.last().get("sender_id") %>
 					<% if (id === FBClone.current_user.id) { %>

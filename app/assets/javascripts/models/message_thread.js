@@ -12,4 +12,5 @@ window.FBClone.Models.MessageThread = Backbone.Model.extend({
 		return jsonResp
 
 	}
+	
 })
