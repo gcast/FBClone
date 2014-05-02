@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140502143312) do
+ActiveRecord::Schema.define(version: 20140502153946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20140502143312) do
     t.string   "locationable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "location_string"
   end
 
   create_table "message_threads", force: true do |t|

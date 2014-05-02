@@ -32,6 +32,7 @@ gem "figaro"
 gem "pg"
 gem "backbone-on-rails"
 gem "ejs"
+gem "nokogiri"
 
 #ADD GEOCODER FOR POST LOCATION http://www.rubygeocoder.com/
 

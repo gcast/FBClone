@@ -175,6 +175,7 @@ DEPENDENCIES
   figaro
   jbuilder (~> 1.2)
   jquery-rails
+  nokogiri
   paperclip
   pg
   pg_search
