@@ -5,7 +5,9 @@ class Comment < ActiveRecord::Base
 	after_commit :send_notification
 
 	belongs_to :commentable, polymorphic: true
+	
 	has_many :notifications, as: :notifiable, dependent: :destroy
+	has_one :location, as: :locationable, dependent: :destroy
 	
 	belongs_to(
 		:author, 

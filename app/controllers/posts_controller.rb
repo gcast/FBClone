@@ -4,8 +4,7 @@ class PostsController < ApplicationController
 		@post = current_user.authored_posts.new(valid_params)
 		@post.recipient_id = params[:user_id]
 
-		# Share.create_default_share(@post)
-		
+
 		unless share_params.nil?
 			share_params[:group_ids].map(&:to_i).each { |id| @post.shares.new({ group_id: id }) }
 		end
@@ -13,9 +12,16 @@ class PostsController < ApplicationController
 		unless photo_params.nil?
 			photo_params.each { |params| @post.photos.new(file: params) }
     	end
+
+    	unless loc_params[:long].nil? || loc_params[:lat].nil?
+    		location = @post.build_location({
+				long: params[:location][:long].to_f,
+				lat: params[:location][:lat].to_f
+			})
+    	end
 	
 		if @post.save
-			flash[:notices] = ["Post saved successfully"]
+			# flash[:notices] = ["Post saved successfully"]
 		else
 			flash[:errors] = @post.errors.full_messages
 		end
@@ -50,5 +56,9 @@ class PostsController < ApplicationController
 
 	def share_params
 		params.require(:share).permit(:group_ids => []) if !params[:share].nil?
+	end
+
+	def loc_params
+		params.require(:location).permit(:long, :lat)
 	end
 end

@@ -7,8 +7,11 @@ class Post < ActiveRecord::Base
 
 	after_commit :send_notification
 
-	has_many :comments, as: :commentable
-	has_many :photos, as: :imageable
+	has_many :comments, as: :commentable, dependent: :destroy
+	has_many :photos, as: :imageable, dependent: :destroy
+
+	has_one :location, as: :locationable, inverse_of: :locationable, dependent: :destroy
+
 	has_many :notifications, as: :notifiable, dependent: :destroy
 	has_many :shares, as: :shareable, inverse_of: :shareable, dependent: :destroy
 	has_many :likes, as: :likeable, inverse_of: :likeable, dependent: :destroy
