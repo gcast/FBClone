@@ -1,7 +1,11 @@
-<section class="post">
+<section class="post group">
 
   <form action="<%= user_posts_url(@user) %>" method="post" enctype="multipart/form-data">
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+        <!-- PUT IN A DIV AND ALLOW USERS TO TOGGLE WHETHER TO GEOLOCATE POSTS -->
+        <input name="location[long]" value="" type="hidden" id="long">
+        <input name="location[lat]" value="" type="hidden" id="lat">
 
       <header class="box-header">
         <p>Post</p>
@@ -49,8 +53,27 @@
 
       </div>
 
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
+
   </form>
 
+  
+
+
+  <script>
+       var map = L.mapbox.map('map', 'gavcastro.i4mcl7e7')
+
+       navigator.geolocation.getCurrentPosition( function(loc) {
+          map.setView([loc.coords.latitude, loc.coords.longitude], 9);
+          $("#long").val( loc.coords.longitude )
+          $("#lat").val( loc.coords.latitude )
+       })
+  </script>
+
+
 </section>
+
 
 

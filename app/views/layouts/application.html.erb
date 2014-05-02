@@ -779,6 +779,21 @@ textarea:focus {
     margin: 5px;
   }
 
+  .map-container {
+    position: relative;
+    display: block;
+    width:100%;
+    height:100px;
+  }
+
+  #map { 
+    display: block;
+    position:absolute; 
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
 </style>
 
 
@@ -791,6 +806,8 @@ textarea:focus {
       
       <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
       <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+      <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+      <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
       <%= csrf_meta_tags %>
 
 

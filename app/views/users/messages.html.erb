@@ -51,7 +51,6 @@
 
 <!-- BACKBONE BEGINS HERE -->
 
-<!-- Fix issue with different cids -->
 <script type="application/json" id="bootstrapped_threads_json">
    <%= @messages.to_json(include: :messages).html_safe %>  
 </script>
@@ -67,6 +66,10 @@
 
 	FBClone.current_user = new FBClone.Models.User(current_user_data, {parse: true})
 	FBClone.messageThreads = new FBClone.Collections.MessageThreads(threads_data, {parse: true})
+
+	navigator.geolocation.getCurrentPosition( function(loc) {
+		console.log("Loc", loc)
+	})
 
 	$(document).ready(function(){
   		FBClone.initialize({
