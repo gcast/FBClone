@@ -22,11 +22,12 @@
               
           <p>
           	Sent <%= ((Time.now - post.created_at) / (60 * 60)).floor %> hours ago
-          	<br>
+          	
           	<% unless post.location.nil? || post.location.location_string.nil? %>
           		<% location_json = JSON.parse(post.location.location_string) %>
-          		From <%= location_json["city"] %>, <%= location_json["province"] %> 
+          		from <%= location_json["city"] %>, <%= location_json["province"] %> 
           	<% end %>
+          	
           </p>
         </div>
 

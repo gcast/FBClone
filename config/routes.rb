@@ -32,7 +32,8 @@ FBClone::Application.routes.draw do
   end
 
   resource :session, only: [:new, :create, :destroy]
-  resources :friend_groups, only: [:new, :create, :index]
+  resources :friend_groups, only: [:new, :create, :index, :destroy]
+  resources :friend_group_joins, only: [:destroy]
   resources :comments, only: [:destroy]
   resources :friendships, only: [:destroy]
   resources :notifications, only: [:index, :show]
@@ -50,7 +51,7 @@ FBClone::Application.routes.draw do
   namespace :api, :defaults => { :format => :json } do
     resources :message_threads
     resources :messages
-    resources :users
+    resources :users 
   end
   
 end

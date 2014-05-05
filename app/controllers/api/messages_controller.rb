@@ -1,3 +1,9 @@
+require 'pusher'
+
+Pusher.app_id = '73737'
+Pusher.key = '69f375190cbaa886558e'
+Pusher.secret = '7f3331f8c5e440d5e6ce'
+
 class Api::MessagesController < ApplicationController
 
 	def create
@@ -11,26 +17,17 @@ class Api::MessagesController < ApplicationController
 			message: params[:message]
 		})
 
-		@message.save
+		if @message.save
+			Pusher.trigger("post1", "posts:change", "")
+		end
 
 		render json: @message
 
-		# if @message.save
-		# 	redirect_to message_thread_url(@thread)
-		# else
-		# 	flash[:errors] = ["There was a problem sending your message"]
-		# 	redirect_to message_thread_url(current_user)
-		# end
 	end
-
-	# def destroy
-
-	# end
 
 	def show
 		@message = Message.find(params[:id])
 		render json: @message
 	end
-
 	
 end

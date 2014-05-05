@@ -1,5 +1,9 @@
 window.FBClone.Models.MessageThread = Backbone.Model.extend({
 
+	initialize: function() {
+		window.notifier.on("posts:change", this.messagesChanged, this);
+	},
+
 	urlRoot: "/api/message_threads",
 
 	parse: function(jsonResp) {
@@ -11,6 +15,10 @@ window.FBClone.Models.MessageThread = Backbone.Model.extend({
 
 		return jsonResp
 
+	},
+
+	messagesChanged: function() {
+		this.fetch();
 	}
 	
 })

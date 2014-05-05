@@ -64,19 +64,20 @@
 	var current_user_data = JSON.parse($("#bootstrapped_current_user_json").html())
 	var threads_data = JSON.parse($("#bootstrapped_threads_json").html())
 
-	FBClone.current_user = new FBClone.Models.User(current_user_data, {parse: true})
-	FBClone.messageThreads = new FBClone.Collections.MessageThreads(threads_data, {parse: true})
-
 	navigator.geolocation.getCurrentPosition( function(loc) {
 		console.log("Loc", loc)
 	})
 
+
 	$(document).ready(function(){
   		FBClone.initialize({
   			user: FBClone.current_user,
-  			messageThreads: FBClone.messageThreads,
-  			$rootEl: $(".user-messages")
+  			$rootEl: $(".user-messages"),
+  			current_user_data: current_user_data,
+  			threads_data: threads_data
   		});
 	});
+
+
 </script>
 

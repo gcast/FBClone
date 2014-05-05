@@ -2,7 +2,7 @@ window.FBClone.Routers.MessagesRouter = Backbone.Router.extend({
 
 	initialize: function(options) {
 		this.user = options.user
-		this.messageThreads = options.messageThreads
+		this.messageThreads = FBClone.messageThreads
 		this.$rootEl = options.$rootEl
 	},
 

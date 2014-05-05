@@ -33,6 +33,7 @@ gem "pg"
 gem "backbone-on-rails"
 gem "ejs"
 gem "nokogiri"
+gem "pusher"
 
 #ADD GEOCODER FOR POST LOCATION http://www.rubygeocoder.com/
 

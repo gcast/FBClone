@@ -5,7 +5,7 @@ window.FBClone.Views.ThreadIndex = Backbone.View.extend({
   	className: "message-threads",
 
  	  initialize: function() {
-      this.listenTo(this.collection, "sync add change", this.render);
+      	this.listenTo(this.collection, "sync add change", this.render);
  	  },
 
   	template: JST["threads/index"],

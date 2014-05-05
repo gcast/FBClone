@@ -1,3 +1,5 @@
+
+
 class MessagesController < ApplicationController
 
 	def create
@@ -12,6 +14,7 @@ class MessagesController < ApplicationController
 		})
 
 		if @message.save
+			
 			redirect_to message_thread_url(@thread)
 		else
 			flash[:errors] = ["There was a problem sending your message"]

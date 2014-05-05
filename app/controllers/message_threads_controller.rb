@@ -1,3 +1,10 @@
+require 'pusher'
+
+Pusher.app_id = '73737'
+Pusher.key = '69f375190cbaa886558e'
+Pusher.secret = '7f3331f8c5e440d5e6ce'
+
+
 class MessageThreadsController < ApplicationController
 
 	def create
@@ -11,6 +18,7 @@ class MessageThreadsController < ApplicationController
 		Message.transaction do
 			@messageThread.save
 			@firstMessage.save	
+			Pusher.trigger("post1", "posts:change", "")
 		end
 
 		redirect_to messages_user_url(current_user)

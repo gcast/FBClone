@@ -6,6 +6,7 @@ window.FBClone.Views.ThreadShow = Backbone.View.extend({
 
  	initialize: function() {
       this.listenTo(this.model.messages, "sync add change", this.render)
+      this.listenTo(this.model, "sync add change", this.render)
  	},
 
  	events: {
@@ -48,6 +49,5 @@ window.FBClone.Views.ThreadShow = Backbone.View.extend({
   		})
 
   	}
-
 
 });

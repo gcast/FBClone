@@ -143,6 +143,16 @@ class User < ActiveRecord::Base
 		self.session_token
 	end
 
+	def turn_off_session_active!
+		self.session_active = false
+		self.save!
+	end
+
+	def turn_on_session_active!
+		self.session_active = true 
+		self.save!
+	end
+
 	def is_password?(unencrypted_password)
 		BCrypt::Password.new(self.password_digest).is_password?(unencrypted_password)
 	end
@@ -152,6 +162,10 @@ class User < ActiveRecord::Base
 			@password = unencrypted_password
 			self.password_digest = BCrypt::Password.create(unencrypted_password)
 		end
+	end
+
+	def online_friends
+		self.friends.where("session_active = true")
 	end
 
 	def friendship(user)

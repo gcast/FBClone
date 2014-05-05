@@ -6,8 +6,13 @@ Friend Groups:
 
 	<% group.friends_in_group.each do |friend| %>
 		<li>
+			<!-- MOVE TO CONTROLLER -->
+			<% friend_join = FriendGroupJoin.where('group_id = ? AND friend_id = ?', group.id, friend.id).first %>
 			<%= friend.full_name %>
+			<%= button_to "Remove From Group", friend_group_join_url(friend_join), method: :delete %>
 		</li>
 	<% end %>
+
+	<%= button_to "Delete", friend_group_url(group), method: :delete %>
 	<br>
 <% end %>	
