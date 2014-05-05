@@ -1,7 +1,8 @@
-
 <article class="post">
 
-	<%= button_to "x", post_url(post), method: :delete, :class => "delete-post" %>
+	<div class="delete-post">
+		<%= button_to "x", post_url(post), method: :delete, :class => "delete-post", remote: true %>
+	</div>
 
 	<header class="post-header group">
 
@@ -14,11 +15,7 @@
         </div>
 
          <div class="post-header-info">
-          <h3><a href="#"><%= post.author.first_name %></a> 
-          		<% if type == "newsfeed"%>
-          			> <%= post.recipient.full_name %> 
-          		<% end %>
-          </h3>
+          <h3><a href="#"><%= post.author.first_name %></a></h3>
               
           <p>
           	Sent <%= ((Time.now - post.created_at) / (60 * 60)).floor %> hours ago
@@ -52,28 +49,65 @@
 		<%= button_to "Like", like_post_url(post), method: :post, :class => "submit" %>
 		<div class="num-likes"><%= post.likes.count %></div>
 		
-			<ul class="group">
-				<% post.comments.each do |comment| %>
-					<li>
-						<%= button_to "x", comment_url(comment), method: :delete, :class => "delete-post" %>
-						<div class="comment-header group">
-							<img src="<%= comment.author.profile_photo_url %>">
-							<div class="comment-details">
-								<strong><%= comment.author.first_name %></strong>: <%= comment.comment %>
-								<br>
-								<%= ((Time.now - comment.created_at) / (60 * 60)).floor %> hours ago
-							</div>
-						</div>
-					</li>
-				<% end %>
-			</ul>
+		<ul class="comments group">
+			<% post.comments.each do |comment| %>
+				<%= render partial: "comments/comment", locals: { comment: comment } %>
+			<% end %>
+		</ul>
 			
-	</div>
-
 	</div>
 	
 </article>
 	
+
+<script> 
+	
+	$(document).ready(function(){
+
+		$deletePost = $(".delete-post")
+		$postFooter = $(".post-footer")
+		$comments = $(".comments")
+
+		$postFooter.on("ajax:success", "form", function(event,data) {
+			$comments.append(data)
+			event.currentTarget.reset()
+		});
+
+		$deletePost.on("ajax:success", "form", function(event,data) {
+			$post = $( event.currentTarget ).closest( "article" )
+			$post.remove()
+
+		});
+
+	});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- 
 	
 	

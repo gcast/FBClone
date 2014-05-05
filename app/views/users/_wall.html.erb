@@ -97,19 +97,23 @@
 	
   		<section class="posts"> 
 	
-  			<%= render partial: "/posts/form" %>
+			<section class="new-post">
+  				<%= render partial: "/posts/form" %>
+  			</section>
   			<br>
 	
-  			<% unless @received_posts.empty? %> 
-	
+  			
+
+			<ul id="posts-index">
     			<% @received_posts.reverse.each do |post| %>
     				<% if post.viewable_by_user?(current_user) %>
     	  				<%= render partial: "/posts/post", locals: { post: post, type: "wall"} %>
     	  			<% end %>
     	  			<br>
     			<% end %>
-	
-  			<% end %>
+			</ul>
+
+  			
 	
   		</section>
 
@@ -118,3 +122,22 @@
   	</section>
 
 </section>
+
+
+<script>
+
+	$(document).ready(function(){
+
+		
+		var $newPost = $(".new-post")
+		var $postsList = $("#posts-index");
+
+		$newPost.on("ajax:success", "form", function(event, data){
+			$postsList.prepend(data)
+			event.currentTarget.reset();
+		});
+
+
+	});
+
+</script>

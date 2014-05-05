@@ -21,12 +21,17 @@ class PostsController < ApplicationController
     	end
 	
 		if @post.save
-			# flash[:notices] = ["Post saved successfully"]
+			#do something
 		else
 			flash[:errors] = @post.errors.full_messages
 		end
 
-		redirect_to wall_user_url(@post.recipient_id)
+		if request.xhr?
+			render partial: "posts/post", locals: {post: @post}
+		else
+			redirect_to wall_user_url(@post.recipient_id)
+		end
+
 	end
 
 	def show
@@ -36,7 +41,14 @@ class PostsController < ApplicationController
 	def destroy
 		@post = Post.find(params[:id])
 		@post.destroy
-		redirect_to :back
+		
+
+		if request.xhr?
+			#What should I render?
+			render nothing: true
+		else
+			redirect_to :back
+		end
 	end
 
 	def like

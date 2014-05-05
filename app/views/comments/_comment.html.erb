@@ -1,0 +1,30 @@
+<li>
+	<div class="delete-comment">
+		<%= button_to "x", comment_url(comment), method: :delete, :class => "delete-post", remote: true %>
+	</div>
+
+	<div class="comment-header group">
+		<img src="<%= comment.author.profile_photo_url %>">
+		<div class="comment-details">
+			<strong><%= comment.author.first_name %></strong>: <%= comment.comment %>
+			<br>
+			<%= ((Time.now - comment.created_at) / (60 * 60)).floor %> hours ago
+		</div>
+	</div>
+</li>
+
+
+<script>
+	
+	$(document).ready(function(){
+
+		$deleteComment = $(".delete-comment")
+
+		$deleteComment.on("ajax:success", "form", function(event,data){
+			$comment = $(event.currentTarget).closest("li")
+			$comment.remove()
+		});
+
+	});
+
+</script>

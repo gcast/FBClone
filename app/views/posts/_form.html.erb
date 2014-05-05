@@ -1,7 +1,15 @@
 <section class="post group">
 
-  <form action="<%= user_posts_url(@user) %>" method="post" enctype="multipart/form-data">
-      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <form 
+    action="<%= user_posts_url(@user) %>" 
+    method="post" 
+    enctype="multipart/form-data"
+    data-remote="true">
+
+      <input 
+        name="authenticity_token" 
+        value="<%= form_authenticity_token %>" 
+        type="hidden">
 
         <!-- PUT IN A DIV AND ALLOW USERS TO TOGGLE WHETHER TO GEOLOCATE POSTS -->
         <input name="location[long]" value="" type="hidden" id="long">

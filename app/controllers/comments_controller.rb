@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 
 	def create
+
 		parameter = params.keys.select {|key| !(/_id/.match(key).nil?) }.first
 		type = parameter.slice(0..-4).capitalize
 
@@ -10,14 +11,28 @@ class CommentsController < ApplicationController
 			comment: params[:comment][:comment]
 		})
 
-		flash[:errors] = @comment.errors.full_messages if !@comment.save
-	
-		redirect_to :back
+		if @comment.save
+			#do something?
+		else 
+			flash[:errors] = @comment.errors.full_messages 
+		end
+
+		if request.xhr?
+			render partial: "comments/comment", locals: { comment: @comment }
+		else
+			redirect_to :back
+		end		
 	end
 
 	def destroy
 		comment = Comment.find(params[:id])
 		comment.destroy
-		redirect_to :back
+
+		if request.xhr?
+			#Should I render something here?
+			render nothing: true
+		else
+			redirect_to :back
+		end
 	end
 end
