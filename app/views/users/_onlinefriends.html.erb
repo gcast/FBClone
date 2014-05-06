@@ -1,7 +1,10 @@
 <ul>
 	<% online_friends.each do |friend| %>
 		<a href="<%= friend_message_thread_user_url(friend) %>" data-remote="true">
-			<li><%= friend.full_name %></li>
+			<li class="group">
+				<status></status>
+				<article><%= friend.full_name %></article>
+			</li>
 		</a>
 	<% end %>
 </ul>

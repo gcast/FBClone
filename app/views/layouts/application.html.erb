@@ -842,12 +842,45 @@ textarea:focus {
     right: 0;
     float: right;
     background-color: #ccc;
-    height: 100px;
-    width: 275px;
+    height: 400px;
+    width: 225px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
   }
 
-  .online-users li {
+  .online-users-header {
+    display: block;
+    background-color: #3b5998;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .online-users-list li {
     list-style: none;
+    padding: 5px;
+    margin: 1px;
+    border: 1px solid #ccc;
+    background: yellow;
+  }
+
+  .online-users-list li > status {
+    display: block;
+    float: left;
+    background: green;
+    margin-top: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+  }
+
+  .online-users-list li > article {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    font-size: 12px;
   }
 
   .chat-boxes {
@@ -876,6 +909,10 @@ textarea:focus {
 
   .minimized {
     bottom: 30px;
+  }
+
+  .minimized-online-users {
+    height: 33px;
   }
 
   .chat-box-header {
@@ -1013,7 +1050,12 @@ textarea:focus {
   <%= yield %>
 
   <section class="chat group">
-    <article class="online-users"></article>
+    <article class="online-users">
+
+      <div class="online-users-header">Chat</div>
+      <div class="online-users-list"></div>
+
+    </article>
     <article class="chat-boxes"></article>
   </section>
 
@@ -1026,7 +1068,7 @@ textarea:focus {
   $(document).ready(function(){
 
     $chat = $(".chat")
-    $onlineUsers = $(".online-users")
+    $onlineUsersList = $(".online-users-list")
     $chatBoxes = $(".chat-boxes")
     
     // setInterval(function(){ 
@@ -1035,7 +1077,7 @@ textarea:focus {
         url: "/online_friends",
         type: "GET",
         success: function (data) {
-          $onlineUsers.html(data)
+          $onlineUsersList.html(data)
         }
       });
 
@@ -1051,6 +1093,9 @@ textarea:focus {
         $(this).closest('article').remove()
     });
 
+    $(".online-users-header").on("click", function(event){
+      $(event.currentTarget).closest("article").toggleClass("minimized-online-users")
+    })
 
   }); 
 
