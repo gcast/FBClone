@@ -1,5 +1,3 @@
-
-
 class MessagesController < ApplicationController
 
 	def create
@@ -14,16 +12,20 @@ class MessagesController < ApplicationController
 		})
 
 		if @message.save
-			
-			redirect_to message_thread_url(@thread)
-		else
+			#do something?
+		else 
 			flash[:errors] = ["There was a problem sending your message"]
-			redirect_to message_thread_url(current_user)
+		end
+
+		if request.xhr?
+			render partial: "messages/message", locals: { message: @message }
+		else
+			redirect_to message_thread_url(@thread)
 		end
 	end
 
-	def destroy
+	# def destroy
 
-	end
+	# end
 
 end

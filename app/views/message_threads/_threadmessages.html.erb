@@ -1,13 +1,46 @@
-<% thread.messages.each do |message| %>
-	<li>
-		<a class="close-chatbox" href="#">x</a>
+<article class="chat-box">
 
-		<%= render partial: "messages/message", locals: { message: message } %>
+	<% user = current_user.id == thread.first_user.id ? thread.second_user : thread.first_user %>
 
-		<form>
-			<input type="text">
-			<input type="submit" class="submit">
-		</form>
+	<section class="chat-box-header group">
+		<div class="chat-box-name">
+			<%= user.full_name %>
+		</div>
+		<a class="close-chatbox" href="#">x</a>	
+	</section>
+	
+	<ul>
+		<% thread.messages.each do |message| %>
+			<li><%= render partial: "messages/message", locals: { message: message } %></li>
+		<% end %>
+	</ul>
 
-	</li>
-<% end %>
+
+	<form action="<%= message_thread_messages_url(thread) %>" data-remote="true" 
+		method="post" class="chat-message-form group">
+
+		<input type="text" class="chat-message-text" name="message" placeholder="Type here...">
+		<input type="submit" class="chat-message-submit submit" value=">">
+
+	</form>
+
+</article>
+
+<script>
+
+	$(document).ready(function(){
+
+		$chatBox = $(".chat-box")
+		$chatBoxMessages = $(".chat-box ul")
+
+
+		$chatBox.on("ajax:success", "form", function(event, data){
+			$(event.currentTarget).closest("article").children("ul").append(data)
+			event.currentTarget.reset()
+		});
+
+	});
+
+</script>
+
+

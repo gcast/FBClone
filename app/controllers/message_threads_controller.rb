@@ -28,7 +28,6 @@ class MessageThreadsController < ApplicationController
 		@messageThread = MessageThread.includes(:messages).find(params[:id])
 
 		if request.xhr?
-			fail
 			render partial: "message_threads/threadmessages", locals: { thread: @messageThread }
 		else
 			render :show
