@@ -1,0 +1,13 @@
+<% thread.messages.each do |message| %>
+	<li>
+		<a class="close-chatbox" href="#">x</a>
+
+		<%= render partial: "messages/message", locals: { message: message } %>
+
+		<form>
+			<input type="text">
+			<input type="submit" class="submit">
+		</form>
+
+	</li>
+<% end %>

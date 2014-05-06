@@ -54,6 +54,19 @@ class UsersController < ApplicationController
 		render :messages
 	end
 
+	def friend_message_thread
+		user = User.find(params[:id])
+		messageThreads = []
+		
+		current_user.message_threads_as_one.where("user_two = ?", user.id).each { |thread| messageThreads << thread }
+		current_user.message_threads_as_two.where("user_one = ?", user.id).each { |thread| messageThreads << thread }
+
+		@messageThread = messageThreads.first
+
+		render partial: "message_threads/threadmessages", locals: { thread: @messageThread }
+
+	end
+
 
 	private
 	def valid_params

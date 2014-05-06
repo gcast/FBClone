@@ -25,12 +25,14 @@ class MessageThreadsController < ApplicationController
 	end
 
 	def show
-		@messageThread = MessageThread.find(params[:id])
-		render :show
-	end
+		@messageThread = MessageThread.includes(:messages).find(params[:id])
 
-	def destroy
-
+		if request.xhr?
+			fail
+			render partial: "message_threads/threadmessages", locals: { thread: @messageThread }
+		else
+			render :show
+		end
 	end
 
 end

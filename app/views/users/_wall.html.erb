@@ -102,8 +102,6 @@
   			</section>
   			<br>
 	
-  			
-
 			<ul id="posts-index">
     			<% @received_posts.reverse.each do |post| %>
     				<% if post.viewable_by_user?(current_user) %>
@@ -113,8 +111,6 @@
     			<% end %>
 			</ul>
 
-  			
-	
   		</section>
 
   		<% end %>
@@ -127,8 +123,7 @@
 <script>
 
 	$(document).ready(function(){
-
-		
+	
 		var $newPost = $(".new-post")
 		var $postsList = $("#posts-index");
 
@@ -136,7 +131,6 @@
 			$postsList.prepend(data)
 			event.currentTarget.reset();
 		});
-
 
 	});
 

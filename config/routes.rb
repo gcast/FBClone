@@ -14,6 +14,7 @@ FBClone::Application.routes.draw do
       get 'wall'
       get 'newsfeed'
       get 'messages'
+      get 'friend_message_thread'
   	end
   end
 
@@ -37,6 +38,7 @@ FBClone::Application.routes.draw do
   resources :comments, only: [:destroy]
   resources :friendships, only: [:destroy]
   resources :notifications, only: [:index, :show]
+  resources :online_friends, only: [:index]
 
 
   get "/search" => "pages#search"
