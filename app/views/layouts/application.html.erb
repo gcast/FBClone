@@ -841,11 +841,12 @@ textarea:focus {
     bottom: 0;
     right: 0;
     float: right;
-    background-color: #ccc;
+    background-color: #ddd;
     height: 400px;
     width: 225px;
-    border: 1px solid #ccc;
+    border: 1px solid #aaa;
     border-radius: 2px;
+    overflow-y: scroll;
   }
 
   .online-users-header {
@@ -860,10 +861,19 @@ textarea:focus {
 
   .online-users-list li {
     list-style: none;
-    padding: 5px;
+    padding: 8px;
     margin: 1px;
-    border: 1px solid #ccc;
-    background: yellow;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+  }
+
+  .online-users-list li:hover {
+    background: #fff;
+  }
+
+  .online-users-list a {
+    text-decoration: none;
+    color: black;
   }
 
   .online-users-list li > status {
@@ -892,7 +902,6 @@ textarea:focus {
     width: 100%;
     height: 0;
   }
-
 
   .chat-box {
     display: block;
