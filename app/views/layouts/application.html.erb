@@ -874,6 +874,10 @@ textarea:focus {
     border-radius: 2px;
   }
 
+  .minimized {
+    bottom: 30px;
+  }
+
   .chat-box-header {
     background-color: #3b5998;
     padding: 8px;
@@ -906,6 +910,7 @@ textarea:focus {
 
   .chat-box li {
     display: block;
+    font-size: 12px;
   }
 
   .chat-message-submit {
@@ -1038,7 +1043,6 @@ textarea:focus {
 
     $chat.on("ajax:success", "a", function(event, data){
       //REMOVE CHAT BOX FIRST IF IT EXISTS?
-      console.log(event, data)
       $chatBoxes.append(data)
     });
 
@@ -1046,6 +1050,7 @@ textarea:focus {
     $(".chat-boxes").on("click", "a", function(){
         $(this).closest('article').remove()
     });
+
 
   }); 
 

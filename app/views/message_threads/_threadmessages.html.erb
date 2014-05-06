@@ -1,8 +1,8 @@
-<article class="chat-box">
+<article class="chat-box" id="box-<%= thread.id %>">
 
 	<% user = current_user.id == thread.first_user.id ? thread.second_user : thread.first_user %>
 
-	<section class="chat-box-header group">
+	<section class="chat-box-header group" id="header-<%= thread.id %>">
 		<div class="chat-box-name">
 			<%= user.full_name %>
 		</div>
@@ -26,18 +26,23 @@
 
 </article>
 
+
 <script>
 
 	$(document).ready(function(){
 
-		$chatBox = $(".chat-box")
-		$chatBoxMessages = $(".chat-box ul")
-
+		$chatBox = $("#box-<%= thread.id %>")
+		$chatBoxMessages = $("#box-<%= thread.id %> ul")
+		$specificHeader = $("#header-<%= thread.id %>")
 
 		$chatBox.on("ajax:success", "form", function(event, data){
 			$(event.currentTarget).closest("article").children("ul").append(data)
 			event.currentTarget.reset()
 		});
+
+		$specificHeader.on("click", function(event){
+        	$(event.currentTarget).closest('article').toggleClass('minimized')
+    	});
 
 	});
 
