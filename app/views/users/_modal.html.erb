@@ -1,0 +1,31 @@
+  <section id="modal" class="modal">
+  	<article class="modal-content">
+    <span class="modal-x close-modal">&times;</span>
+
+    	<div class="modal-image">
+    		<img src="">
+    	</div>
+
+  	</article>
+  	<div class="modal-screen close-modal"></div>
+  </section>
+
+
+<script>
+
+	window.openModal = function(event){
+		imageSource = $(event.currentTarget).children("li").children("img")[0].src
+		$("#modal img").attr("src", imageSource);
+		$("#modal").addClass("is-active");
+	}
+	
+	window.closeModal = function(event){
+	  $("#modal").removeClass("is-active");
+	}
+	
+	$(document).ready(function(){
+	  $(".user_wall").on("click", ".open-modal", window.openModal);
+	  $(".user_wall").on("click", ".close-modal", window.closeModal);
+	});
+
+</script>

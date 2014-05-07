@@ -1,53 +1,6 @@
 <section class="user_wall">
 
-	<section class="user-header group">
-		
-		<a href="<%= user_albums_url(@user)  %>">
-			<div class="profile-picture">
-				<% profile_photos = @user.get_profile_photos %>
-				<% src = profile_photos.empty? ? Photo.default_photo_url : profile_photos.first.file.url %>
-				<img src="<%= src %>">
-			</div>
-		</a>
-
-		<div class="toggle-friend-button">
-			<% if (current_user != @user) && (current_user.can_request_friendship?(@user)) %>
-    			<%= button_to "Add Friend", user_friend_requests_url(@user), method: :post, :class => "add-friend" %>
-  			<% end %>
-
-  			<% if (current_user != @user) && (current_user.friends_with?(@user)) %>
-  				<% friendship = current_user.get_friendship(@user) %>
-  				<%= button_to "Unfriend", friendship_url(friendship), method: :delete, :class => "add-friend" %>
-  			<% end %>
-
-  		</div>
-		
-
-		<div class="profile-name">
-			<p><%= @user.full_name %></p>
-		</div>
-
-		<a href="<%= user_albums_url(@user)  %>">
-			<div class="cover-photo">
-				<% cover_photos = @user.get_cover_photos %>
-				<% src = cover_photos.empty? ? Photo.default_cover_photo_url : cover_photos.first.file.url %>
-				<img src="<%= src %>">
-			</div>
-		</a>
-
-		<div class="user-header-links">
-
-			<ul>
-          		<li><a href="<%= wall_user_url(@user) %>">Timeline</a></li>
-          		<li><a href="#">About</a></li>
-          		<li><a href="<%= user_albums_url(@user) %>">Photos</a></li>
-          		<li><a href="<%=  friends_user_url(@user) %>">Friends</a></li>
-          		<li><a href="#">More</a></li>
-        	</ul>
-
-		</div>
-
-	</section>
+	<%= render partial: "users/userheader" %>
 
 	<section class="user-profile-body group"> 
 
@@ -118,35 +71,12 @@
   	</section>
 
 
-  
-
-  <section id="modal" class="modal">
-  	<article class="modal-content">
-    <span class="modal-x close-modal">&times;</span>
-
-    	<div class="modal-image">
-    		<img src="">
-    	</div>
-
-  	</article>
-  	<div class="modal-screen close-modal"></div>
-  </section>
-
-
+  <%= render partial: "users/modal" %>
 
 </section>
 
 
-  <section class="chat group">
-    <article class="online-users minimized-online-users">
-
-      <div class="online-users-header">Chat</div>
-      <div class="online-users-list"></div>
-
-    </article>
-    <article class="chat-boxes"></article>
-  </section>
-
+<%= render partial: "users/chat" %>
 
 
 <script>
@@ -165,60 +95,6 @@
 
 </script>
 
-<script>
-
-	window.openModal = function(event){
-		imageSource = $(event.currentTarget).children("li").children("img")[0].src
-		$("#modal img").attr("src", imageSource);
-		$("#modal").addClass("is-active");
-	}
-	
-	window.closeModal = function(event){
-	  $("#modal").removeClass("is-active");
-	}
-	
-	$(document).ready(function(){
-	  $(".user_wall").on("click", ".open-modal", window.openModal);
-	  $(".user_wall").on("click", ".close-modal", window.closeModal);
-	});
-
-</script>
 
 
-<script>
-  
-  $(document).ready(function(){
 
-    $chat = $(".chat")
-    $onlineUsersList = $(".online-users-list")
-    $chatBoxes = $(".chat-boxes")
-    
-    // setInterval(function(){ 
-
-      $.ajax({
-        url: "/online_friends",
-        type: "GET",
-        success: function (data) {
-          $onlineUsersList.html(data)
-        }
-      });
-
-    // }, 5000);
-
-    $chat.on("ajax:success", "a", function(event, data){
-      //REMOVE CHAT BOX FIRST IF IT EXISTS?
-      $chatBoxes.append(data)
-    });
-
-
-    $(".chat-boxes").on("click", "a", function(){
-        $(this).closest('article').remove()
-    });
-
-    $(".online-users-header").on("click", function(event){
-      $(event.currentTarget).closest("article").toggleClass("minimized-online-users")
-    })
-
-  }); 
-
-</script>

@@ -1,3 +1,5 @@
+<%= render partial: "users/userheader" %>
+
 <section class="friend-page group">
 
   <section class="friend-nav-bar group">
@@ -60,3 +62,5 @@
     <%= button_to "Decline", decline_request_url(request), method: :put %>   
   <% end %>
 <% end %>
+
+<%= render partial: "users/chat" %>
