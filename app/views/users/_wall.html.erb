@@ -60,7 +60,7 @@
 				<div class="user-detail-photos group">	
 					<ul class="group">
 						<% @photos.each do |photo| %>
-							<li><img src="<%= photo.file.url %>"></li>
+							<a href="#" class="open-modal"><li><img src="<%= photo.file.url %>"></li></a>
 						<% end %>
 					</ul>
 				</div>
@@ -117,7 +117,25 @@
 
   	</section>
 
+
+  
+
+  <section id="modal" class="modal">
+  	<article class="modal-content">
+    <span class="modal-x close-modal">&times;</span>
+
+    	<div class="modal-image">
+    		<img src="">
+    	</div>
+
+  	</article>
+  	<div class="modal-screen close-modal"></div>
+  </section>
+
+
+
 </section>
+
 
   <section class="chat group">
     <article class="online-users">
@@ -128,6 +146,7 @@
     </article>
     <article class="chat-boxes"></article>
   </section>
+
 
 
 <script>
@@ -142,6 +161,25 @@
 			event.currentTarget.reset();
 		});
 
+	});
+
+</script>
+
+<script>
+
+	window.openModal = function(event){
+		imageSource = $(event.currentTarget).children("li").children("img")[0].src
+		$("#modal img").attr("src", imageSource);
+		$("#modal").addClass("is-active");
+	}
+	
+	window.closeModal = function(event){
+	  $("#modal").removeClass("is-active");
+	}
+	
+	$(document).ready(function(){
+	  $(".user_wall").on("click", ".open-modal", window.openModal);
+	  $(".user_wall").on("click", ".close-modal", window.closeModal);
 	});
 
 </script>

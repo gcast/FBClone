@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://localhost:3000/users/18/wall# -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
+
+  html, body, header, nav, h1, a, ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+  }
+
+  body {
+    position: relative;
+    font-family: sans-serif;
+    background-color: #edf0f5;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .group:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .navbar {
+    background: #3b5998;
+    width: 100%;
+  }
+
+  .navbar > nav {
+    margin: auto;
+    width: 1242px;
+    padding: 4px;
+  }
+
+  .navbar a {
+    color: white;
+    font-weight: 550;
+    font-size: 13px;
+  }
+
+  .navbar ul {
+    list-style: none;
+    float: left;
+    padding: 4px;
+  }
+
+  .navbar ul li {
+    float: left;
+    padding: 7px;
+  }
+
+  .user-links {
+    display: block;
+    float: right;
+    width: 300px;
+    margin-right: 60px;
+  }
+
+  .search-field {
+    float: right;
+    padding: 5px;
+  }
+
+  .search-field > input {
+    width: 300px;
+    padding: 5px;
+    border-radius: 2px;
+  }
+
+  logo {
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    display: block;
+    float: left;
+    padding: 5px;
+    
+  }
+
+  .header-logo{
+    display: block;
+    width: 485px;
+    float: left;
+  }
+
+/*POST STYLES*/
+
+
+.posts {
+  margin-top: 50px;
+  width: 480px;
+  float: right;
+}
+
+.post {
+  border-top: 1px solid #ddd;
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.post-header {
+  padding: 5px 0 2px 5px;
+}
+
+.box-header {
+  padding: 5px;
+  background-color: #f4f6f9;
+}
+
+.box-header > p {
+  font-weight: bold;
+  padding: 4px;
+  margin: 0;
+  font-size: 12px;
+}
+
+.post-header-thumbnail {
+  float: left;
+  padding: 10px;
+}
+
+.post-header-thumbnail > a {
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.post-header-thumbnail img {
+  width: 100%;
+  height: 100%;
+}
+
+.post-header-info {
+  float: left;
+  padding: 20px 0 20px 0;
+}
+
+.post-header-info > h3 {
+  color: black;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.post-header-info > h3 > a {
+  color: black;
+  font-size: 14px;
+}
+
+.post-header-info > p {
+  color: black;
+  font-size: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.post-content {
+  padding: 0 15px;
+  font-size: 14px;
+}
+
+.create-comment {
+  padding: 10px;
+  background-color: white;
+}
+
+.comment-box {
+  width: 175px;
+}
+
+.submit {
+    position: relative;
+    margin-top: 18px;
+    padding: 3px 6px;
+
+    background: #5b74a8;
+    color: #fff;
+    font-weight: bold;
+
+    border-radius: 3px;
+    border-color: #29447e #29447e #1a356e;
+    box-shadow: 0 2px 0 0 #29447e; 
+}
+
+.logout {
+  display: block;
+  float: right;
+  bottom: 9px;
+}
+
+textarea {
+   resize: none;
+   border: white;
+   display: block;
+   width: 455px;
+   height: 50px;
+   padding: 10px;
+   /*margin: 10px;*/
+}
+
+textarea:focus {
+    outline: none ;
+    height: 100px;
+}
+
+.post-footer {
+  display: block;
+  background-color: #f4f6f9;
+  padding: 10px;
+}
+
+.post-footer > input {
+  float: left;
+  margin: 2px 5px;
+}
+
+.post-footer > div {
+  float: right;
+  margin: 2px 5px;
+  font-size: 12px;
+}
+
+.post-footer > ul {
+  list-style: none;
+}
+
+.post-footer li {
+  display: block;
+  padding: 10px;
+  width: 400px; /*CAN DELETE LATER*/
+  font-size: 11px;
+}
+
+.comment-header img {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  float: left;
+}
+
+.comment-details {
+  float: left;
+  margin-left: 10px;
+  margin-top: 5px;
+  vertical-align: middle;
+  display: block;
+}
+
+
+.file-submit::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.file-submit:before {
+  content: 'Upload Photo';
+  display: inline-block;
+  background: #5b74a8;
+  border-color: #29447e #29447e #1a356e;
+  color: #fff;
+  border-radius: 3px;
+  padding: 3px 4px;
+  margin: 1px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 5px 0 0 #29447e;
+}
+
+.comment-form {
+  float: left;
+  border-radius: 2px;
+}
+
+.comment-form > input {
+  padding: 3px;
+}
+
+.delete-post {
+  float: right;
+  width: auto;
+  border: 0 none;
+  margin: 5px 10px 0 0;
+  padding:0;
+  background: transparent;
+  font-size: 14px;
+  color: #A8A8A8;
+}
+
+.user-header {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 850px ;
+  height: 355px; /*Placeholder*/
+  border-left: 2px solid #ddd;
+  border-right: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  border-radius: 3px;
+}
+
+.cover-photo {
+  display: block;
+  height: 88%;
+  overflow: hidden;
+}
+
+.cover-photo img {
+  width:100%; 
+}
+
+.profile-picture {
+  display: block;
+  width: 165px;
+  height: 165px;
+  position: absolute;
+  top: 169px;
+  left: 39px;
+  border: 4px solid #ddd;
+  border-radius: 2px;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-name {
+  position: absolute;
+  top: 245px;
+  left: 240px;
+}
+
+.profile-name p {
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.add-friend {
+  position: absolute;
+  display: block;
+  top: 270px;
+  left: 730px;
+  float: right;
+  width: auto;
+  border: 0 none;
+  margin: 5px 10px 0 0;
+  padding: 5px;
+  background: white;
+  font-size: 12px;
+  color: black;
+  font-weight: bold;
+  border: 2px solid #bbb;
+  border-radius: 4px;
+}
+
+.user-header-links {
+  display: block;
+  height: 12%; /*Placeholder*/
+  background-color: white;
+}
+
+.user-header-links ul {
+  list-style: none;
+  float: right;
+  margin-right: 85px; 
+  border-left: 1px solid #ddd;
+}
+
+.user-header-links ul li {
+  float: left;
+  padding: 13px 25px;
+  border-right: 1px solid #ddd;
+}
+
+.user-header-links ul li a {
+  color: #3b5998;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.user-profile-body {
+  margin: auto;
+  width: 850px;
+}
+
+.user-details {
+  margin-top: 50px;
+  display: block;
+  width: 317px;
+  height: 200px;
+  float: left;
+}
+
+.user-mini-photos {
+  border-top: 1px solid #ddd;
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  background-color: white;
+  margin-bottom: 25px;
+}
+
+.friend-mini-profile {
+  position: relative;
+  float: left;
+}
+
+
+.friend-name {
+  position: absolute;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  left: 20px;
+  top: 58px;
+}
+
+.user-detail-photos > ul {
+  margin: auto;
+  list-style: none;
+}
+
+.user-detail-photos > ul li {
+  height: 100px;
+  width: 100px;
+  display: block;
+  float: left;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  margin: 1px;
+}
+
+.user-detail-photos li img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+ .header-logo {
+    float: left;
+  }
+
+  .sign-in {
+    float: right;
+    width: 355px;
+  }
+
+  .sign-in input {
+    padding: 2px;
+    border-radius: 3px;
+  }
+
+  .inputs {
+    display: block;
+    padding: 0 8px 8px 8px;
+  }
+
+  .inputs label {
+    color: white;
+    font-size: 10px;
+    margin-right: 3px;
+  }
+
+  .email {
+    float: left;
+    display: block;
+    width: 120px;
+  }
+
+  .password {
+    float: left;
+    display: block;
+    width: 120px;
+  }
+
+  .login {
+    float: left;
+    display: block;
+    width: auto;
+  }
+
+  .body{
+    background-color: #edf0f5;
+  }
+
+  #sign_up{
+    width:100px;
+    display: block;
+    float: right;
+    margin-right: 500px;
+  }
+
+  #signup_header {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Freight Sans Bold', 'lucida grande',tahoma,verdana,arial,sans-serif;
+    display: block;
+  }
+
+  #signup_text {
+    font-size: 20px;
+    font-weight: none;
+    font-family: 'Freight Sans', 'lucida grande',tahoma,verdana,arial,sans-serif; 
+  }
+
+  .signup_fields > input {
+    display: block;
+    float: left;
+    width: 250px;
+    padding: 8px 10px;
+    font-size: 18px;
+    border: solid 1px;
+    border-color: #bdc7d8;
+    border-radius: 5px;    
+  }
+
+  .signup {
+    width: 600px;
+    float: right;
+    padding-top: 25px;
+    padding-bottom: 100px;
+  }
+
+  .signup_intro {
+    padding-bottom: 15px;
+  }
+
+   #signup_button > input {
+    background: #69a74e;
+    border: 1px solid;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    padding: 10px 20px;
+    font-size: 20px;
+  }
+
+  .sign-up-button > input {
+    position: relative;
+    display: inline-block;
+    background: #5b74a8;
+    border-color: #29447e #29447e #1a356e;
+    color: #fff;
+    padding: 3px 6px;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 0 #29447e;
+    font-weight: bold;
+    margin-top: 18px
+  }
+
+  .share-checkbox {
+    position: relative;
+  }
+
+  .share-checkbox:hover > .share-dropdown {
+    display: block;
+    z-index: 10;
+  }
+
+  .share-dropdown {
+    position: absolute;
+    list-style: none;
+    color: white;
+    top: 17px;
+    left: 0px;
+    width: 170px;
+    padding: 0;
+    margin: 0;
+    display: none;
+  } 
+
+  .share-dropdown > li {
+    display: block;
+    padding: 5px;
+  } 
+
+  .album-index li {
+    position: relative;
+    display: block;
+    width: 150px;
+    height: 150px;
+    padding: 3px;
+    border: 2px solid #bbb;
+    border-radius: 3px;
+    float: left;
+    margin: 25px;
+    background-color: #aaa;
+  }
+
+  .album-index tag {
+    display: block;
+    position: absolute;
+    width: 150px;
+    bottom: 11px;
+    color: white;
+    font-weight: bold;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    text-align: center;
+  }
+
+  .album-index img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .album-submit {
+    display: block;
+    width: 200px;
+  }
+
+  .user-albums > a {
+    margin: 25px;
+    font-weight: normal;
+  }
+
+  .friends-list {
+    display: block;
+    width: 40%;
+    margin: auto;
+  }
+
+  .friends-list ul {
+   list-style: none;
+  }
+
+  .friends-list li {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .friends-list img {
+    display: block;
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 1px solid #ddd;
+    margin: 5px;
+  }
+
+  .friend-list-details {
+    display: block;
+    margin: 5px;
+  }
+
+  .friend-list-options {
+    display: block;
+    float: right;
+  }
+
+  .friend-page {
+    display: block;
+  }
+
+  .friend-nav-bar {
+    width: 25%;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    display: block;
+  }
+
+  .friend-nav-bar > a {
+    margin: 10px 0;
+  }
+
+  .all-results {
+    padding: 50px;
+  }
+
+  .results-subsets {
+    padding: 50px;
+    background-color: green;
+    display: block;
+    width: 40%;
+    margin: auto;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    background: white;
+  }
+
+  .results-subsets ul {
+    list-style: none;
+  }
+
+  .results-subsets li {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+    margin: 10px;
+  }
+
+  .results-subsets li:hover {
+    background-color: #bbb;
+    color: white;
+  }
+
+  .search-bar {
+    padding: 5px;
+    width: 250px;
+  }
+
+  .search-button {
+    margin: 0 10px;
+  }
+
+  .newsfeed {
+    width: 30%;
+    margin: auto;
+  }
+
+  .newsfeed article {
+    margin: 20px 0;
+  }
+
+  .new-message-thread {
+    display: block;
+    float: left;
+    padding: 10px;
+    /*border: 1px solid black;*/
+    margin-top: 10px;
+  }
+
+  .message-threads {
+    display: block;
+    float: left;
+    width: 650px;
+    /*border: 1px solid black;*/
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  .message-threads ul {
+    list-style: none;
+  }
+
+  .message-threads li {
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+  }
+
+  .message-thread {
+    display: block; 
+    width: 500px;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid black;
+  }
+
+  .message-thread textarea {
+    margin: 15px;
+  }
+
+  .message-thread ul {
+    list-style: none;
+  }
+
+  .message-thread li {
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin: 5px;
+  }
+
+  .map-container {
+    position: relative;
+    display: block;
+    width:100%;
+    height:100px;
+  }
+
+  #map { 
+    display: block;
+    position:absolute; 
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  /*CHANGE OTHER STUFF*/
+
+  .styled-select select {
+    background: transparent;
+    width: 180px;
+    padding: 5px;
+    font-size: 12px;
+    border: 0;
+    border-radius: 0;
+    height: 34px;
+    -webkit-appearance: none;
+   }
+
+   .styled-select {
+    width: 180px;
+    height: 34px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #bbb;
+    margin-left: 10px;
+   }
+
+   .new-message-submit {
+    margin-top: 0;
+    margin-left: 10px;
+   }
+
+   .user-messages {
+      margin-top: 10px;
+   }
+
+  .chat {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: blue;
+    width: 100%;
+  }
+
+  .online-users {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    float: right;
+    background-color: #ddd;
+    height: 400px;
+    width: 225px;
+    border: 1px solid #aaa;
+    border-radius: 2px;
+    overflow-y: scroll;
+  }
+
+  .online-users-header {
+    display: block;
+    background-color: #3b5998;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .online-users-list li {
+    list-style: none;
+    padding: 8px;
+    margin: 1px;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+  }
+
+  .online-users-list li:hover {
+    background: #fff;
+  }
+
+  .online-users-list a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .online-users-list li > status {
+    display: block;
+    float: left;
+    background: green;
+    margin-top: 3px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+  }
+
+  .online-users-list li > article {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    font-size: 12px;
+  }
+
+  .chat-boxes {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 275px;
+    float: right;
+    width: 100%;
+    height: 0;
+  }
+
+  .chat-box {
+    display: block;
+    position: relative;
+    bottom: 275px;
+    float: right;
+    background-color: white;
+    height: 500px;
+    width: 250px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+  }
+
+  .minimized {
+    bottom: 30px;
+  }
+
+  .minimized-online-users {
+    height: 33px;
+  }
+
+  .chat-box-header {
+    background-color: #3b5998;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .chat-box-name {
+    display: block;
+    float: left;
+  }
+
+  .chat-box a {
+    display: block;
+    float: right;
+    color: white;
+  }
+
+  .chat-box ul {
+    display: block;
+    background-color: #eee;
+    padding: 0;
+    margin: 0;
+    height: 195px;
+    list-style: none;
+    padding: 5px;
+    overflow-y: scroll;
+  }
+
+  .chat-box li {
+    display: block;
+    font-size: 12px;
+  }
+
+  .chat-message-submit {
+    display: block;
+    float: right;
+    margin-top: -1px;
+  }
+
+  .chat-message-text {
+    display: block;
+    float: left;
+    width: 203px;
+    height: 20px;
+    margin: 0;
+    border: none;
+  }
+
+  .chat-message-text:focus {
+    outline: none;
+  }
+
+  .chat-message-form {
+    padding: 5px;
+    border: 1px solid #ccc;
+  }
+
+    .modal {
+    display: none;
+  }
+
+  .modal.is-active {
+    display: block;
+  }
+
+  .modal-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: #fff;
+
+    margin-left: -230px;
+    margin-top: -150px;
+
+    padding: 30px;
+    width: 400px;
+    min-height: 200px;
+    z-index: 1000;
+
+    box-shadow: 0 0 5px 5px rgba(0,0,0,0.3);
+    border-radius: 2px;
+  }
+
+  .modal-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+  }
+
+  .modal-x {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+
+    color: #999;
+  }
+
+  .modal-x:hover {
+    color: #000;
+  }
+
+</style>
+
+
+
+
+    </head><body><header class="navbar">
+      <nav class="group">
+
+      <title>FBClone</title> 
+      
+      <link data-turbolinks-track="true" href="http://localhost:3000/assets/application.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/albums.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/comments.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/friend_group_joins.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/friend_groups.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/friend_requests.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/friendships.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/message_threads.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/messages.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/notifications.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/pages.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/photos.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/posts.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/sessions.css?body=1" media="all" rel="stylesheet">
+<link data-turbolinks-track="true" href="http://localhost:3000/assets/users.css?body=1" media="all" rel="stylesheet">
+      <script data-turbolinks-track="true" src="./FBClone_files/jquery.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/jquery_ujs.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/jquery.serializejson.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/underscore.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/backbone.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/fb_clone.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/index.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/new.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/show.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/message.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/message_thread.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/user.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/message_threads.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/messages.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/users.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/thread_index.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/thread_new.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/thread_show.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/messages_router.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/notifier.js"></script>
+<script data-turbolinks-track="true" src="./FBClone_files/application.js"></script>
+      <script src="./FBClone_files/mapbox.js"></script>
+      <link href="https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css" rel="stylesheet">
+
+      <script src="./FBClone_files/pusher.min.js" type="text/javascript"></script>
+
+      <meta content="authenticity_token" name="csrf-param">
+<meta content="u8aFOVj0dQ/Q9IfVpuVTuKVTIUN72TbTasU/KvLdaNw=" name="csrf-token">
+
+
+
+    
+
+
+    <!-- MOVE LOGIC TO CONTROLLER ACTION -->
+      
+      <div class="header-logo group">
+        <a href="http://localhost:3000/users/18/newsfeed"><logo>Facebook</logo></a>
+        <div class="search-field">
+
+          <!-- FIX APPERANCE -->
+          <form action="http://localhost:3000/search" method="GET">
+            <input class="search-bar" type="text" name="query" placeholder="Search friends, users, posts etc...">
+            <input class="search-button submit" type="submit" value="Search">
+          </form>
+
+        </div>
+      </div>
+        
+        
+      <div class="user-links group">
+        <ul>
+          <li><a href="http://localhost:3000/users/18/wall">Home</a></li>
+          <li><a href="http://localhost:3000/notifications">Notifications</a></li>
+          <li><a href="http://localhost:3000/users/18/messages">Messages</a></li>
+        </ul>
+        <form action="http://localhost:3000/session" class="button_to" method="post"><div><input name="_method" type="hidden" value="delete"><input class="submit logout" type="submit" value="Log Out"><input name="authenticity_token" type="hidden" value="u8aFOVj0dQ/Q9IfVpuVTuKVTIUN72TbTasU/KvLdaNw="></div></form>
+      </div>
+  
+
+    </nav>
+  </header>
+
+
+
+
+
+  <section class="user_wall">
+
+	<section class="user-header group">
+		
+		<a href="http://localhost:3000/users/18/albums">
+			<div class="profile-picture">
+				<img src="./FBClone_files/Screen_Shot_2014-02-12_at_9.08.52_AM.png">
+			</div>
+		</a>
+
+		<div class="toggle-friend-button">
+
+
+  		</div>
+		
+
+		<div class="profile-name">
+			<p>Gavin Gavin</p>
+		</div>
+
+		<a href="http://localhost:3000/users/18/albums">
+			<div class="cover-photo">
+				<img src="./FBClone_files/grey background.jpg">
+			</div>
+		</a>
+
+		<div class="user-header-links">
+
+			<ul>
+          		<li><a href="http://localhost:3000/users/18/wall">Timeline</a></li>
+          		<li><a href="./FBClone_files/FBClone.html">About</a></li>
+          		<li><a href="http://localhost:3000/users/18/albums">Photos</a></li>
+          		<li><a href="http://localhost:3000/users/18/friends">Friends</a></li>
+          		<li><a href="./FBClone_files/FBClone.html">More</a></li>
+        	</ul>
+
+		</div>
+
+	</section>
+
+	<section class="user-profile-body group"> 
+
+		<section class="user-details group">
+
+			<article class="user-mini-photos">
+
+				<header class="box-header"><p>Photos</p></header>
+
+				<div class="user-detail-photos group">	
+					<ul class="group">
+							<a href="./FBClone_files/FBClone.html" class="open-modal"><li><img src="./FBClone_files/Screen_Shot_2014-02-12_at_9.08.52_AM.png"></li></a>
+					</ul>
+				</div>
+
+			</article>
+
+		<article class="user-mini-photos">
+
+			<header class="box-header"><p>Friends</p></header>
+
+			<div class="user-detail-photos group">
+				<ul class="group">
+
+						<a href="http://localhost:3000/users/19/wall">
+						<div class="friend-mini-profile group">
+
+							<div class="friend-name"><p>Cora Cora Cora Cora</p></div>
+							<li><img src="./FBClone_files/IMG_9171.jpeg"></li>
+						</div>
+						</a>
+				</ul>
+
+			</div>
+
+		</article>			
+	
+		</section>
+
+	
+  		<section class="posts"> 
+	
+			<section class="new-post">
+  				<section class="post group">
+
+  <form action="http://localhost:3000/users/18/posts" method="post" enctype="multipart/form-data" data-remote="true">
+
+      <input name="authenticity_token" value="u8aFOVj0dQ/Q9IfVpuVTuKVTIUN72TbTasU/KvLdaNw=" type="hidden">
+
+        <!-- PUT IN A DIV AND ALLOW USERS TO TOGGLE WHETHER TO GEOLOCATE POSTS -->
+        <input name="location[long]" value="-73.9919754" type="hidden" id="long">
+        <input name="location[lat]" value="40.756899" type="hidden" id="lat">
+
+      <header class="box-header">
+        <p>Post</p>
+      </header>
+
+      <textarea name="post[body]" placeholder="Type Something..."></textarea>
+
+       
+      <div class="post-footer group">
+        
+        <input class="submit" type="submit" value="Post">
+        <input class="file-submit" type="file" multiple="" name="photos[]" value="Upload Photos">
+
+        <!-- TAG DROPDOWN -->
+        <div class="share-checkbox submit">
+          Tag
+
+          <ul class="share-dropdown submit">
+                <li>
+                  <input type="checkbox" name="post[tagged_user_ids][]" value="19">
+                  <label>Cora Cora Cora Cora</label>
+                </li>
+          </ul>
+        </div> 
+
+
+          <!-- SHARE DROPDOWN -->
+          <div class="share-checkbox submit">
+            Visibility
+  
+            <ul class="share-dropdown submit">
+                <li>
+                  <input type="checkbox" name="share[group_ids][]" value="13">
+                  <label>Test</label>
+                </li>
+                <li>
+                  <input type="checkbox" name="share[group_ids][]" value="11">
+                  <label>Family</label>
+                </li>
+            </ul>
+          </div>
+
+
+      </div>
+
+      <div class="map-container">
+        <div id="map" class="leaflet-container leaflet-fade-anim" tabindex="0"><div class="leaflet-map-pane" style="-webkit-transform: translate3d(0px, 0px, 0px);"><div class="leaflet-tile-pane"><div class="leaflet-layer"><div class="leaflet-tile-container"></div><div class="leaflet-tile-container leaflet-zoom-animated"><img class="leaflet-tile leaflet-tile-loaded" src="./FBClone_files/192.png" style="height: 256px; width: 256px; left: 42px; top: -57px;"><img class="leaflet-tile leaflet-tile-loaded" src="./FBClone_files/192(1).png" style="height: 256px; width: 256px; left: -214px; top: -57px;"><img class="leaflet-tile leaflet-tile-loaded" src="./FBClone_files/192(2).png" style="height: 256px; width: 256px; left: 298px; top: -57px;"></div></div></div><div class="leaflet-objects-pane"><div class="leaflet-shadow-pane"></div><div class="leaflet-overlay-pane"></div><div class="leaflet-marker-pane"><img src="./FBClone_files/pin-m-embassy+3887be.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-clickable" title="Welcome to Mapbox!" tabindex="0" style="margin-left: -15px; margin-top: -35px; width: 30px; height: 70px; -webkit-transform: translate3d(233px, 71px, 0px); z-index: 71;"></div><div class="leaflet-popup-pane"></div></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="./FBClone_files/FBClone.html" title="Zoom in">+</a><a class="leaflet-control-zoom-out" href="./FBClone_files/FBClone.html" title="Zoom out">-</a></div></div><div class="leaflet-top leaflet-right"><div class="leaflet-control-grid map-tooltip leaflet-control" style="display: none;"><a class="close" href="./FBClone_files/FBClone.html" title="close">close</a><div class="map-tooltip-content"></div></div></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="map-legends wax-legends leaflet-control" style="display: none;"></div><div class="mapbox-control-info mapbox-small mapbox-control-info-right leaflet-control" style="display: block;"><div class="map-info-container"><a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox © OpenStreetMap</a> <a class="mapbox-improve-map" href="https://www.mapbox.com/map-feedback/#gavcastro.i4mcl7e7/-73.992/40.757/9" target="_blank">Improve this map</a></div><a class="mapbox-info-toggle mapbox-icon mapbox-icon-info" href="./FBClone_files/FBClone.html"></a></div></div></div></div>
+      </div>
+
+  </form>
+
+  
+
+
+  <script>
+       var map = L.mapbox.map('map', 'gavcastro.i4mcl7e7')
+
+       navigator.geolocation.getCurrentPosition( function(loc) {
+          map.setView([loc.coords.latitude, loc.coords.longitude], 9);
+          $("#long").val( loc.coords.longitude )
+          $("#lat").val( loc.coords.latitude )
+
+       })
+  </script>
+
+
+</section>
+
+
+
+
+  			</section>
+  			<br>
+	
+			<ul id="posts-index">
+    	  				<article class="post">
+
+	<div class="delete-post">
+		<form action="http://localhost:3000/posts/95" class="button_to" data-remote="true" method="post"><div><input name="_method" type="hidden" value="delete"><input class="delete-post" type="submit" value="x"><input name="authenticity_token" type="hidden" value="u8aFOVj0dQ/Q9IfVpuVTuKVTIUN72TbTasU/KvLdaNw="></div></form>
+	</div>
+
+	<header class="post-header group">
+
+		<div class="post-header-thumbnail">
+          <a href="./FBClone_files/FBClone.html">
+      		<img src="./FBClone_files/Screen_Shot_2014-02-12_at_9.08.52_AM.png">  	
+          </a>
+        </div>
+
+         <div class="post-header-info">
+          <h3><a href="./FBClone_files/FBClone.html">Gavin</a></h3>
+              
+          <p>
+          	Sent 106 hours ago
+          	
+          		from New York, New York 
+          	
+          </p>
+        </div>
+
+	</header>
+		
+	<div class="post-content">
+		
+		<p>hi there</p>
+		
+
+	</div>
+		
+	<div class="post-footer">
+		<form class="comment-form" action="http://localhost:3000/posts/95/comment" method="post" data-remote="true">
+
+        <input name="authenticity_token" value="u8aFOVj0dQ/Q9IfVpuVTuKVTIUN72TbTasU/KvLdaNw=" type="hidden">
+
+        <input class="comment-box" type="text" name="comment[comment]" placeholder="Write a comment...">
+
+        <input class="submit" type="submit" value="Comment">
+</form>
+
+		<!-- ADD LOGIC TO CHANGE THIS BUTTON TO UNLIKE IF USER ALREADY LIKED -->
+		<form action="http://localhost:3000/posts/95/like" class="button_to" method="post"><div><input class="submit" type="submit" value="Like"><input name="authenticity_token" type="hidden" value="u8aFOVj0dQ/Q9IfVpuVTuKVTIUN72TbTasU/KvLdaNw="></div></form>
+		<div class="num-likes">0</div>
+		
+		<ul class="comments group">
+		</ul>
+			
+	</div>
+	
+</article>
+	
+
+<script> 
+	
+	$(document).ready(function(){
+
+		$deletePost = $(".delete-post")
+		$postFooter = $(".post-footer")
+		$comments = $(".comments")
+
+		$postFooter.on("ajax:success", "form", function(event,data) {
+			$comments.append(data)
+			event.currentTarget.reset()
+		});
+
+		$deletePost.on("ajax:success", "form", function(event,data) {
+			$post = $( event.currentTarget ).closest( "article" )
+			$post.remove()
+
+		});
+
+	});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 
+	
+	
+	 		 Post Tags -->
+	<!-- 	 -->
+	
+
+
+
+
+    	  			<br>
+			</ul>
+
+  		</section>
+
+
+  	</section>
+
+
+  
+
+  <section id="modal" class="modal">
+  	<article class="modal-content">
+    <span class="modal-x close-modal">×</span>
+
+    	<img src="./FBClone_files/Screen_Shot_2014-02-12_at_9.08.52_AM.png">
+
+  	</article>
+  	<div class="modal-screen close-modal"></div>
+  </section>
+
+
+
+</section>
+
+
+  <section class="chat group">
+    <article class="online-users">
+
+      <div class="online-users-header">Chat</div>
+      <div class="online-users-list"><ul>
+		<a href="http://localhost:3000/users/19/friend_message_thread" data-remote="true">
+			<li class="group">
+				<status></status>
+				<article>Cora Cora Cora Cora</article>
+			</li>
+		</a>
+</ul></div>
+
+    </article>
+    <article class="chat-boxes"></article>
+  </section>
+
+
+
+<script>
+
+	$(document).ready(function(){
+	
+		var $newPost = $(".new-post")
+		var $postsList = $("#posts-index");
+
+		$newPost.on("ajax:success", "form", function(event, data){
+			$postsList.prepend(data)
+			event.currentTarget.reset();
+		});
+
+	});
+
+</script>
+
+<script>
+
+	window.openModal = function(event){
+		imageSource = $(event.currentTarget).children("li").children("img")[0].src
+		$("#modal img").attr("src", imageSource);
+		$("#modal").addClass("is-active");
+	}
+	
+	window.closeModal = function(event){
+	  $("#modal").removeClass("is-active");
+	}
+	
+	$(document).ready(function(){
+	  $(".user_wall").on("click", ".open-modal", window.openModal);
+	  $(".user_wall").on("click", ".close-modal", window.closeModal);
+	});
+
+</script>
+
+
+<script>
+  
+  $(document).ready(function(){
+
+    $chat = $(".chat")
+    $onlineUsersList = $(".online-users-list")
+    $chatBoxes = $(".chat-boxes")
+    
+    // setInterval(function(){ 
+
+      $.ajax({
+        url: "/online_friends",
+        type: "GET",
+        success: function (data) {
+          $onlineUsersList.html(data)
+        }
+      });
+
+    // }, 5000);
+
+    $chat.on("ajax:success", "a", function(event, data){
+      //REMOVE CHAT BOX FIRST IF IT EXISTS?
+      $chatBoxes.append(data)
+    });
+
+
+    $(".chat-boxes").on("click", "a", function(){
+        $(this).closest('article').remove()
+    });
+
+    $(".online-users-header").on("click", function(event){
+      $(event.currentTarget).closest("article").toggleClass("minimized-online-users")
+    })
+
+  }); 
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<iframe id="rdbIndicator" width="100%" height="270" border="0" src="./FBClone_files/indicator.html" style="display: none; border: 0; position: fixed; left: 0; top: 0; z-index: 2147483647"></iframe></body></html>
