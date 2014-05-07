@@ -61,6 +61,7 @@ class Notification < ActiveRecord::Base
   	end
   end
 
+  #Add production enviroment
   def default_url_options
     options = {}
     options[:host] = "localhost:3000"
