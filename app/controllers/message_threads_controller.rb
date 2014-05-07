@@ -1,8 +1,9 @@
 require 'pusher'
 
-Pusher.app_id = '73737'
-Pusher.key = '69f375190cbaa886558e'
-Pusher.secret = '7f3331f8c5e440d5e6ce'
+Pusher.app_id = ENV["PUSHER_APP_ID"]
+Pusher.key = ENV["PUSHER_KEY"]
+Pusher.secret = ENV["PUSHER_SECRET"]
+
 
 
 class MessageThreadsController < ApplicationController
