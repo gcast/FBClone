@@ -119,6 +119,16 @@
 
 </section>
 
+  <section class="chat group">
+    <article class="online-users">
+
+      <div class="online-users-header">Chat</div>
+      <div class="online-users-list"></div>
+
+    </article>
+    <article class="chat-boxes"></article>
+  </section>
+
 
 <script>
 
@@ -133,5 +143,44 @@
 		});
 
 	});
+
+</script>
+
+
+<script>
+  
+  $(document).ready(function(){
+
+    $chat = $(".chat")
+    $onlineUsersList = $(".online-users-list")
+    $chatBoxes = $(".chat-boxes")
+    
+    // setInterval(function(){ 
+
+      $.ajax({
+        url: "/online_friends",
+        type: "GET",
+        success: function (data) {
+          $onlineUsersList.html(data)
+        }
+      });
+
+    // }, 5000);
+
+    $chat.on("ajax:success", "a", function(event, data){
+      //REMOVE CHAT BOX FIRST IF IT EXISTS?
+      $chatBoxes.append(data)
+    });
+
+
+    $(".chat-boxes").on("click", "a", function(){
+        $(this).closest('article').remove()
+    });
+
+    $(".online-users-header").on("click", function(event){
+      $(event.currentTarget).closest("article").toggleClass("minimized-online-users")
+    })
+
+  }); 
 
 </script>
