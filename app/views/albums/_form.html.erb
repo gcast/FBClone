@@ -1,15 +1,7 @@
 <section class="album">
-
-	<% if @method == "edit" %>
-		<% @album.photos.each do |photo| %>
-			<img src="<%= photo.file.url(:med) %>">
-			<%= button_to "Delete Photo", album_photo_url(@album, photo), method: :delete %>
-		<% end %>
-	<% end %>
-
 	
-	<% if @method == "edit" %>
-		<form action="<%= album_url(@album) %>" method="POST" enctype="multipart/form-data">	
+	<% if method == "edit" %>
+		<form action="<%= album_url(album) %>" method="POST" enctype="multipart/form-data">	
 		<input type="hidden" name="_method" value="PUT">
 	<% else %>
 		<form action="<%= user_albums_url(current_user) %>" method="POST" enctype="multipart/form-data">
@@ -18,23 +10,31 @@
 	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
 		<br>
-		<label for="album_name">Name</label>
-		<input type="text" name="album[name]"<%if @method == "edit"%> value="<%= @album.name %>" <% end %>>
-		<br>
-		<label>Photo 1</label>
+
+		<% if method == "create" || 
+			((method == "edit" && album.name != "Profile Photos") && 
+			(method == "edit" && album.name != "Cover Photos")) %>
+			<label for="album_name">Name</label>
+			<input type="text" name="album[name]"<%if method == "edit"%> value="<%= album.name %>" <% end %>>
+			<br>
+			<br>
+		<% end %>
+
+		<label>Add Photo</label>
 		<input type="file" multiple name="photos[]">
 		<br>
-		<label>Photo 2</label>
+		<label>Add Photo</label>
 		<input type="file" multiple name="photos[]">
 		<br>
-		<label>Photo 3</label>
+		<label>Add Photo</label>
 		<input type="file" multiple name="photos[]">
+		<br>
 		<br>
 
-		<% if @method == "edit" %>
-			<input type="submit" value="Edit Album">
+		<% if method == "edit" %>
+			<input type="submit" value="Edit Album" class="album-create">
 		<% else %>
-			<input type="submit" value="Create Album">
+			<input type="submit" value="Create Album" class="album-create">
 		<% end %>
 	
 	</form>

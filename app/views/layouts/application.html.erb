@@ -594,20 +594,23 @@ textarea:focus {
   .album-index li {
     position: relative;
     display: block;
-    width: 150px;
-    height: 150px;
-    padding: 3px;
-    border: 2px solid #bbb;
-    border-radius: 3px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #eee;
+    border-radius: 1px;
     float: left;
-    margin: 25px;
+    margin: 3px;
     background-color: #aaa;
+  }
+
+  .album-index li:hover {
+    opacity: 0.5;
   }
 
   .album-index tag {
     display: block;
     position: absolute;
-    width: 150px;
+    width: 200px;
     bottom: 11px;
     color: white;
     font-weight: bold;
@@ -629,6 +632,67 @@ textarea:focus {
   .user-albums > a {
     margin: 25px;
     font-weight: normal;
+  }
+
+  .user-albums {
+    display: block;
+    width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: white;
+    padding-bottom: 40px;
+  }
+
+  .user-albums header {
+    display: block;
+    background-color: #eee;
+    height: 75px;
+    border-top:  1px solid #ddd;
+    border-left:  1px solid #ddd;
+    border-right:  1px solid #ddd;
+    border-radius: 3px;
+  }
+
+  .user-albums header section {
+    display: block;
+    font-weight: 100;
+    font-size: 25px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    color: #aaa;
+  }
+
+  .album-create {
+    display: block;
+    float: right;
+    width: 105px;
+    background-color: #fff;
+    padding: 5px;
+    color: black;
+    font-weight: 100;
+    border: 1px solid #aaa;
+    font-size: 13px;
+    margin-top: 20px;
+    margin-right: 10px;
+  }
+
+  .album-create:hover {
+    text-decoration: underline;
+  }
+
+  .delete-photo {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 45px;
+  }
+
+  .album-index li:hover .delete-photo {
+    display: block;
   }
 
   .friends-list {
@@ -1070,7 +1134,7 @@ textarea:focus {
     background: #fff;
 
     margin-left: -400px;
-    margin-top: -350px;
+    margin-top: -150px;
 
     /*padding: 30px;*/
     width: 800px;
@@ -1159,6 +1223,44 @@ textarea:focus {
     display: block;
   }
 
+  .photo-form {
+    display: block;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+    width: 400px;
+    /*margin: auto;
+    margin-top: 170px*/;
+    margin-left: 203px;
+    padding: 5px;
+  }
+
+  .photo-form .album-create {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+  }
+
+  .photo-form > .close-modal {
+    float: right;
+    font-size: 16px;
+    cursor: pointer;  
+    margin-right: 5px;
+  }
+
+  .photo-modal > .modal-content {
+    height: 0px;
+    width: 0px;
+  }
+
+
+  .modal-x .close-modal .album-form {
+
+  }
 
 
 </style>

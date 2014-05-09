@@ -24,7 +24,7 @@ class AlbumsController < ApplicationController
     		flash[:errors] = album.errors.full_messages
     	end
 
-    	redirect_to edit_album_url(album)
+    	redirect_to album_url(album)
 	end
 
 	def create

@@ -1,8 +1,71 @@
-Album: <%= @album.name %>
-<br>
-	<% @album.photos.each do |photo| %>
-		<img src="<%= photo.file.url(:med) %>">
+<%= render partial: "users/userheader" %>
 
-		<%= button_to "Delete Photo", album_photo_url(@album, photo), method: :delete %>
-		<br>
-	<% end %>	
+<section class="user-albums group">
+
+	<header class="group"> 
+		<section><%= @album.name %></section>
+		<div>
+			<% if @user == current_user %>
+
+					<% if @user == current_user %>
+						<% unless (@album.name == "Profile Photos") || (@album.name == "Cover Photos") %>
+						<%= button_to "Delete Album", user_album_url(current_user, @album), method: :delete, :class => "album-create" %>
+						<% end %>
+					<% end %> 
+
+					<a id="open-modal" class="album-create" href="#">
+						+ Add Photos
+					</a> 
+
+			<% end %>
+		</div>
+	</header>
+
+
+
+	<ul class="album-index group">
+		<% @album.photos.each do |photo| %>
+			<li>
+				<a href="#">
+					<img src="<%= photo.file.url(:med) %>">
+					<%= button_to "Delete Photo", album_photo_url(@album, photo), method: :delete, :class => "delete-photo album-create" %>
+				</a>
+			</li>
+		<% end %>
+	</ul>
+
+ 	<section id="modal" class="photo-modal modal">
+ 	 	<article class="modal-content">
+ 	  	
+		<section class="photo-form">
+			<span class="close-modal">&times;</span>
+ 	   		<%= render partial: "albums/form", locals: { method: "edit", album: @album } %>
+ 	   	</section>
+		
+ 	 	</article>
+ 	 	<div class="modal-screen close-modal"></div>
+ 	 </section>	
+
+ 	
+
+</section>
+
+<%= render partial: "users/chat" %>
+
+<script>
+	window.openModal = function(event){
+		$("#modal").addClass("is-active");
+	}
+	
+	window.closeModal = function(event){
+	  $("#modal").removeClass("is-active");
+	}
+	
+	$(document).ready(function(){
+	  $("#open-modal").on("click", window.openModal);
+	  $(".user-albums").on("click", ".close-modal", window.closeModal);
+	});
+
+</script>
+
+
