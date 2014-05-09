@@ -28,7 +28,9 @@
 			<li>
 				<a href="#">
 					<img src="<%= photo.file.url(:med) %>">
-					<%= button_to "Delete Photo", album_photo_url(@album, photo), method: :delete, :class => "delete-photo album-create" %>
+					<% if @album.owner_id == current_user.id %>
+						<%= button_to "Delete Photo", album_photo_url(@album, photo), method: :delete, :class => "delete-photo album-create" %>
+					<% end %>
 				</a>
 			</li>
 		<% end %>
