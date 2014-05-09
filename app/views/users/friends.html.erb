@@ -1,39 +1,86 @@
 <%= render partial: "users/userheader" %>
 
-<section class="friend-page group">
+<section class="user-albums friend-page group">
 
-  <section class="friend-nav-bar group">
-    <a href="<%= new_friend_group_url %>" class="submit">Create Friend Group</a>
-    <a href="<%=friend_groups_url%>" class="submit">Friend Groups</a>
-  </section>
+  
+  <header class="group"> 
+      <section>
+        Friends
+        <% unless @user == current_user %>
+          of <%= @user.full_name %>
+        <% end %>
+      </section>
+
+      <% if @user == current_user %>
+        <a href="<%= new_friend_group_url %>" class="album-create">New Friend Group</a>
+        <a href="<%=friend_groups_url%>" class="album-create">Friend Groups</a>
+        <!-- ADD HOVER SAYING WHAT FRIEND GROUPS DO? -->
+      <% end %>
+  </header>
   
   
   <section class="friends-list">
+
+    <% unless @user.received_requests.empty? %>
+
+      <ul>
+       <% @user.received_requests.each do |request| %>
+       <% requestor = request.requestor %>
+       <a href="<%= wall_user_url(requestor)%>">
+            <li class="group">
+    
+              <img src="<%= requestor.profile_photo_url %>">
+    
+              <div class="friend-list-details">
+                  <%= requestor.full_name %>
+              </div>
+              
+              <% if @user == current_user %>
+                <div class="friend-list-options">
+                  <%= button_to "Decline", decline_request_url(request), method: :put, :class => "album-create" %>
+                  <%= button_to "Accept", accept_request_url(request), method: :put, :class => "album-create" %>
+                </div>
+              <% end %>
+    
+            </li>
+          </a>
+        <% end %> 
+      </ul>
+
+    <% end %>
+
+
+
     <% unless @user.owned_friendships.empty? %>
       <ul>
        <% @user.owned_friendships.each do |friendship| %>
-          <li class="group">
-  
-            <img src="<%= friendship.friend.profile_photo_url %>">
-  
-            <div class="friend-list-details">
-              <a href="<%= wall_user_url(friendship.friend) %>">
-                <%= friendship.friend.full_name %>
-              </a>
-            </div>
-  
-            <div class="friend-list-options">
-              <%= button_to "Unfriend", friendship_url(friendship), 
-              method: :delete, :class => "submit" %>
-            </div>
-  
-          </li>
+       <a href="<%= wall_user_url(friendship.friend) %>">
+            <li class="group">
+    
+              <img src="<%= friendship.friend.profile_photo_url %>">
+    
+              <div class="friend-list-details">
+                
+                  <%= friendship.friend.full_name %>
+                
+              </div>
+              
+              <% if @user == current_user %>
+                <div class="friend-list-options">
+                  <%= button_to "Unfriend", friendship_url(friendship), 
+                  method: :delete, :class => "submit" %>
+                </div>
+              <% end %>
+    
+            </li>
+          </a>
         <% end %> 
       </ul>
     <% end %>
   </section>
 
 </section>
+
 
 
 <!-- Requests Sent -->
@@ -50,17 +97,6 @@
 
 
 <!-- Requests From  -->
-<% unless @user.received_requests.empty? %>
-  <h3>Friend Requests From:</h3>
 
-  <% @user.received_requests.each do |request| %>
-    <li>
-      <% requestor = request.requestor %>
-      <a href="<%= wall_user_url(requestor)%>"><%= requestor.first_name %> <%= requestor.last_name %></a>
-    </li>
-    <%= button_to "Accept", accept_request_url(request), method: :put %>
-    <%= button_to "Decline", decline_request_url(request), method: :put %>   
-  <% end %>
-<% end %>
 
 <%= render partial: "users/chat" %>

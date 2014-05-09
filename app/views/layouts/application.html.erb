@@ -684,6 +684,7 @@ textarea:focus {
     text-decoration: underline;
   }
 
+
   .delete-photo {
     display: none;
     position: absolute;
@@ -697,12 +698,17 @@ textarea:focus {
 
   .friends-list {
     display: block;
-    width: 40%;
+    width: 80%;
     margin: auto;
   }
 
   .friends-list ul {
    list-style: none;
+   /*background-color: green;*/
+  }
+
+  .friends-list a {
+    color: #4d4d4d;
   }
 
   .friends-list li {
@@ -711,6 +717,15 @@ textarea:focus {
     background-color: white;
     padding: 10px;
     margin: 10px;
+  }
+
+  .friends-list li:hover {
+    background-color: #eee;
+  }
+
+  .friends-list .submit {
+    float: right;
+    cursor: pointer;
   }
 
   .friends-list img {
@@ -724,28 +739,19 @@ textarea:focus {
 
   .friend-list-details {
     display: block;
-    margin: 5px;
+    margin-left: 5px;
+    margin-top: 22px;
+    float: left;
   }
 
   .friend-list-options {
     display: block;
     float: right;
+    width: 240px;
   }
 
   .friend-page {
     display: block;
-  }
-
-  .friend-nav-bar {
-    width: 25%;
-    margin: auto;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    display: block;
-  }
-
-  .friend-nav-bar > a {
-    margin: 10px 0;
   }
 
   .all-results {
