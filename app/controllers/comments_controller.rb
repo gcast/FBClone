@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+	before_action :ensure_current_user!
+
 	def create
 
 		parameter = params.keys.select {|key| !(/_id/.match(key).nil?) }.first

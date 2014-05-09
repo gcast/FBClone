@@ -1,5 +1,7 @@
 class FriendshipsController < ApplicationController
 
+	before_action :ensure_current_user!
+
 	def destroy
 		friendshipA = Friendship.find(params[:id])
 		friendshipB = Friendship.where("user_id = ? AND friend_id = ?", 

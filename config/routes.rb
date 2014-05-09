@@ -39,6 +39,7 @@ FBClone::Application.routes.draw do
   resources :friendships, only: [:destroy]
   resources :notifications, only: [:index, :show]
   resources :online_friends, only: [:index]
+  resources :likes, only: [:destroy]
 
 
   get "/search" => "pages#search"

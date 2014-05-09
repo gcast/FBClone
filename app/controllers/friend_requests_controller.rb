@@ -1,5 +1,7 @@
 class FriendRequestsController < ApplicationController
 
+	before_action :ensure_current_user!
+
 	def create
 		requestee_id = params[:user_id]
 		@friendship_request = current_user.sent_requests.new({requestee_id: requestee_id})

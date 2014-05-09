@@ -42,12 +42,18 @@
 
 	</div>
 		
-	<div class="post-footer">
+	<div class="post-footer" id="<%= post.id %>">
 		<%= render partial: "comments/form", locals: { post: post } %>
 
-		<!-- ADD LOGIC TO CHANGE THIS BUTTON TO UNLIKE IF USER ALREADY LIKED -->
-		<%= button_to "Like", like_post_url(post), method: :post, :class => "submit" %>
-		<div class="num-likes"><%= post.likes.count %></div>
+		<!-- FIX N+1 QUERIES -->
+		<% like = current_user.liked_items.where("likeable_id = ?", post.id) %>
+		<% unless like.empty? %>
+			<%= button_to "Unlike", like_url(like.first), method: :delete, :class => "submit" %>
+		<% else %>
+			<%= button_to "Like", like_post_url(post), method: :post, :class => "submit" %>
+		<% end %>
+
+		<div class="num-likes"><%= "&#9757;".html_safe %> <%= post.likes.count %></div>
 		
 		<ul class="comments group">
 			<% post.comments.each do |comment| %>
@@ -65,16 +71,15 @@
 	$(document).ready(function(){
 
 		$deletePost = $(".delete-post")
-		$postFooter = $(".post-footer")
-		$comments = $(".comments")
+		$postFooter = $("#<%= post.id %>")
 
 		$postFooter.on("ajax:success", "form", function(event,data) {
-			$comments.append(data)
+			$(event.currentTarget).closest("div").children("ul").append(data)
 			event.currentTarget.reset()
 		});
 
 		$deletePost.on("ajax:success", "form", function(event,data) {
-			$post = $( event.currentTarget ).closest( "article" )
+			$post = $(event.currentTarget).closest("article")
 			$post.remove()
 
 		});

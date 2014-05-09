@@ -17,7 +17,9 @@ class Comment < ActiveRecord::Base
 	)
 
 	def send_notification
-		self.notifications.create(user_id: self.commentable.recipient_id, event_id: 3)
+		unless current_user.id == self.commentable.recipient_id
+			self.notifications.create(user_id: self.commentable.recipient_id, event_id: 3) 
+		end
 	end
 
 end

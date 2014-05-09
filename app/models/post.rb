@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
 	has_many :tagged_users, through: :post_tags, source: :person_tagged
 
 	def send_notification
-		self.notifications.create(user_id: self.recipient_id, event_id: 5)
+		self.notifications.create(user_id: self.recipient_id, event_id: 5) unless current_user.id == self.recipient_id
 	end
 
 	def viewable_by_user?(user)

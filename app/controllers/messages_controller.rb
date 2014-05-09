@@ -1,5 +1,7 @@
 class MessagesController < ApplicationController
 
+	before_action :ensure_current_user!
+
 	def create
 		@thread = MessageThread.find(params[:message_thread_id])
 

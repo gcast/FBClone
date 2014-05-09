@@ -1,0 +1,6 @@
+<a href="<%= notification_url(notification) %>" class="single-notification group">
+	<li>
+	  <% unless notification.is_read? %><strong>New</strong><% end %>
+	  <%= notification.get_text %>
+	</li>
+</a>

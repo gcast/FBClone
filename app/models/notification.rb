@@ -26,7 +26,7 @@ class Notification < ActiveRecord::Base
 
   scope :read, -> { where(is_read?: true) }
   scope :unread, -> { where(is_read?: false) }
-  # HUHHHH scope :event -> (event_name) { where(event_id: EVENT_IDS[event_name]) } 
+  
 
   def get_url
     element = self.notifiable
@@ -49,15 +49,15 @@ class Notification < ActiveRecord::Base
     element = self.notifiable
 
   	if self.event_id == 1 
-  		return "You received a friend request from #{element.requestor.full_name}"
+  		return "You received a friend request from #{element.requestor.full_name}. Visit their profile."
   	elsif self.event_id == 2
-  		return "You are now friends with #{element.friend.full_name}"
+  		return "You are now friends with #{element.friend.full_name}. Vist their profile."
   	elsif self.event_id == 3
-      return "#{element.author.full_name} commented your post: #{element.comment}"
+      return "#{element.author.full_name} commented your post. Visit their wall."
   	elsif self.event_id == 4
-  		return "You were tagged in a post by: #{element.post.author.full_name}"
+  		return "You were tagged in a post by: #{element.post.author.full_name}. Visit their wall."
   	elsif self.event_id == 5
-  		return "#{element.author.full_name} posted on your wall."	
+  		return "#{element.author.full_name} posted on your wall. Visit their wall."	
   	end
   end
 

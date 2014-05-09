@@ -22,6 +22,7 @@ module FBClone
 
     config.initialize_on_precompile = false
     config.assets.paths << "app/assets/templates"
+    config.encoding = "utf-8"
 
     config.paperclip_defaults = {
       :storage => :s3,

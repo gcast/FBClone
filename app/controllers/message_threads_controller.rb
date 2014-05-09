@@ -6,6 +6,8 @@ Pusher.secret = ENV["PUSHER_SECRET"]
 
 class MessageThreadsController < ApplicationController
 
+	before_action :ensure_current_user!
+
 	def create
 		@messageThread = current_user.message_threads_as_one.new({ user_two: params[:thread][:user_two] })
 		@firstMessage = @messageThread.messages.new({ 

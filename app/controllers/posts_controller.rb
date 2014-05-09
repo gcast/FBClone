@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+	before_action :ensure_current_user!
+
 	def create
 		@post = current_user.authored_posts.new(valid_params)
 		@post.recipient_id = params[:user_id]
@@ -21,7 +23,7 @@ class PostsController < ApplicationController
     	end
 	
 		if @post.save
-			#do something
+			flash[:notice] = ["Post successfully saved."]
 		else
 			flash[:errors] = @post.errors.full_messages
 		end
@@ -44,7 +46,6 @@ class PostsController < ApplicationController
 		
 
 		if request.xhr?
-			#What should I render?
 			render nothing: true
 		else
 			redirect_to :back

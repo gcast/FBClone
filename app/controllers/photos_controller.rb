@@ -1,4 +1,7 @@
 class PhotosController < ApplicationController
+
+	before_action :ensure_current_user!
+	
 	def destroy
 		@photo = Photo.find(params[:id])
 
@@ -10,7 +13,5 @@ class PhotosController < ApplicationController
 
 		redirect_to :back
 	end
-
-	#ADD SHOW
 
 end

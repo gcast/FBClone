@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
 
-	# before_action :ensure_friends_with_user!, only: [:index]
+	before_action :ensure_current_user!
 
 	def new
 		@method = "new"

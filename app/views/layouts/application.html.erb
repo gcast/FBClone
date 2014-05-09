@@ -61,6 +61,11 @@
     margin-right: 60px;
   }
 
+  .user-links {
+    display: block;
+    position: relative;
+  }
+
   .search-field {
     float: right;
     padding: 5px;
@@ -1053,6 +1058,44 @@ textarea:focus {
     color: #000;
   }
 
+  .dropdown {
+    display: none;
+    width: 400px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 2px;
+    position: absolute;
+    top: 36px;
+    left: 59px;
+    z-index: 100;
+  }
+
+  .dropdown li {
+    display: block;
+    color: black;
+  }
+
+  .dropdown li strong {
+    font-size: 12px;
+    color: blue;
+    margin-right: 5px;
+  }
+
+  .dropdown a {
+    display: block;
+    color: black;
+  }
+
+  .single-notification:hover {
+    background-color: #ddd;
+  }
+
+  .notifications:hover .dropdown {
+    display: block;
+  }
+
+
+
 </style>
 
 
@@ -1111,7 +1154,18 @@ textarea:focus {
       <div class="user-links group">
         <ul>
           <li><a href="<%= wall_user_url(current_user) %>">Home</a></li>
-          <li><a href="<%= notifications_url %>">Notifications</a></li>
+          <li class="notifications">
+            <a href="#">Notifications</a>
+
+            <ul class="dropdown">
+              <% if current_user.notifications.unread.empty? %>
+                <%= render partial: "notifications/nonotifications" %>
+              <% else %>
+                <%= render partial: "notifications/notification", collection: current_user.notifications.unread %>
+              <% end %>
+            </ul>
+
+          </li>
           <li><a href="<%= messages_user_url(current_user) %>">Messages</a></li>
         </ul>
         <%= button_to "Log Out", session_url, method: :delete, :class => "submit logout" %>

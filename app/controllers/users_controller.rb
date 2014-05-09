@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-	# before_action :ensure_friends_with_user!, only: [:wall]
-	# before_action :reroute_to_wall_if_friends!, only: [:show]
 	before_action :ensure_current_user_newsfeed, only: [:newsfeed]
+	before_action :ensure_current_user!, only: [:friends, :wall, :newsfeed, :messages, :friend_message_thread]
+	before_action :redirect_if_logged_in!, only: [:new]
 
 	def new
 	end
@@ -41,9 +41,7 @@ class UsersController < ApplicationController
 
 		@friends.each do |friend|
 			friend.authored_posts.each { |post| @friends_postings << post }
-			#Can add more later like friend photo updates, new friendships etc...
 		end
-
 	end
 
 	def messages
@@ -74,9 +72,7 @@ class UsersController < ApplicationController
 	end
 
 	def ensure_current_user_newsfeed
-		unless params[:id].to_i == current_user.id
-			redirect_to wall_user_url(current_user)
-		end
+		redirect_to wall_user_url(current_user) unless params[:id].to_i == current_user.id
 	end
 
 end

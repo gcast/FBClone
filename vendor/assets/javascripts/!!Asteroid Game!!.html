@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)file:///Users/gavincastro/Desktop/Asteroids/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>!!Asteroid Game!!</title>
+    <style>
+    canvas {
+      border: 10px solid #ccc;
+    }
+    </style>
+    <script src="./!!Asteroid Game!!_files/keymaster.js"></script>
+    <script src="./!!Asteroid Game!!_files/inherits.js"></script>
+    <script src="./!!Asteroid Game!!_files/moving_object.js"></script>
+    <script src="./!!Asteroid Game!!_files/bullet.js"></script>
+    <script src="./!!Asteroid Game!!_files/asteroid.js"></script>
+    <script src="./!!Asteroid Game!!_files/ship.js"></script>
+    <script src="./!!Asteroid Game!!_files/game.js"></script>
+    </head><body><canvas width="700" height="700"></canvas>
+
+    <script>
+        var canvas = document.getElementsByTagName("canvas")[0];
+        var ctx = canvas.getContext("2d");
+        var asteroidsGame = new Asteroids.Game(canvas.getContext("2d"));
+        asteroidsGame.start();
+    </script>
+
+
+
+
+
+</body></html>

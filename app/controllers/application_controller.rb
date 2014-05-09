@@ -16,22 +16,18 @@ class ApplicationController < ActionController::Base
   	session[:session_token] = nil
   end
 
-  #JUST AS CURRENT_USER IS SAVED AS IVAR, STORE OTHER INFO AS IVARS THAT 
-  #ARE HARD TO INCLUDE IN ASSOCIATIONS (E.G. SEARCHABLE)
-
   def current_user
   	return nil unless session[:session_token]
   	@current_user ||= User.find_by_session_token(session[:session_token])
   end
 
-  # def ensure_friends_with_user!
-  #   id = params[:id].nil? ? params[:user_id] : params[:id]
-  #   user = User.find(id)
+  def ensure_current_user!
+      redirect_to new_session_url unless current_user
+  end
 
-  #   if (user.id != current_user.id) && !current_user.friends_with?(user)
-  #     flash[:notices] = ["You have to be friends with this user."]
-  #     redirect_to user_url(user)
-  #   end
-  # end
+  def redirect_if_logged_in!
+      redirect_to wall_user_url(current_user) if current_user
+  end
+
 
 end
