@@ -1,0 +1,23 @@
+<form action="<%= friend_groups_url %>" method='post'>
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+<strong><h1>Create A Friend Group</h1></strong>
+
+	<label for="groupName">Group Name</label>
+	<input type="text" name="group[group_name]" id="groupName">
+
+	<br>
+
+	<% current_user.friends.each do |friend| %>
+		<%= friend.first_name %> <%= friend.last_name %>
+		<input type="checkbox" name="group[friends_in_group_ids][]" value="<%= friend.id %>">
+		<br>
+	<% end %>
+	
+<input type='submit' value="Create Group" class="album-create">
+
+</form>
+
+
+
+

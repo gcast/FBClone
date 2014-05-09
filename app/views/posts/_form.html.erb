@@ -41,23 +41,34 @@
           </ul>
         </div> 
 
-        <% unless current_user.created_groups.empty? %>
+        
 
           <!-- SHARE DROPDOWN -->
           <div class="share-checkbox submit">
             Visibility
   
             <ul class="share-dropdown submit">
-            <% current_user.created_groups.each do |group| %>  
-                <li>
-                  <input type="checkbox" name="share[group_ids][]" value="<%= group.id %>">
-                  <label><%= group.group_name %></label>
+            <% groups = current_user.created_groups %>
+            <% if groups.empty? %>
+               <li> 
+                  <label>
+                    Create 
+                    <a href="<%= friends_user_url(current_user)%> ">Friend Groups</a>
+                    first
+                  </label>
                 </li>
-            <% end %> 
+            <% else %>
+              <% groups.each do |group| %>  
+                  <li>
+                    <input type="checkbox" name="share[group_ids][]" value="<%= group.id %>">
+                    <label><%= group.group_name %></label>
+                  </li>
+              <% end %> 
+            <% end %>
             </ul>
           </div>
 
-        <% end %>
+        
 
       </div>
 

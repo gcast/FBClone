@@ -591,6 +591,11 @@ textarea:focus {
     padding: 5px;
   } 
 
+  .share-dropdown a {
+    text-decoration: underline;
+    color: white;
+  }
+
   .album-index li {
     position: relative;
     display: block;
@@ -1263,9 +1268,27 @@ textarea:focus {
     width: 0px;
   }
 
+  .tutorial-element {
+    position: relative;
+    float: right;
+    padding-bottom: 10px;
+  }
 
-  .modal-x .close-modal .album-form {
+  .tutorial-element:hover > .tutorial {
+    display: block;
+  }
 
+  .tutorial {
+    display: none;
+    font-weight: 100;
+    font-size: 12px;
+    padding: 7px;
+    border-radius: 3px;
+    top: 52px;
+    border: 1px solid #aaa;
+    background-color: #ccc;
+    width: 150px;
+    position: absolute;
   }
 
 

@@ -31,7 +31,7 @@
 						<a href="<%= wall_user_url(friend) %>">
 						<div class="friend-mini-profile group">
 							<% profile_photos = friend.get_profile_photos %>
-							<% src = profile_photos.empty? ? Photo.default_photo_url               : profile_photos.first.file.url %>
+							<% src = profile_photos.empty? ? Photo.default_photo_url : profile_photos.first.file.url %>
 
 							<div class="friend-name"><p><%= friend.full_name %></p></div>
 							<li><img src="<%= src %>"></li>

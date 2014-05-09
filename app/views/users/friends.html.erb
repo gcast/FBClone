@@ -12,9 +12,16 @@
       </section>
 
       <% if @user == current_user %>
-        <a href="<%= new_friend_group_url %>" class="album-create">New Friend Group</a>
-        <a href="<%=friend_groups_url%>" class="album-create">Friend Groups</a>
-        <!-- ADD HOVER SAYING WHAT FRIEND GROUPS DO? -->
+
+      <div class="tutorial-element group">
+        <a href="#" class="album-create" id="new-group">
+          New Friend Group
+        </a>
+          <div class="tutorial group">
+            Create friend groups to limit the visibility of your posts.
+          </div>
+      </div>
+        
       <% end %>
   </header>
   
@@ -79,24 +86,40 @@
     <% end %>
   </section>
 
+
+
+  <section id="modal" class="photo-modal modal">
+    <article class="modal-content">
+    
+      <section class="photo-form">
+        <span class="close-modal">&times;</span>
+        <%= render partial: "friend_groups/form" %>
+      </section>
+  
+    </article>
+    <div class="modal-screen close-modal"></div>
+  </section>  
+
 </section>
 
 
-
-<!-- Requests Sent -->
-<% unless @user.sent_requests.empty? %>
-  <h3>Friend Requests Sent To:</h3>
-
-  <% @user.sent_requests.each do |request| %>
-    <li>
-      <% requestee = request.requestee %>
-      <a href="<%= wall_user_url(requestee)%>"><%= requestee.first_name %> <%= requestee.last_name %></a>
-    </li>
-  <% end %>
-<% end %>
-
-
-<!-- Requests From  -->
-
-
 <%= render partial: "users/chat" %>
+
+
+
+<script>
+
+  window.openModal = function(event){
+    $("#modal").addClass("is-active");
+  }
+  
+  window.closeModal = function(event){
+    $("#modal").removeClass("is-active");
+  }
+  
+  $(document).ready(function(){
+    $("#new-group").on("click", window.openModal);
+    $(".user-albums").on("click", ".close-modal", window.closeModal);
+  });
+
+</script>
