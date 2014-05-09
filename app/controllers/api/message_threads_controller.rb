@@ -7,7 +7,14 @@ Pusher.secret = ENV["PUSHER_SECRET"]
 class Api::MessageThreadsController < ApplicationController
 
 	def create
-		@messageThread = current_user.message_threads_as_one.new({ user_two: params[:user_two] })
+		thread = MessageThread.find_thread_with_user(current_user, params[:user_two])
+
+		if thread
+			@messageThread = thread
+		else
+			@messageThread = current_user.message_threads_as_one.new({ user_two: params[:user_two] })
+		end
+
 		@firstMessage = @messageThread.messages.new({ 
 			sender_id: current_user.id,
 			recipient_id: params[:user_two],

@@ -9,8 +9,15 @@ class MessageThreadsController < ApplicationController
 	before_action :ensure_current_user!
 
 	def create
-		@messageThread = current_user.message_threads_as_one.new({ user_two: params[:thread][:user_two] })
-		@firstMessage = @messageThread.messages.new({ 
+		thread = MessageThread.find_thread_with_user(params[:thread][:user_two])
+		
+		if thread 
+			@messageThread = thread
+		else
+			@messageThread = current_user.message_threads_as_one.new({ user_two: params[:thread][:user_two] })
+		end
+
+		@message = @messageThread.messages.new({ 
 			sender_id: current_user.id,
 			recipient_id: params[:thread][:user_two],
 			message: params[:thread][:first_message]
@@ -18,7 +25,7 @@ class MessageThreadsController < ApplicationController
 
 		Message.transaction do
 			@messageThread.save
-			@firstMessage.save	
+			@message.save	
 			Pusher.trigger("post1", "posts:change", "")
 		end
 

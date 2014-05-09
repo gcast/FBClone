@@ -18,7 +18,7 @@ window.FBClone.Routers.MessagesRouter = Backbone.Router.extend({
 		var threadIndex = new FBClone.Views.ThreadIndex({ collection: this.messageThreads })	
 		this.$rootEl.append(threadIndex.render().$el)
 
-		//NEED TO IMPLEMENT A SWAPVIEWS TO REMOVE THESE
+		//NEED TO REMOVE THESE//
 	},
 
 	threadShow: function(id) {
@@ -28,11 +28,5 @@ window.FBClone.Routers.MessagesRouter = Backbone.Router.extend({
 		this.$rootEl.html(threadShowView.render().$el)
 	}
 
-	// _swapView: function(view) {
-	// 	this.currentView && this.currentView.remove()
-	// 	this.currentView = view
-	// 	this.$rootEl.html(view.render().$el)
-	// }
-
-})
+});
 

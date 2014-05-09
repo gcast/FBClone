@@ -735,24 +735,8 @@ textarea:focus {
     margin: 20px 0;
   }
 
-  .new-message-thread {
-    display: block;
-    float: left;
-    padding: 10px;
-    /*border: 1px solid black;*/
-    margin-top: 10px;
-  }
 
-  .message-threads {
-    display: block;
-    float: left;
-    width: 650px;
-    /*border: 1px solid black;*/
-    margin-top: 10px;
-    padding: 10px;
-  }
-
-  .message-threads ul {
+  /*.message-threads ul {
     list-style: none;
   }
 
@@ -783,7 +767,7 @@ textarea:focus {
     padding: 5px;
     border: 1px solid #ccc;
     margin: 5px;
-  }
+  }*/
 
   .map-container {
     position: relative;
@@ -802,34 +786,115 @@ textarea:focus {
 
   /*CHANGE OTHER STUFF*/
 
-  .styled-select select {
-    background: transparent;
-    width: 180px;
-    padding: 5px;
-    font-size: 12px;
-    border: 0;
-    border-radius: 0;
-    height: 34px;
-    -webkit-appearance: none;
-   }
-
-   .styled-select {
-    width: 180px;
-    height: 34px;
-    overflow: hidden;
-    background: white;
-    border: 1px solid #bbb;
-    margin-left: 10px;
-   }
-
-   .new-message-submit {
+/*   .new-message-submit {
     margin-top: 0;
     margin-left: 10px;
+   }*/
+
+/*   .user-messages {
+      display: block;
+      margin-top: 10px;
+      width: 700px;
+      margin: auto;
+   }*/
+
+   .threads-form {
+    display: block;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 525px;
+    padding-bottom: 15px;
+    background-color: #ddd;
+    border: 1px solid #aaa;
+    border-radius: 4px;
    }
 
-   .user-messages {
-      margin-top: 10px;
+   .threads-form textarea {
+    display: block;
+    margin: 10px;
+    height: 75px;
+    margin-left: auto;
+    margin-right: auto;
    }
+
+   .threads-form > .submit {
+    display: block;
+    margin: auto;
+   }
+
+   .threads-form select {
+      font-size: 13px;
+      border: 1px solid lightblue;
+      border-radius: 10px;
+      color: black;
+      padding: 3px;
+      width: 100px;
+      cursor: pointer;
+      margin-left: 23px;
+      -webkit-appearance: none;
+      
+      background-color: white;
+      background-transparency: 0.5;
+      background-position: right 15px top 22px;
+      background-size: 18px 18px;
+   }
+
+
+  .threads-form > select:active {
+    border: 1px solid #000;
+  }
+
+  .threads-form header {
+    display: block;
+    background-color: red;
+    padding: 10px;
+    background-color: #aaa;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: bold;
+  }
+
+   .threads-list {
+    display: block;
+    list-style: none;
+    width: 558px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+   }
+
+   .threads-list li {
+     background-color: white;
+     border: 1px solid #aaa;
+     border-radius: 4px;
+    /* margin: 10px;*/
+   }
+
+   .threads-list li:hover > header {
+    background-color: #aaa;
+   }
+
+   .threads-list li:hover > div {
+    background-color: #ddd;
+   }
+
+   .threads-list li > header {
+    display: block;
+    background-color: #bbb;
+    padding: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    border-bottom: 1px solid #aaa;
+   }
+
+   .threads-list li > div {
+    padding: 8px;
+    color: black;
+    font-size: 13px;
+   }
+
 
   .chat {
     display: block;
@@ -1060,7 +1125,7 @@ textarea:focus {
 
   .dropdown {
     display: none;
-    width: 400px;
+    width: 300px;
     background-color: white;
     border: 2px solid #ccc;
     border-radius: 2px;
@@ -1115,7 +1180,7 @@ textarea:focus {
 
       <%= csrf_meta_tags %>
 
-
+<!-- 
       <% unless flash[:notices].nil? %>
       <h3>Notices</h3>
         <% flash[:notices].each do |notice| %>
@@ -1131,7 +1196,7 @@ textarea:focus {
           <li><%= error %></li>
         <% end %>
         <hr>
-      <% end %>
+      <% end %> -->
 
 
     <!-- MOVE LOGIC TO CONTROLLER ACTION -->

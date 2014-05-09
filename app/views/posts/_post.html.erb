@@ -1,8 +1,11 @@
 <article class="post">
 
-	<div class="delete-post">
-		<%= button_to "x", post_url(post), method: :delete, :class => "delete-post", remote: true %>
-	</div>
+	<% if (current_user.id == post.recipient_id || current_user.id == post.author_id) %>
+		<div class="delete-post">
+			<%= button_to "x", post_url(post), method: :delete, :class => "delete-post", remote: true %>
+		</div>
+	<% end %>
+
 
 	<header class="post-header group">
 

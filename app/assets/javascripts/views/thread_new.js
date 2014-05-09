@@ -39,5 +39,4 @@ window.FBClone.Views.ThreadNew = Backbone.View.extend({
 
   }
 
-
 });

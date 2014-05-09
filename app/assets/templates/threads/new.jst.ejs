@@ -1,15 +1,17 @@
-<form>
-	<div class="styled-select">
-
-		<select name="thread[user_two]" id="recipient">
+<form class="threads-form group">
+	<header>
+		<div class="styled-select">
+			To:
+			<select name="thread[user_two]" id="recipient">
+		
+				<% friends.each(function(friend) {  %>
+   					<option value="<%= friend.id %>"><%= friend.get("first_name") %></option>
+   				<% }) %>
+		
+  			</select>
 	
-			<% friends.each(function(friend) {  %>
-   				<option value="<%= friend.id %>"><%= friend.get("first_name") %></option>
-   			<% }) %>
-	
-  		</select>
-
-  	</div>
+  		</div>
+  	</header>
 
 	<textarea name="thread[first_message]"  placeholder="Write a new message..."></textarea>
 	<input type="submit" value="Send Message" class="submit new-message-submit">

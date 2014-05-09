@@ -49,15 +49,15 @@ class Notification < ActiveRecord::Base
     element = self.notifiable
 
   	if self.event_id == 1 
-  		return "You received a friend request from #{element.requestor.full_name}. Visit their profile."
+  		return "You received a friend request from #{element.requestor.full_name}"
   	elsif self.event_id == 2
-  		return "You are now friends with #{element.friend.full_name}. Vist their profile."
+  		return "You are now friends with #{element.friend.full_name}"
   	elsif self.event_id == 3
-      return "#{element.author.full_name} commented your post. Visit their wall."
+      return "#{element.author.full_name} commented your post"
   	elsif self.event_id == 4
-  		return "You were tagged in a post by: #{element.post.author.full_name}. Visit their wall."
+  		return "You were tagged in a post by #{element.post.author.first_name}"
   	elsif self.event_id == 5
-  		return "#{element.author.full_name} posted on your wall. Visit their wall."	
+  		return "#{element.author.full_name} posted on your wall"	
   	end
   end
 

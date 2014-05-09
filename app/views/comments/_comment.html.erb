@@ -1,7 +1,9 @@
 <li>
-	<div class="delete-comment">
-		<%= button_to "x", comment_url(comment), method: :delete, :class => "delete-post", remote: true %>
-	</div>
+	<% if current_user.id == comment.author_id %>
+		<div class="delete-comment">
+			<%= button_to "x", comment_url(comment), method: :delete, :class => "delete-post", remote: true %>
+		</div>
+	<% end %>
 
 	<div class="comment-header group">
 		<img src="<%= comment.author.profile_photo_url %>">

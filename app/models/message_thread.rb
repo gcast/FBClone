@@ -25,4 +25,11 @@ class MessageThread < ActiveRecord::Base
 		dependent: :destroy
 	)
 
+	def self.find_thread_with_user(current_user, user2_id)
+		threadOne = current_user.message_threads_as_one.where("user_two = ?", user2_id).first
+		threadTwo = current_user.message_threads_as_two.where("user_one = ?", user2_id).first
+
+		threadOne || threadTwo
+	end
+
 end

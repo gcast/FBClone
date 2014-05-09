@@ -1,18 +1,23 @@
-
-
-<ul>
+<ul class="threads-list group">
 	<% threads.each(function(thread) {  %>
 		<a href="#/threads/<%= thread.id %>">
 			<li>
-				<% id = thread.get("user_one") === FBClone.current_user.id ? thread.get("user_two") : thread.get("user_one") %>
-			
-				<%= FBClone.current_user.friends.get(id).get("first_name")  %>
-								
-				<br>
-				<%= thread.messages.last().get("message") %>
+				<header>
+					<% id = thread.get("user_one") === FBClone.current_user.id ? thread.get("user_two") : thread.get("user_one") %>
+				
+					<%= FBClone.current_user.friends.get(id).get("first_name")  %>
+					<%= FBClone.current_user.friends.get(id).get("last_name")  %>
+				</header>				
+
+				<div>
+					<%= thread.messages.last().get("message") %>
+					<%= prettyDate(thread.messages.last().get("created_at")) %>
+				</div>
 			</li>
 		</a>
 		<br>
 	<% }) %>
 </ul>
+
+
 
