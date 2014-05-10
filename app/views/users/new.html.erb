@@ -56,6 +56,10 @@
 
      </form>
 
+         <div class="sign-up-button employer" id="signup_button">
+           <input type="submit" value="Sign In As Demo User">
+         </div>
+
     </div>
 
   </section>
@@ -63,3 +67,25 @@
 
 </body>
 </html>
+
+<script>
+
+  $(document).ready(function(){
+
+    $email = $("#email")
+    $password = $("#password")
+    $signIn = $("#sign-in")
+
+    $(".employer").on("click", function(event) {
+      console.log(event)
+      $email.val("demo@user.com")
+      $password.val("useruser")
+      $signIn.click()
+    })
+
+
+  });
+
+
+
+</script>
