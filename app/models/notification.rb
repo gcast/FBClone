@@ -68,4 +68,10 @@ class Notification < ActiveRecord::Base
     options
   end
 
+  def default_url_options
+    options = {}
+    options[:host] = Rails.env.production? ? "thebookface.me" : "localhost:3000"
+    options
+  end
+
 end
