@@ -41,6 +41,8 @@ FBClone::Application.routes.draw do
   resources :online_friends, only: [:index]
   resources :likes, only: [:destroy]
 
+  resource :visit, only: [:create]
+
 
   get "/search" => "pages#search"
   put "/friend_requests/:id/accept", { as: :accept_request, controller: :friend_requests, action: :accept }
